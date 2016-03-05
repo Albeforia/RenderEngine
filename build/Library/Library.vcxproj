@@ -142,6 +142,7 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\Library\Common.h" />
     <ClInclude Include="..\..\source\Library\Game.h" />
     <ClInclude Include="..\..\source\Library\GameClock.h" />
     <ClInclude Include="..\..\source\Library\GameException.h" />
