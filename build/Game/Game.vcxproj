@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Game\Program.cpp" />
+    <ClCompile Include="..\..\source\Game\RenderingGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\Game\RenderingGame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CA2ABDDE-CCFC-428E-A3B7-4814BA6B25B9}</ProjectGuid>
