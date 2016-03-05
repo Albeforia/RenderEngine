@@ -30,6 +30,7 @@ namespace Library {
 	double GameClock::get_frequency() const {
 		LARGE_INTEGER f;
 		if (!QueryPerformanceFrequency(&f)) {
+			// FIXME std::exception -> GameException
 			throw std::exception("QueryPerformanceFrequency() failed.");
 		}
 		return double(f.QuadPart);
