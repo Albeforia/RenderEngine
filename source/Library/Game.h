@@ -22,6 +22,7 @@ namespace Library {
 		const std::wstring& window_title() const;
 		int screen_width() const;
 		int screen_height() const;
+		float aspect_ratio() const;
 
 		// FIXME add getter implementation
 		ID3D11Device1* d3d_device() const;

@@ -47,6 +47,10 @@ namespace Library {
 		return m_screen_height;
 	}
 
+	float Game::aspect_ratio() const {
+		return static_cast<float>(m_screen_width) / m_screen_height;
+	}
+
 	void Game::run() {
 		init_window();
 		init_dx();
