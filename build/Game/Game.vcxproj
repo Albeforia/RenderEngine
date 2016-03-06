@@ -24,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Game\RenderingGame.h" />
+    <ClInclude Include="..\..\source\Game\TriangleDemo.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CA2ABDDE-CCFC-428E-A3B7-4814BA6B25B9}</ProjectGuid>
@@ -101,7 +102,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;DirectXTK.lib;d3dcompiler.lib;Effects11.lib;dinput8.lib;dxguid.lib;shlwapi.lib;Libraryd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib;$(SolutionDir)..\external\DirectXTK\Bin\Desktop_2015\Win32\Debug;$(SolutionDir)..\external\Effects11\Bin\Desktop_2013\Win32\Debug;$(WindowsSDK_IncludePath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib;$(SolutionDir)..\external\DirectXTK\Bin\Desktop_2015\Win32\Debug;$(SolutionDir)..\external\Effects11\Bin\Desktop_2015\Win32\Debug;$(WindowsSDK_IncludePath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>IF NOT EXIST "$(OutDir)content\" mkdir "$(OutDir)content\"
@@ -138,7 +139,7 @@ IF EXIST "$(SolutionDir)..\content\game" xcopy /E /Y "$(SolutionDir)..\content\g
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;DirectXTK.lib;d3dcompiler.lib;Effects11.lib;dinput8.lib;dxguid.lib;shlwapi.lib;Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\lib;$(SolutionDir)..\external\DirectXTK\Bin\Desktop_2015\Win32\Debug;$(SolutionDir)..\external\Effects11\Bin\Desktop_2013\Win32\Debug;$(WindowsSDK_IncludePath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib;$(SolutionDir)..\external\DirectXTK\Bin\Desktop_2015\Win32\Debug;$(SolutionDir)..\external\Effects11\Bin\Desktop_2015\Win32\Debug;$(WindowsSDK_IncludePath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>IF NOT EXIST "$(OutDir)content\" mkdir "$(OutDir)content\"

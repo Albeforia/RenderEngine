@@ -22,5 +22,8 @@
     <ClInclude Include="..\..\source\Game\RenderingGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Game\TriangleDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
