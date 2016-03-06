@@ -7,6 +7,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include "RTTI.h"
 
 #include <d3d11_1.h>
 #include <DirectXMath.h>

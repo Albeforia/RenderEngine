@@ -83,6 +83,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)..\external\DirectXTK\Inc;$(SolutionDir)..\external\Effects11\inc;$(WindowsSDK_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -114,6 +115,7 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)..\external\DirectXTK\Inc;$(SolutionDir)..\external\Effects11\inc;$(WindowsSDK_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,12 +147,15 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     <ClInclude Include="..\..\source\Library\Common.h" />
     <ClInclude Include="..\..\source\Library\Game.h" />
     <ClInclude Include="..\..\source\Library\GameClock.h" />
+    <ClInclude Include="..\..\source\Library\GameComponent.h" />
     <ClInclude Include="..\..\source\Library\GameException.h" />
     <ClInclude Include="..\..\source\Library\GameTime.h" />
+    <ClInclude Include="..\..\source\Library\RTTI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\Game.cpp" />
     <ClCompile Include="..\..\source\Library\GameClock.cpp" />
+    <ClCompile Include="..\..\source\Library\GameComponent.cpp" />
     <ClCompile Include="..\..\source\Library\GameException.cpp" />
     <ClCompile Include="..\..\source\Library\GameTime.cpp" />
   </ItemGroup>
