@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "GameException.h"
+#include "GameComponentDrawable.h"
 
 namespace Library {
 
@@ -89,11 +90,29 @@ namespace Library {
 		UnregisterClass(m_window_class.c_str(), m_window.hInstance);
 	}
 
-	void Game::init() {}
+	void Game::init() {
+		for (GameComponent* c : m_components) {
+			c->init();
+		}
+	}
 
-	void Game::update(const GameTime& game_time) {}
+	void Game::update(const GameTime& game_time) {
+		for (GameComponent* c : m_components) {
+			if (c->enabled()) {
+				c->update(game_time);
+			}
+		}
+	}
 
-	void Game::draw(const GameTime& game_time) {}
+	void Game::draw(const GameTime& game_time) {
+		for (GameComponent* c : m_components) {
+			// TODO use seperate vectors for drawable and non-drawable
+			auto* drawable = c->As<GameComponentDrawable>();
+			if (drawable != nullptr && drawable->visible()) {
+				drawable->draw(game_time);
+			}
+		}
+	}
 
 	void Game::init_window() {
 		ZeroMemory(&m_window, sizeof(m_window));

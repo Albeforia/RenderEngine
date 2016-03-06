@@ -3,6 +3,7 @@
 #include "Common.h"
 #include "GameClock.h"
 #include "GameTime.h"
+#include "GameComponent.h"
 
 namespace Library {
 
@@ -31,6 +32,8 @@ namespace Library {
 		bool is_full_screen() const;
 		const D3D11_TEXTURE2D_DESC& buffer_desc() const;
 		const D3D11_VIEWPORT& viewport() const;
+
+		const std::vector<GameComponent*>& components() const;
 
 		virtual void run();
 		virtual void exit();
@@ -75,6 +78,8 @@ namespace Library {
 		ID3D11RenderTargetView* m_render_target_view;
 		ID3D11DepthStencilView* m_depth_stencil_view;
 		D3D11_VIEWPORT m_viewport;
+
+		std::vector<GameComponent*> m_components;
 
 		GameClock m_game_clock;
 		GameTime m_game_time;
