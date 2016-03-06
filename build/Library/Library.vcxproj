@@ -92,6 +92,13 @@
       <Command>mkdir "$(SolutionDir)..\lib\"
 copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     </PostBuildEvent>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ObjectFileOutput>$(OutDir)content\effects\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -126,6 +133,13 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
       <Command>mkdir "$(SolutionDir)..\lib\"
 copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     </PostBuildEvent>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ObjectFileOutput>$(OutDir)content\effects\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -145,6 +159,7 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Library\Camera.h" />
+    <ClInclude Include="..\..\source\Library\ColorHelper.h" />
     <ClInclude Include="..\..\source\Library\Common.h" />
     <ClInclude Include="..\..\source\Library\Game.h" />
     <ClInclude Include="..\..\source\Library\GameClock.h" />
@@ -160,6 +175,7 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\Camera.cpp" />
+    <ClCompile Include="..\..\source\Library\ColorHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Game.cpp" />
     <ClCompile Include="..\..\source\Library\GameClock.cpp" />
     <ClCompile Include="..\..\source\Library\GameComponent.cpp" />
@@ -170,6 +186,9 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     <ClCompile Include="..\..\source\Library\MatrixHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Utility.cpp" />
     <ClCompile Include="..\..\source\Library\VectorHelper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\content\effects\basic_effect.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
