@@ -47,7 +47,7 @@ namespace Rendering {
 
 		// create effect object
 		if (FAILED(hr = D3DX11CreateEffectFromMemory(compiled->GetBufferPointer(), compiled->GetBufferSize(),
-													 0, m_game->d3d_device, &m_effect))) {
+													 0, m_game->d3d_device(), &m_effect))) {
 			throw GameException("D3DX11CreateEffectFromMemory() failed.", hr);
 		}
 		ReleaseObject(compiled);

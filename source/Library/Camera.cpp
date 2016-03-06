@@ -25,6 +25,8 @@ namespace Library {
 		m_farp = farp;
 	}
 
+	Camera::~Camera() {}
+
 	XMMATRIX Camera::view_projection() const {
 		XMMATRIX v = XMLoadFloat4x4(&m_view);
 		XMMATRIX p = XMLoadFloat4x4(&m_projection);
