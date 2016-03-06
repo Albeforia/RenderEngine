@@ -14,7 +14,14 @@ namespace Rendering {
 	RenderingGame::~RenderingGame() {}
 
 	void RenderingGame::init() {
+		m_info_panel = new InfoPanel(*this);
+		m_components.push_back(m_info_panel);
 		Game::init();
+	}
+
+	void RenderingGame::shutdown() {
+		DeleteObject(m_info_panel);
+		Game::shutdown();
 	}
 
 	void RenderingGame::update(const GameTime& game_time) {

@@ -52,6 +52,14 @@ namespace Library {
 		return static_cast<float>(m_screen_width) / m_screen_height;
 	}
 
+	ID3D11Device1* Game::d3d_device() const {
+		return m_d3d_device;
+	}
+
+	ID3D11DeviceContext1* Game::d3d_device_context() const {
+		return m_d3d_device_context;
+	}
+
 	void Game::run() {
 		init_window();
 		init_dx();
