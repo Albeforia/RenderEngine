@@ -103,6 +103,10 @@
       <AdditionalDependencies>d3d11.lib;DirectXTK.lib;d3dcompiler.lib;Effects11.lib;dinput8.lib;dxguid.lib;Libraryd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\lib;$(SolutionDir)..\external\DirectXTK\Bin\Desktop_2013\Win32\Debug;$(SolutionDir)..\external\Effects11\Bin\Desktop_2013\Win32\Debug;$(WindowsSDK_IncludePath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>IF NOT EXIST "$(OutDir)content\" mkdir "$(OutDir)content\"
+IF EXIST "$(SolutionDir)..\content\game" xcopy /E /Y "$(SolutionDir)..\content\game" "$(OutDir)content\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -136,6 +140,10 @@
       <AdditionalDependencies>d3d11.lib;DirectXTK.lib;d3dcompiler.lib;Effects11.lib;dinput8.lib;dxguid.lib;Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)..\lib;$(SolutionDir)..\external\DirectXTK\Bin\Desktop_2013\Win32\Debug;$(SolutionDir)..\external\Effects11\Bin\Desktop_2013\Win32\Debug;$(WindowsSDK_IncludePath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>IF NOT EXIST "$(OutDir)content\" mkdir "$(OutDir)content\"
+IF EXIST "$(SolutionDir)..\content\game" xcopy /E /Y "$(SolutionDir)..\content\game" "$(OutDir)content\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
