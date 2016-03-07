@@ -90,7 +90,8 @@
     </Link>
     <PostBuildEvent>
       <Command>mkdir "$(SolutionDir)..\lib\"
-copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
+copy "$(TargetPath)" "$(SolutionDir)..\lib\"
+copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <FxCompile>
       <ShaderType>Effect</ShaderType>
@@ -131,7 +132,8 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     </Link>
     <PostBuildEvent>
       <Command>mkdir "$(SolutionDir)..\lib\"
-copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
+copy "$(TargetPath)" "$(SolutionDir)..\lib\"
+copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <FxCompile>
       <ShaderType>Effect</ShaderType>

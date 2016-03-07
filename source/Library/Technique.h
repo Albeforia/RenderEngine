@@ -27,7 +27,7 @@ namespace Library {
 		Effect& m_effect;
 		ID3DX11EffectTechnique* m_technique;
 		D3DX11_TECHNIQUE_DESC m_technique_desc;
-		std::string& m_name;
+		std::string m_name;
 		std::vector<Pass*> m_passes;
 		std::map<std::string, Pass*> m_passes_by_name;
 
