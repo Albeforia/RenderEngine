@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Common.h"
+#include "Game.h"
 
 namespace Library {
 
-	class Game;
 	class Technique;
 
 	class Pass {

@@ -33,6 +33,8 @@ namespace Library {
 		void load(const std::wstring& file);
 
 	private:
+		void init();
+
 		Game& m_game;
 		ID3DX11Effect* m_effect;
 		D3DX11_EFFECT_DESC m_effect_desc;

@@ -161,6 +161,7 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     <ClInclude Include="..\..\source\Library\Camera.h" />
     <ClInclude Include="..\..\source\Library\ColorHelper.h" />
     <ClInclude Include="..\..\source\Library\Common.h" />
+    <ClInclude Include="..\..\source\Library\Effect.h" />
     <ClInclude Include="..\..\source\Library\Game.h" />
     <ClInclude Include="..\..\source\Library\GameClock.h" />
     <ClInclude Include="..\..\source\Library\GameComponent.h" />
@@ -169,13 +170,17 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     <ClInclude Include="..\..\source\Library\GameTime.h" />
     <ClInclude Include="..\..\source\Library\InfoPanel.h" />
     <ClInclude Include="..\..\source\Library\MatrixHelper.h" />
+    <ClInclude Include="..\..\source\Library\Pass.h" />
     <ClInclude Include="..\..\source\Library\RTTI.h" />
+    <ClInclude Include="..\..\source\Library\Technique.h" />
     <ClInclude Include="..\..\source\Library\Utility.h" />
+    <ClInclude Include="..\..\source\Library\Variable.h" />
     <ClInclude Include="..\..\source\Library\VectorHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\Camera.cpp" />
     <ClCompile Include="..\..\source\Library\ColorHelper.cpp" />
+    <ClCompile Include="..\..\source\Library\Effect.cpp" />
     <ClCompile Include="..\..\source\Library\Game.cpp" />
     <ClCompile Include="..\..\source\Library\GameClock.cpp" />
     <ClCompile Include="..\..\source\Library\GameComponent.cpp" />
@@ -184,7 +189,10 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     <ClCompile Include="..\..\source\Library\GameTime.cpp" />
     <ClCompile Include="..\..\source\Library\InfoPanel.cpp" />
     <ClCompile Include="..\..\source\Library\MatrixHelper.cpp" />
+    <ClCompile Include="..\..\source\Library\Pass.cpp" />
+    <ClCompile Include="..\..\source\Library\Technique.cpp" />
     <ClCompile Include="..\..\source\Library\Utility.cpp" />
+    <ClCompile Include="..\..\source\Library\Variable.cpp" />
     <ClCompile Include="..\..\source\Library\VectorHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
