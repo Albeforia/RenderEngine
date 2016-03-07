@@ -178,6 +178,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClInclude Include="..\..\source\Library\Model.h" />
     <ClInclude Include="..\..\source\Library\ModelMaterial.h" />
     <ClInclude Include="..\..\source\Library\Pass.h" />
+    <ClInclude Include="..\..\source\Library\RenderStateHelper.h" />
     <ClInclude Include="..\..\source\Library\RTTI.h" />
     <ClInclude Include="..\..\source\Library\Technique.h" />
     <ClInclude Include="..\..\source\Library\Utility.h" />
@@ -202,6 +203,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\Model.cpp" />
     <ClCompile Include="..\..\source\Library\ModelMaterial.cpp" />
     <ClCompile Include="..\..\source\Library\Pass.cpp" />
+    <ClCompile Include="..\..\source\Library\RenderStateHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Technique.cpp" />
     <ClCompile Include="..\..\source\Library\Utility.cpp" />
     <ClCompile Include="..\..\source\Library\Variable.cpp" />
