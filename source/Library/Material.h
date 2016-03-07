@@ -24,7 +24,7 @@ namespace Library {
 		const std::map<Pass*, ID3D11InputLayout*>& input_layouts() const;
 
 		virtual void init(Effect*);
-		virtual void create_vertex_buffer(ID3D11Device*, const Model&, std::vector<ID3D11Buffer*>) const;
+		virtual void create_vertex_buffer(ID3D11Device*, const Model&, std::vector<ID3D11Buffer*>&) const;
 		virtual void create_vertex_buffer(ID3D11Device*, const Mesh&, ID3D11Buffer**) const = 0;
 		virtual UINT vertex_size() const = 0;
 

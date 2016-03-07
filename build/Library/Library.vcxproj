@@ -194,6 +194,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\GameException.cpp" />
     <ClCompile Include="..\..\source\Library\GameTime.cpp" />
     <ClCompile Include="..\..\source\Library\InfoPanel.cpp" />
+    <ClCompile Include="..\..\source\Library\Material.cpp" />
     <ClCompile Include="..\..\source\Library\MatrixHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Mesh.cpp" />
     <ClCompile Include="..\..\source\Library\Model.cpp" />
