@@ -80,6 +80,9 @@
     <ClInclude Include="..\..\source\Library\ModelMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\MaterialBasic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -140,6 +143,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\MaterialBasic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

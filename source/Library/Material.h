@@ -41,18 +41,18 @@ namespace Library {
 		public:											\
             Variable& VariableName() const;				\
 		private:										\
-            Variable* m ## VariableName;
+            Variable* m_ ## VariableName;
 
 
 #define MATERIAL_VARIABLE_DEFINITION(Material, VariableName)		\
         Variable& Material::VariableName() const					\
         {															\
-            return *m ## VariableName;								\
+            return *m_ ## VariableName;								\
         }
 
-#define MATERIAL_VARIABLE_INITIALIZATION(VariableName) m ## VariableName(NULL)
+#define MATERIAL_VARIABLE_INITIALIZATION(VariableName) m_ ## VariableName {}
 
-#define MATERIAL_VARIABLE_RETRIEVE(VariableName)						\
-        m ## VariableName = mEffect->VariablesByName().at(#VariableName);
+#define MATERIAL_VARIABLE_RETRIEVE(VariableName)					\
+        m_ ## VariableName = m_effect->variables_by_name().at(#VariableName);
 
 }
