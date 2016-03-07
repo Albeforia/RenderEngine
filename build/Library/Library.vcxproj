@@ -169,7 +169,11 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"</Command>
     <ClInclude Include="..\..\source\Library\GameException.h" />
     <ClInclude Include="..\..\source\Library\GameTime.h" />
     <ClInclude Include="..\..\source\Library\InfoPanel.h" />
+    <ClInclude Include="..\..\source\Library\Material.h" />
     <ClInclude Include="..\..\source\Library\MatrixHelper.h" />
+    <ClInclude Include="..\..\source\Library\Mesh.h" />
+    <ClInclude Include="..\..\source\Library\Model.h" />
+    <ClInclude Include="..\..\source\Library\ModelMaterial.h" />
     <ClInclude Include="..\..\source\Library\Pass.h" />
     <ClInclude Include="..\..\source\Library\RTTI.h" />
     <ClInclude Include="..\..\source\Library\Technique.h" />
