@@ -14,6 +14,7 @@ namespace Library {
 		Model(Game&, const std::string& file, bool filp_uv = false);
 		~Model();
 
+		Game& game();
 		bool has_meshes() const;
 		bool has_materials() const;
 

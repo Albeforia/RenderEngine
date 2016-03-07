@@ -2,7 +2,7 @@
 
 #include "Common.h"
 
-struct Assimp_Mesh;
+struct aiMesh;
 
 namespace Library {
 
@@ -33,7 +33,7 @@ namespace Library {
 		void create_index_buffer(ID3D11Buffer**);
 
 	private:
-		Mesh(Model&, Assimp_Mesh&);
+		Mesh(Model&, aiMesh&);
 
 		Model& m_model;
 		ModelMaterial* m_material;

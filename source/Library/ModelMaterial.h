@@ -2,10 +2,10 @@
 
 #include "Common.h"
 
-struct Assimp_Material;
+struct aiMaterial;
 
 namespace Library {
-	enum class TextureType {
+	enum TextureType {
 		TextureTypeDifffuse = 0,
 		TextureTypeSpecularMap,
 		TextureTypeAmbient,
@@ -32,7 +32,7 @@ namespace Library {
 		static void InitTextureTypeMappings();
 		static std::map<TextureType, UINT> TextureTypeMappings;
 
-		ModelMaterial(Model&, Assimp_Material*);
+		ModelMaterial(Model&, aiMaterial*);
 
 		Model& m_model;
 		std::string m_name;
