@@ -10,6 +10,7 @@
 #include "RTTI.h"
 
 #include <d3d11_1.h>
+#include <d3dx11effect.h>
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
 

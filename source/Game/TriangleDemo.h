@@ -1,6 +1,5 @@
 #pragma once
 
-#include <d3dx11effect.h>
 #include "GameComponentDrawable.h"
 
 using namespace Library;
