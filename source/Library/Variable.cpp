@@ -5,7 +5,12 @@ namespace Library {
 
 	Variable::Variable(Effect& effect, ID3DX11EffectVariable* variable)
 		: m_effect {effect}, m_variable {variable}, m_variable_desc {},
-		m_type {}, m_type_desc {}, m_name {} {}
+		m_type {}, m_type_desc {}, m_name {} {
+		m_variable->GetDesc(&m_variable_desc);
+		m_name = m_variable_desc.Name;
+		m_type = m_variable->GetType();
+		m_type->GetDesc(&m_type_desc);
+	}
 
 	Effect&Variable::effect() { return m_effect; }
 	ID3DX11EffectVariable*Variable::variable() const { return m_variable; }

@@ -14,7 +14,7 @@ namespace Library {
 
 	Camera::Camera(Game& game)
 		: GameComponent(game),
-		m_fov {DEFAULT_FOV}, m_ratio {game.aspect_ratio()}, m_nearp {DEFAULT_FARP}, m_farp {DEFAULT_FARP},
+		m_fov {DEFAULT_FOV}, m_ratio {game.aspect_ratio()}, m_nearp {DEFAULT_NEARP}, m_farp {DEFAULT_FARP},
 		m_position {}, m_direction {}, m_up {}, m_right {}, m_view {}, m_projection {} {}
 
 	Camera::Camera(Game& game, float fov, float ratio, float nearp, float farp)

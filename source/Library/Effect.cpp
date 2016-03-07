@@ -30,6 +30,7 @@ namespace Library {
 
 	void Effect::compile_from_file(const std::wstring& file) {
 		compile_from_file(m_game.d3d_device(), &m_effect, file);
+		init();
 	}
 
 	void Effect::load(ID3D11Device* dev, ID3DX11Effect** effect, const std::wstring& file) {
@@ -43,6 +44,7 @@ namespace Library {
 
 	void Effect::load(const std::wstring& file) {
 		load(m_game.d3d_device(), &m_effect, file);
+		init();
 	}
 
 	Effect::Effect(Game& game)
