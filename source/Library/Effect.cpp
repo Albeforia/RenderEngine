@@ -28,6 +28,10 @@ namespace Library {
 		ReleaseObject(compiled);
 	}
 
+	void Effect::compile_from_file(const std::wstring& file) {
+		compile_from_file(m_game.d3d_device(), &m_effect, file);
+	}
+
 	void Effect::load(ID3D11Device* dev, ID3DX11Effect** effect, const std::wstring& file) {
 		std::vector<char> compiled;
 		Utility::LoadBinaryFile(file, compiled);
@@ -37,8 +41,22 @@ namespace Library {
 		}
 	}
 
+	void Effect::load(const std::wstring& file) {
+		load(m_game.d3d_device(), &m_effect, file);
+	}
+
 	Effect::Effect(Game& game)
 		: m_game {game} {}
+
+	Effect::~Effect() {};
+
+	Game&Effect::game() { return m_game; }
+	ID3DX11Effect*Effect::effect() const { return m_effect; }
+	const D3DX11_EFFECT_DESC&Effect::effect_desc() const { return m_effect_desc; }
+	const std::vector<Technique*>&Effect::techniques() const { return m_techniques; }
+	const std::map<std::string, Technique*>&Effect::techniques_by_name() const { return m_techniques_by_name; }
+	const std::vector<Variable*>&Effect::variables() const { return m_variables; }
+	const std::map<std::string, Variable*>&Effect::variables_by_name() const { return m_variables_by_name; }
 
 	void Effect::init() {
 		HRESULT hr = m_effect->GetDesc(&m_effect_desc);

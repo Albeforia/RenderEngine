@@ -45,6 +45,14 @@ namespace Library {
 		return m_game;
 	}
 
+	const std::vector<Mesh*>& Model::meshes() const {
+		return m_meshes;
+	}
+
+	const std::vector<ModelMaterial*>& Model::materials() const {
+		return m_materials;
+	}
+
 	bool Model::has_meshes() const {
 		return m_meshes.size() > 0;
 	}

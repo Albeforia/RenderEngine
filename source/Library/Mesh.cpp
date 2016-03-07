@@ -75,6 +75,19 @@ namespace Library {
 		}
 	}
 
+	Model& Mesh::model() { return m_model; }
+	ModelMaterial* Mesh::material() const { return m_material; }
+	const std::string& Mesh::name() const { return m_name; }
+
+	const std::vector<XMFLOAT3>& Mesh::vertices() const { return m_vertices; }
+	const std::vector<XMFLOAT3>& Mesh::normals() const { return m_normals; }
+	const std::vector<XMFLOAT3>& Mesh::tangents() const { return m_tangents; }
+	const std::vector<XMFLOAT3>& Mesh::bi_normals() const { return m_bi_normals; }
+	const std::vector<std::vector<XMFLOAT3>*>& Mesh::texture_coords() const { return m_texture_coords; }
+	const std::vector<std::vector<XMFLOAT4>*>& Mesh::vertex_colors() const { return m_vertex_colors; }
+	UINT Mesh::face_count() const { return m_face_count; }
+	const std::vector<UINT>& Mesh::indices() const { return m_indices; }
+
 	void Mesh::create_index_buffer(ID3D11Buffer** buffer) {
 		assert(buffer != nullptr);
 

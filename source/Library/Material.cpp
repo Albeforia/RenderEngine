@@ -28,8 +28,20 @@ namespace Library {
 		return v;
 	}
 
+	Effect* Material::effect() const {
+		return m_effect;
+	}
+
+	Technique* Material::curr_technique() const {
+		return m_curr_technique;
+	}
+
 	void Material::set_curr_technique(Technique* t) {
 		m_curr_technique = t;
+	}
+
+	const std::map<Pass*, ID3D11InputLayout*>& Material::input_layouts() const {
+		return m_input_layouts;
 	}
 
 	void Material::init(Effect* effect) {

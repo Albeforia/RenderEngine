@@ -14,4 +14,11 @@ namespace Library {
 		}
 	}
 
+	Effect&Technique::effect() { return m_effect; }
+	ID3DX11EffectTechnique*Technique::technique() const { return m_technique; }
+	const D3DX11_TECHNIQUE_DESC&Technique::technique_desc() const { return m_technique_desc; }
+	const std::string&Technique::name() const { return m_name; }
+	const std::vector<Pass*>&Technique::passes() const { return  m_passes; }
+	const std::map<std::string, Pass*>&Technique::passes_by_name() const { return m_passes_by_name; }
+
 }
