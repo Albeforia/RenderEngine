@@ -20,7 +20,6 @@ namespace Library {
 			m_device->Release();
 			m_device = nullptr;
 		}
-		ReleaseObject(m_input);
 	}
 
 	const byte* const Keyboard::curr_state() const { return m_curr_state; }

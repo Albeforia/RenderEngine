@@ -20,7 +20,6 @@ namespace Library {
 			m_device->Release();
 			m_device = nullptr;
 		}
-		ReleaseObject(m_input);
 	}
 
 	LPDIMOUSESTATE  Mouse::curr_state() { return &m_curr_state; }
