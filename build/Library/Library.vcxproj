@@ -161,6 +161,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Library\Camera.h" />
+    <ClInclude Include="..\..\source\Library\CameraFirstPerson.h" />
     <ClInclude Include="..\..\source\Library\ColorHelper.h" />
     <ClInclude Include="..\..\source\Library\Common.h" />
     <ClInclude Include="..\..\source\Library\Effect.h" />
@@ -182,6 +183,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClInclude Include="..\..\source\Library\Pass.h" />
     <ClInclude Include="..\..\source\Library\RenderStateHelper.h" />
     <ClInclude Include="..\..\source\Library\RTTI.h" />
+    <ClInclude Include="..\..\source\Library\ServiceContainer.h" />
     <ClInclude Include="..\..\source\Library\Technique.h" />
     <ClInclude Include="..\..\source\Library\Utility.h" />
     <ClInclude Include="..\..\source\Library\Variable.h" />
@@ -189,6 +191,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\Camera.cpp" />
+    <ClCompile Include="..\..\source\Library\CameraFirstPerson.cpp" />
     <ClCompile Include="..\..\source\Library\ColorHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Effect.cpp" />
     <ClCompile Include="..\..\source\Library\Game.cpp" />
@@ -208,6 +211,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\Mouse.cpp" />
     <ClCompile Include="..\..\source\Library\Pass.cpp" />
     <ClCompile Include="..\..\source\Library\RenderStateHelper.cpp" />
+    <ClCompile Include="..\..\source\Library\ServiceContainer.cpp" />
     <ClCompile Include="..\..\source\Library\Technique.cpp" />
     <ClCompile Include="..\..\source\Library\Utility.cpp" />
     <ClCompile Include="..\..\source\Library\Variable.cpp" />

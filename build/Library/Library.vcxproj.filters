@@ -12,6 +12,12 @@
     <Filter Include="Effects">
       <UniqueIdentifier>{264133b7-acb7-4942-a360-c9ed925831e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Material">
+      <UniqueIdentifier>{1d80ed4f-518e-45a6-98cb-63f46a08cb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Material">
+      <UniqueIdentifier>{bbc5112b-7b0f-4610-aaeb-9b9376e7eb41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Library\GameClock.h">
@@ -68,9 +74,6 @@
     <ClInclude Include="..\..\source\Library\Variable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -78,9 +81,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\ModelMaterial.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\MaterialBasic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\RenderStateHelper.h">
@@ -91,6 +91,18 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Library\Mouse.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\ServiceContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\CameraFirstPerson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Material.h">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\MaterialBasic.h">
+      <Filter>Header Files\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -151,12 +163,6 @@
     <ClCompile Include="..\..\source\Library\ModelMaterial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Library\Material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\MaterialBasic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Library\RenderStateHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -165,6 +171,18 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Mouse.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\ServiceContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\CameraFirstPerson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Material.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\MaterialBasic.cpp">
+      <Filter>Source Files\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

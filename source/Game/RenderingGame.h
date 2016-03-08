@@ -6,6 +6,8 @@
 using namespace Library;
 
 namespace Library {
+	class Keyboard;
+	class Mouse;
 	class Camera;
 	class RenderStateHelper;
 	class InfoPanel;
@@ -29,7 +31,11 @@ namespace Rendering {
 	private:
 		static const XMVECTORF32 BACKGROUND_COLOR;
 
+		LPDIRECTINPUT8 m_input;
+		Keyboard* m_keyboard;
+		Mouse* m_mouse;
 		Camera* m_camera;
+
 		RenderStateHelper* m_render_state_helper;
 
 		InfoPanel* m_info_panel;

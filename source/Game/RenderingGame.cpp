@@ -1,6 +1,8 @@
 #include "RenderingGame.h"
 #include "GameException.h"
-#include "Camera.h"
+#include "Keyboard.h"
+#include "Mouse.h"
+#include "CameraFirstPerson.h"
 #include "RenderStateHelper.h"
 #include "MaterialBasicDemo.h"
 #include "InfoPanel.h"
@@ -18,12 +20,26 @@ namespace Rendering {
 	RenderingGame::~RenderingGame() {}
 
 	void RenderingGame::init() {
-		m_camera = new Camera(*this);
-		//m_info_panel = new InfoPanel(*this);
-		m_demo = new MaterialBasicDemo(*this, *m_camera);
+		if (FAILED(DirectInput8Create(m_instance, DIRECTINPUT_VERSION, IID_IDirectInput8, (LPVOID*)&m_input, nullptr))) {
+			throw GameException("DirectInput8Create() failed.");
+		}
 
+		m_keyboard = new Keyboard(*this, m_input);
+		m_components.push_back(m_keyboard);
+		m_services.add_service(Keyboard::TypeIdClass(), m_keyboard);
+
+		m_mouse = new Mouse(*this, m_input);
+		m_components.push_back(m_mouse);
+		m_services.add_service(Mouse::TypeIdClass(), m_mouse);
+
+		m_camera = new CameraFirstPerson(*this);
 		m_components.push_back(m_camera);
+		m_services.add_service(CameraFirstPerson::TypeIdClass(), m_camera);
+
+		//m_info_panel = new InfoPanel(*this);
 		//m_components.push_back(m_info_panel);
+
+		m_demo = new MaterialBasicDemo(*this, *m_camera);
 		m_components.push_back(m_demo);
 
 		m_render_state_helper = new RenderStateHelper(*this);
@@ -34,10 +50,11 @@ namespace Rendering {
 	}
 
 	void RenderingGame::shutdown() {
-		DeleteObject(m_demo);
-		//DeleteObject(m_info_panel);
-		DeleteObject(m_camera);
+		for (auto* c : m_components) {
+			DeleteObject(c);
+		}
 		DeleteObject(m_render_state_helper);
+		ReleaseObject(m_input);
 		Game::shutdown();
 	}
 
