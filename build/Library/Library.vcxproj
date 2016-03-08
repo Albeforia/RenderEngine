@@ -171,6 +171,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClInclude Include="..\..\source\Library\GameException.h" />
     <ClInclude Include="..\..\source\Library\GameTime.h" />
     <ClInclude Include="..\..\source\Library\InfoPanel.h" />
+    <ClInclude Include="..\..\source\Library\Keyboard.h" />
     <ClInclude Include="..\..\source\Library\Material.h" />
     <ClInclude Include="..\..\source\Library\MaterialBasic.h" />
     <ClInclude Include="..\..\source\Library\MatrixHelper.h" />
@@ -196,6 +197,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\GameException.cpp" />
     <ClCompile Include="..\..\source\Library\GameTime.cpp" />
     <ClCompile Include="..\..\source\Library\InfoPanel.cpp" />
+    <ClCompile Include="..\..\source\Library\Keyboard.cpp" />
     <ClCompile Include="..\..\source\Library\Material.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialBasic.cpp" />
     <ClCompile Include="..\..\source\Library\MatrixHelper.cpp" />
