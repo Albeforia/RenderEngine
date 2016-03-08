@@ -16,7 +16,9 @@ namespace Library {
 		m_cubemap_file {cubemap_file}, m_effect {}, m_material {},
 		m_cubemap_res_view {}, m_vertex_buffer {}, m_index_buffer {}, m_index_count {},
 		m_world_mat {MatrixHelper::Identity}, m_scale_mat {MatrixHelper::Identity} {
-		XMStoreFloat4x4(&m_scale_mat, XMMatrixScaling(scale, scale, scale));
+		XMMATRIX scale_mat = XMMatrixScaling(scale, scale, scale);
+		XMStoreFloat4x4(&m_scale_mat, scale_mat);
+		XMStoreFloat4x4(&m_world_mat, scale_mat);
 	}
 
 	Skybox::~Skybox() {
@@ -46,7 +48,8 @@ namespace Library {
 
 	void Skybox::update(const GameTime& game_time) {
 		const XMFLOAT3& pos = m_camera->position();
-		XMStoreFloat4x4(&m_world_mat, XMLoadFloat4x4(&m_scale_mat) * XMMatrixTranslation(pos.x, pos.y, pos.z));
+		// align with camera
+		//XMStoreFloat4x4(&m_world_mat, XMLoadFloat4x4(&m_scale_mat) * XMMatrixTranslation(pos.x, pos.y, pos.z));
 	}
 
 	void Skybox::draw(const GameTime& game_time) {
