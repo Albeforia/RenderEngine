@@ -1,5 +1,9 @@
 #include "RenderingGame.h"
 #include "GameException.h"
+#include "Camera.h"
+#include "RenderStateHelper.h"
+#include "MaterialBasicDemo.h"
+#include "InfoPanel.h"
 
 namespace Rendering {
 
@@ -14,13 +18,26 @@ namespace Rendering {
 	RenderingGame::~RenderingGame() {}
 
 	void RenderingGame::init() {
-		m_info_panel = new InfoPanel(*this);
-		m_components.push_back(m_info_panel);
+		m_camera = new Camera(*this);
+		//m_info_panel = new InfoPanel(*this);
+		m_demo = new MaterialBasicDemo(*this, *m_camera);
+
+		m_components.push_back(m_camera);
+		//m_components.push_back(m_info_panel);
+		m_components.push_back(m_demo);
+
+		m_render_state_helper = new RenderStateHelper(*this);
+
 		Game::init();
+
+		m_camera->set_position(0, 0, 25.0f);
 	}
 
 	void RenderingGame::shutdown() {
-		DeleteObject(m_info_panel);
+		DeleteObject(m_demo);
+		//DeleteObject(m_info_panel);
+		DeleteObject(m_camera);
+		DeleteObject(m_render_state_helper);
 		Game::shutdown();
 	}
 

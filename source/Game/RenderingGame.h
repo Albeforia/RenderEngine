@@ -2,11 +2,18 @@
 
 #include "Common.h"
 #include "Game.h"
-#include "InfoPanel.h"
 
 using namespace Library;
 
+namespace Library {
+	class Camera;
+	class RenderStateHelper;
+	class InfoPanel;
+}
+
 namespace Rendering {
+
+	class MaterialBasicDemo;
 
 	class RenderingGame : public Game {
 
@@ -22,7 +29,11 @@ namespace Rendering {
 	private:
 		static const XMVECTORF32 BACKGROUND_COLOR;
 
+		Camera* m_camera;
+		RenderStateHelper* m_render_state_helper;
+
 		InfoPanel* m_info_panel;
+		MaterialBasicDemo* m_demo;
 
 	};
 
