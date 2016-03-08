@@ -50,6 +50,7 @@ namespace Rendering {
 		con->IASetIndexBuffer(m_index_buffer, DXGI_FORMAT_R32_UINT, 0);
 		XMMATRIX world = XMLoadFloat4x4(&m_world_mat);
 		XMMATRIX wvp = world*m_camera->view_projection();
+		m_material->WVP() << wvp;
 		pass->apply(0, con);
 		con->DrawIndexed(m_index_count, 0, 0);
 	}
