@@ -4,6 +4,7 @@
 #include "GameClock.h"
 #include "GameTime.h"
 #include "GameComponent.h"
+#include "ServiceContainer.h"
 
 namespace Library {
 
@@ -80,6 +81,7 @@ namespace Library {
 		D3D11_VIEWPORT m_viewport;
 
 		std::vector<GameComponent*> m_components;
+		ServiceContainer m_services;
 
 		GameClock m_game_clock;
 		GameTime m_game_time;

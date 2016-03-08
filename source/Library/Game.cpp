@@ -11,12 +11,13 @@ namespace Library {
 
 	Game::Game(HINSTANCE instance, const std::wstring& window_class, const std::wstring& window_title, int show_cmd)
 		: m_instance {instance}, m_window_class {window_class}, m_window_title {window_title}, m_show_cmd {show_cmd},
-		m_window_handle {}, m_window {}, m_game_clock {}, m_game_time {},
+		m_window_handle {}, m_window {},
 		m_screen_width {DEFAULT_SCREEN_WIDTH}, m_screen_height {DEFAULT_SCREEN_HEIGHT},
 		m_feature_level {D3D_FEATURE_LEVEL_9_1}, m_d3d_device {}, m_d3d_device_context {},
 		m_swap_chain {}, m_frame_rate {DEFAULT_FRAME_RATE}, m_is_full_screen {},
 		m_dsbuffer_enabled {}, m_msaa_enabled {}, m_msaa_count {DEFAULT_MSAA_COUNT}, m_msaa_quality_levels {},
-		m_dsbuffer {}, m_render_target_view {}, m_depth_stencil_view {}, m_viewport {} {}
+		m_dsbuffer {}, m_render_target_view {}, m_depth_stencil_view {}, m_viewport {},
+		m_game_clock {}, m_game_time {}, m_components {}, m_services {} {}
 
 	Game::~Game() {}
 
