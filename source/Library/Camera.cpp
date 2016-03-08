@@ -27,6 +27,11 @@ namespace Library {
 
 	Camera::~Camera() {}
 
+	const XMFLOAT3& Camera::position() const { return m_position; }
+	const XMFLOAT3& Camera::direction() const { return m_direction; }
+	const XMFLOAT3& Camera::up() const { return m_up; }
+	const XMFLOAT3& Camera::right() const { return m_right; }
+
 	XMMATRIX Camera::view_projection() const {
 		XMMATRIX v = XMLoadFloat4x4(&m_view);
 		XMMATRIX p = XMLoadFloat4x4(&m_projection);
