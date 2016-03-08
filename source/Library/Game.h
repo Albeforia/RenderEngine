@@ -35,6 +35,7 @@ namespace Library {
 		const D3D11_VIEWPORT& viewport() const;
 
 		const std::vector<GameComponent*>& components() const;
+		const ServiceContainer& services() const;
 
 		virtual void run();
 		virtual void exit();

@@ -61,6 +61,9 @@ namespace Library {
 		return m_d3d_device_context;
 	}
 
+	const std::vector<GameComponent*>& Game::components() const { return m_components; }
+	const ServiceContainer& Game::services() const { return m_services; }
+
 	void Game::run() {
 		init_window();
 		init_dx();
