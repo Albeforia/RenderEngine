@@ -18,6 +18,12 @@
     <Filter Include="Source Files\Material">
       <UniqueIdentifier>{bbc5112b-7b0f-4610-aaeb-9b9376e7eb41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameComponent">
+      <UniqueIdentifier>{6ed576a0-590f-4879-a28f-482000a76246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameComponent">
+      <UniqueIdentifier>{ffec5972-536c-4c44-974e-b9ad2a31357a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Library\GameClock.h">
@@ -35,9 +41,6 @@
     <ClInclude Include="..\..\source\Library\Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\GameComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\RTTI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,12 +51,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\MatrixHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\GameComponentDrawable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\InfoPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\Utility.h">
@@ -107,6 +104,18 @@
     <ClInclude Include="..\..\source\Library\MaterialSkybox.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\GameComponent.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\GameComponentDrawable.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\InfoPanel.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Skybox.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -121,9 +130,6 @@
     <ClCompile Include="..\..\source\Library\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Library\GameComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Library\VectorHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -131,12 +137,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\GameComponentDrawable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\InfoPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Utility.cpp">
@@ -189,6 +189,18 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\MaterialSkybox.cpp">
       <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\GameComponent.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\GameComponentDrawable.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\InfoPanel.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Skybox.cpp">
+      <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
