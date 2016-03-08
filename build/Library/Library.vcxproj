@@ -175,6 +175,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClInclude Include="..\..\source\Library\Keyboard.h" />
     <ClInclude Include="..\..\source\Library\Material.h" />
     <ClInclude Include="..\..\source\Library\MaterialBasic.h" />
+    <ClInclude Include="..\..\source\Library\MaterialSkybox.h" />
     <ClInclude Include="..\..\source\Library\MatrixHelper.h" />
     <ClInclude Include="..\..\source\Library\Mesh.h" />
     <ClInclude Include="..\..\source\Library\Model.h" />
@@ -204,6 +205,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\Keyboard.cpp" />
     <ClCompile Include="..\..\source\Library\Material.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialBasic.cpp" />
+    <ClCompile Include="..\..\source\Library\MaterialSkybox.cpp" />
     <ClCompile Include="..\..\source\Library\MatrixHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Mesh.cpp" />
     <ClCompile Include="..\..\source\Library\Model.cpp" />

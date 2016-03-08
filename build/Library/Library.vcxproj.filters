@@ -104,6 +104,9 @@
     <ClInclude Include="..\..\source\Library\MaterialBasic.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\MaterialSkybox.h">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -182,6 +185,9 @@
       <Filter>Source Files\Material</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\MaterialBasic.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\MaterialSkybox.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
   </ItemGroup>
