@@ -28,7 +28,7 @@ namespace Rendering {
 
 		std::unique_ptr<Model> model(new Model(*m_game, "content\\models\\Sphere.obj", true));
 		m_effect = new Effect(*m_game);
-		m_effect->load(L"content\\effects\\basic_effect.cso");
+		m_effect->load(L"content\\effects\\basic.cso");
 		m_material = new MaterialBasic();
 		m_material->init(m_effect);
 
