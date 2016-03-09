@@ -5,6 +5,7 @@
 #include "CameraFirstPerson.h"
 #include "RenderStateHelper.h"
 #include "MaterialBasicDemo.h"
+#include "Skybox.h"
 #include "InfoPanel.h"
 
 namespace Rendering {
@@ -39,14 +40,16 @@ namespace Rendering {
 		//m_info_panel = new InfoPanel(*this);
 		//m_components.push_back(m_info_panel);
 
-		m_demo = new MaterialBasicDemo(*this, *m_camera);
-		m_components.push_back(m_demo);
+		/*m_demo = new MaterialBasicDemo(*this, *m_camera);
+		m_components.push_back(m_demo);*/
+
+		m_components.push_back(new Skybox(*this, *m_camera, L"content\\textures\\Lycksele2.dds", 4.0f));
 
 		m_render_state_helper = new RenderStateHelper(*this);
 
 		Game::init();
 
-		m_camera->set_position(0, 0, 25.0f);
+		m_camera->set_position(0, 0, 0);
 	}
 
 	void RenderingGame::shutdown() {

@@ -204,10 +204,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\content\effects\basic_effect.fx">
+    <FxCompile Include="..\..\content\effects\skybox.fx">
       <Filter>Effects</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\content\effects\skybox.fx">
+    <FxCompile Include="..\..\content\effects\basic.fx">
       <Filter>Effects</Filter>
     </FxCompile>
   </ItemGroup>
