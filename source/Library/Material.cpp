@@ -68,6 +68,20 @@ namespace Library {
 		}
 	}
 
+	void Material::create_vertex_buffer(ID3D11Device* device, void* vertices, UINT count, ID3D11Buffer** buffer) const {
+		D3D11_BUFFER_DESC desc;
+		ZeroMemory(&desc, sizeof(desc));
+		desc.ByteWidth = vertex_size() * count;
+		desc.Usage = D3D11_USAGE_IMMUTABLE;
+		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		D3D11_SUBRESOURCE_DATA data;
+		ZeroMemory(&data, sizeof(data));
+		data.pSysMem = vertices;
+		if (FAILED(device->CreateBuffer(&desc, &data, buffer))) {
+			throw GameException("ID3D11Device::CreateBuffer() failed.");
+		}
+	}
+
 	void Material::create_input_layout(const std::string& techname, const std::string& passname, D3D11_INPUT_ELEMENT_DESC* desc, UINT num) {
 		Technique* tech = m_effect->techniques_by_name().at(techname);
 		assert(tech != nullptr);
