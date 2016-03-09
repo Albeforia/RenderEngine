@@ -50,7 +50,15 @@ namespace Library {
 	Effect::Effect(Game& game)
 		: m_game {game} {}
 
-	Effect::~Effect() {};
+	Effect::~Effect() {
+		for (auto* t : m_techniques) {
+			DeleteObject(t);
+		}
+		for (auto* v : m_variables) {
+			DeleteObject(v);
+		}
+		ReleaseObject(m_effect);
+	};
 
 	Game&Effect::game() { return m_game; }
 	ID3DX11Effect*Effect::effect() const { return m_effect; }

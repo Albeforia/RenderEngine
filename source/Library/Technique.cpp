@@ -14,6 +14,13 @@ namespace Library {
 		}
 	}
 
+	Technique::~Technique() {
+		for (auto* p : m_passes) {
+			DeleteObject(p);
+		}
+		ReleaseObject(m_technique);
+	}
+
 	Effect&Technique::effect() { return m_effect; }
 	ID3DX11EffectTechnique*Technique::technique() const { return m_technique; }
 	const D3DX11_TECHNIQUE_DESC&Technique::technique_desc() const { return m_technique_desc; }

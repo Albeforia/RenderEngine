@@ -12,7 +12,7 @@ namespace Library {
 
 	public:
 		Technique(Game&, Effect&, ID3DX11EffectTechnique*);
-
+		~Technique();
 		Technique(const Technique&) = delete;
 		Technique& operator=(const Technique&) = delete;
 

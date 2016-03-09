@@ -10,7 +10,9 @@ namespace Library {
 		m_name = m_pass_desc.Name;
 	}
 
-	Pass::~Pass() {}
+	Pass::~Pass() {
+		ReleaseObject(m_pass);
+	}
 
 	Technique&Pass::technique() { return m_technique; }
 	ID3DX11EffectPass*Pass::pass() const { return m_pass; }

@@ -5,18 +5,22 @@ namespace Library {
 
 	Variable::Variable(Effect& effect, ID3DX11EffectVariable* variable)
 		: m_effect {effect}, m_variable {variable}, m_variable_desc {},
-		m_type {}, m_type_desc {}, m_name {} {
+		m_type {}, m_name {} {
 		m_variable->GetDesc(&m_variable_desc);
 		m_name = m_variable_desc.Name;
 		m_type = m_variable->GetType();
-		m_type->GetDesc(&m_type_desc);
+		//m_type->GetDesc(&m_type_desc);
+	}
+
+	Variable::~Variable() {
+		ReleaseObject(m_variable);
 	}
 
 	Effect&Variable::effect() { return m_effect; }
 	ID3DX11EffectVariable*Variable::variable() const { return m_variable; }
 	const D3DX11_EFFECT_VARIABLE_DESC&Variable::variable_desc() const { return m_variable_desc; }
 	ID3DX11EffectType*Variable::type() const { return m_type; }
-	const D3DX11_EFFECT_TYPE_DESC&Variable::type_desc() const { return m_type_desc; }
+	//const D3DX11_EFFECT_TYPE_DESC&Variable::type_desc() const { return m_type_desc; }
 	const std::string Variable::name() const { return m_name; }
 
 	Variable& Variable::operator<<(CXMMATRIX value) {
