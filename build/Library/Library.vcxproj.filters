@@ -30,11 +30,11 @@
     <Filter Include="Source Files\Helper">
       <UniqueIdentifier>{07c6ea55-3944-4da4-b9ce-1d36c1f73179}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Light">
-      <UniqueIdentifier>{200ab768-fe17-42b6-8c93-8c7df6f1554d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Light">
+    <Filter Include="Source Files\GameComponent\Light">
       <UniqueIdentifier>{6e0d0683-e714-44e4-9ecf-aed2be16795d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameComponent\Light">
+      <UniqueIdentifier>{200ab768-fe17-42b6-8c93-8c7df6f1554d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,9 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\RTTI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\Utility.h">
@@ -90,9 +87,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\ServiceContainer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\CameraFirstPerson.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\Material.h">
@@ -135,10 +129,22 @@
       <Filter>Header Files\Material</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\Light.h">
-      <Filter>Header Files\Light</Filter>
+      <Filter>Header Files\GameComponent\Light</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\LightDirectional.h">
-      <Filter>Header Files\Light</Filter>
+      <Filter>Header Files\GameComponent\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\RasterizerStates.h">
+      <Filter>Header Files\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Camera.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\CameraFirstPerson.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Gizmo.h">
+      <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,9 +158,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Utility.cpp">
@@ -188,9 +191,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\ServiceContainer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\CameraFirstPerson.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Material.cpp">
@@ -230,10 +230,22 @@
       <Filter>Source Files\Material</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Light.cpp">
-      <Filter>Source Files\Light</Filter>
+      <Filter>Source Files\GameComponent\Light</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\LightDirectional.cpp">
-      <Filter>Source Files\Light</Filter>
+      <Filter>Source Files\GameComponent\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\RasterizerStates.cpp">
+      <Filter>Source Files\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Camera.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\CameraFirstPerson.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Gizmo.cpp">
+      <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
