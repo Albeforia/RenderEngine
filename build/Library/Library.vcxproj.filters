@@ -30,6 +30,12 @@
     <Filter Include="Source Files\Helper">
       <UniqueIdentifier>{07c6ea55-3944-4da4-b9ce-1d36c1f73179}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Light">
+      <UniqueIdentifier>{200ab768-fe17-42b6-8c93-8c7df6f1554d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Light">
+      <UniqueIdentifier>{6e0d0683-e714-44e4-9ecf-aed2be16795d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Library\GameClock.h">
@@ -128,6 +134,9 @@
     <ClInclude Include="..\..\source\Library\MaterialDiffuse.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\Light.h">
+      <Filter>Header Files\Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -216,6 +225,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\MaterialDiffuse.cpp">
       <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Light.cpp">
+      <Filter>Source Files\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
