@@ -149,6 +149,9 @@
     <ClInclude Include="..\..\source\Library\Mouse.h">
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\FullScreenQuad.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -251,6 +254,9 @@
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Mouse.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\FullScreenQuad.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>

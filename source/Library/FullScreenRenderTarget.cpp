@@ -34,7 +34,6 @@ namespace Library {
 		}
 		ReleaseObject(tex);
 
-
 		ZeroMemory(&desc, sizeof(desc));
 		desc.Width = game.screen_width();
 		desc.Height = game.screen_height();
