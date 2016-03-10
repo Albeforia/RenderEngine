@@ -5,13 +5,13 @@
 
 namespace Library {
 
-	VERTEX_STRUCT_DECLARATION(MaterialBasic, POSITION, COLOR)
+	VERTEX_STRUCT_DECLARATION(MaterialBasic, POSITION, TEXCOORD)
 
 	class MaterialBasic : public Material {
 
 		RTTI_DECLARATIONS(MaterialBasic, Material);
 
-		MATERIAL_VARIABLES_DECLARATION(WVP);
+		MATERIAL_VARIABLES_DECLARATION(WVP, DiffuseTexture);
 
 	public:
 		MaterialBasic();
