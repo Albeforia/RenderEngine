@@ -80,12 +80,6 @@
     <ClInclude Include="..\..\source\Library\ModelMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\Keyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\Mouse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\ServiceContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -149,6 +143,12 @@
     <ClInclude Include="..\..\source\Library\FullScreenRenderTarget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\Keyboard.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Mouse.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -185,12 +185,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\ModelMaterial.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Keyboard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\ServiceContainer.cpp">
@@ -252,6 +246,12 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\FullScreenRenderTarget.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Keyboard.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Mouse.cpp">
+      <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

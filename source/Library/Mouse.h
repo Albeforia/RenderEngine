@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameComponent.h"
+#include <dinput.h>
 
 namespace Library {
 
