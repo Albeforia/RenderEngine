@@ -175,6 +175,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClInclude Include="..\..\source\Library\InfoPanel.h" />
     <ClInclude Include="..\..\source\Library\Keyboard.h" />
     <ClInclude Include="..\..\source\Library\Light.h" />
+    <ClInclude Include="..\..\source\Library\LightDirectional.h" />
     <ClInclude Include="..\..\source\Library\Material.h" />
     <ClInclude Include="..\..\source\Library\MaterialBasic.h" />
     <ClInclude Include="..\..\source\Library\MaterialDiffuse.h" />
@@ -208,6 +209,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\InfoPanel.cpp" />
     <ClCompile Include="..\..\source\Library\Keyboard.cpp" />
     <ClCompile Include="..\..\source\Library\Light.cpp" />
+    <ClCompile Include="..\..\source\Library\LightDirectional.cpp" />
     <ClCompile Include="..\..\source\Library\Material.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialBasic.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialDiffuse.cpp" />
