@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\Game\MaterialBasicDemo.cpp" />
+    <ClCompile Include="..\..\source\Game\EarthDemo.cpp" />
     <ClCompile Include="..\..\source\Game\Program.cpp" />
     <ClCompile Include="..\..\source\Game\RenderingGame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\source\Game\MaterialBasicDemo.h" />
+    <ClInclude Include="..\..\source\Game\EarthDemo.h" />
     <ClInclude Include="..\..\source\Game\RenderingGame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
