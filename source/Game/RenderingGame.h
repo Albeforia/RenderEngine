@@ -2,20 +2,23 @@
 
 #include "Common.h"
 #include "Game.h"
+#include "dinput.h"
 
 using namespace Library;
 
 namespace Library {
 	class Keyboard;
 	class Mouse;
-	class Camera;
 	class RenderStateHelper;
-	class InfoPanel;
+	class FullScreenRenderTarget;
+	class Camera;
+	// only for test MRT
+	class FullScreenQuad;
+	class MaterialBasic;
+	class Effect;
 }
 
 namespace Rendering {
-
-	class MaterialBasicDemo;
 
 	class RenderingGame : public Game {
 
@@ -34,12 +37,19 @@ namespace Rendering {
 		LPDIRECTINPUT8 m_input;
 		Keyboard* m_keyboard;
 		Mouse* m_mouse;
-		Camera* m_camera;
 
 		RenderStateHelper* m_render_state_helper;
+		// MRT for deferred shading
+		std::vector<FullScreenRenderTarget*> m_render_targets;
+		ID3D11RenderTargetView** m_render_targets_raw;
 
-		InfoPanel* m_info_panel;
-		MaterialBasicDemo* m_demo;
+		Camera* m_camera;
+
+		// only for test MRT
+		FullScreenQuad* m_quad;
+		MaterialBasic* m_quad_material;
+		Effect* m_quad_effect;
+		void update_quad_material();
 
 	};
 
