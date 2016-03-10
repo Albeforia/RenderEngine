@@ -43,6 +43,8 @@ namespace Library {
 		virtual void update(const GameTime&);
 		virtual void draw(const GameTime&);
 
+		void reset_render_targets();
+
 	protected:
 		virtual void init_window();
 		virtual void shutdown();

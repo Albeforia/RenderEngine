@@ -126,6 +126,10 @@ namespace Library {
 		}
 	}
 
+	void Game::reset_render_targets() {
+		m_d3d_device_context->OMSetRenderTargets(1, &m_render_target_view, m_depth_stencil_view);
+	}
+
 	void Game::init_window() {
 		ZeroMemory(&m_window, sizeof(m_window));
 		m_window.cbSize = sizeof(WNDCLASSEX);

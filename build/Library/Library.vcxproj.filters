@@ -146,6 +146,9 @@
     <ClInclude Include="..\..\source\Library\Gizmo.h">
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\FullScreenRenderTarget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -246,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Gizmo.cpp">
       <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\FullScreenRenderTarget.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
