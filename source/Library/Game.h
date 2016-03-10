@@ -29,9 +29,9 @@ namespace Library {
 		// FIXME add getter implementation
 		ID3D11Device1* d3d_device() const;
 		ID3D11DeviceContext1* d3d_device_context() const;
-		bool dsbuffer_enabled() const;
+		bool depth_stencil_enabled() const;
 		bool is_full_screen() const;
-		const D3D11_TEXTURE2D_DESC& buffer_desc() const;
+		//const D3D11_TEXTURE2D_DESC& buffer_desc() const;
 		const D3D11_VIEWPORT& viewport() const;
 
 		const std::vector<GameComponent*>& components() const;
@@ -52,7 +52,6 @@ namespace Library {
 
 		static const UINT DEFAULT_SCREEN_WIDTH;
 		static const UINT DEFAULT_SCREEN_HEIGHT;
-
 		static const UINT DEFAULT_FRAME_RATE;
 		static const UINT DEFAULT_MSAA_COUNT;
 
@@ -72,15 +71,15 @@ namespace Library {
 
 		UINT m_frame_rate;
 		bool m_is_full_screen;
-		bool m_dsbuffer_enabled;
+		bool m_depth_stencil_enabled;
 		bool m_msaa_enabled;
 		UINT m_msaa_count;
 		UINT m_msaa_quality_levels;
 
-		ID3D11Texture2D* m_dsbuffer;
-		D3D11_TEXTURE2D_DESC m_buffer_desc;
-		ID3D11RenderTargetView* m_render_target_view;
-		ID3D11DepthStencilView* m_depth_stencil_view;
+		//ID3D11Texture2D* m_dsbuffer;
+		//D3D11_TEXTURE2D_DESC m_buffer_desc;
+		ID3D11RenderTargetView* m_render_target_back;
+		ID3D11DepthStencilView* m_depth_stencil_back;
 		D3D11_VIEWPORT m_viewport;
 
 		std::vector<GameComponent*> m_components;

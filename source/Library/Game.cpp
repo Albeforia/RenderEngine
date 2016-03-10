@@ -15,8 +15,8 @@ namespace Library {
 		m_screen_width {DEFAULT_SCREEN_WIDTH}, m_screen_height {DEFAULT_SCREEN_HEIGHT},
 		m_feature_level {D3D_FEATURE_LEVEL_9_1}, m_d3d_device {}, m_d3d_device_context {},
 		m_swap_chain {}, m_frame_rate {DEFAULT_FRAME_RATE}, m_is_full_screen {},
-		m_dsbuffer_enabled {}, m_msaa_enabled {}, m_msaa_count {DEFAULT_MSAA_COUNT}, m_msaa_quality_levels {},
-		m_dsbuffer {}, m_render_target_view {}, m_depth_stencil_view {}, m_viewport {},
+		m_depth_stencil_enabled {}, m_msaa_enabled {}, m_msaa_count {DEFAULT_MSAA_COUNT}, m_msaa_quality_levels {},
+		m_render_target_back {}, m_depth_stencil_back {}, m_viewport {},
 		m_game_clock {}, m_game_time {}, m_components {}, m_services {} {}
 
 	Game::~Game() {}
@@ -90,10 +90,13 @@ namespace Library {
 	}
 
 	void Game::shutdown() {
-		ReleaseObject(m_render_target_view);
-		ReleaseObject(m_depth_stencil_view);
+		for (auto* c : m_components) {
+			DeleteObject(c);
+		}
+		ReleaseObject(m_render_target_back);
+		ReleaseObject(m_depth_stencil_back);
 		ReleaseObject(m_swap_chain);
-		ReleaseObject(m_dsbuffer);
+		/*ReleaseObject(m_dsbuffer);*/
 		if (m_d3d_device_context != nullptr) {
 			m_d3d_device_context->ClearState();
 		}
@@ -127,7 +130,7 @@ namespace Library {
 	}
 
 	void Game::reset_render_targets() {
-		m_d3d_device_context->OMSetRenderTargets(1, &m_render_target_view, m_depth_stencil_view);
+		m_d3d_device_context->OMSetRenderTargets(1, &m_render_target_back, m_depth_stencil_back);
 	}
 
 	void Game::init_window() {
@@ -244,15 +247,16 @@ namespace Library {
 		if (FAILED(hr = m_swap_chain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&buffer)))) {
 			throw GameException("IDXGISwapChain1::GetBuffer() failed.", hr);
 		}
-		buffer->GetDesc(&m_buffer_desc);
+		//buffer->GetDesc(&m_buffer_desc);
 
-		if (FAILED(hr = m_d3d_device->CreateRenderTargetView(buffer, nullptr, &m_render_target_view))) {
+		if (FAILED(hr = m_d3d_device->CreateRenderTargetView(buffer, nullptr, &m_render_target_back))) {
 			ReleaseObject(buffer);
 			throw GameException("ID3D11Device1::CreateRenderTargetView() failed.", hr);
 		}
 		ReleaseObject(buffer);
 
-		if (m_dsbuffer_enabled) {
+		if (m_depth_stencil_enabled) {
+			ID3D11Texture2D* dsbuffer = nullptr;
 			D3D11_TEXTURE2D_DESC ds_desc;
 			ZeroMemory(&ds_desc, sizeof(ds_desc));
 			ds_desc.Width = m_screen_width;
@@ -270,15 +274,16 @@ namespace Library {
 				ds_desc.SampleDesc.Count = 1;
 				ds_desc.SampleDesc.Quality = 0;
 			}
-			if (FAILED(hr = m_d3d_device->CreateTexture2D(&ds_desc, nullptr, &m_dsbuffer))) {
+			if (FAILED(hr = m_d3d_device->CreateTexture2D(&ds_desc, nullptr, &dsbuffer))) {
 				throw GameException("ID3D11Device1::CreateTexture2D() failed.", hr);
 			}
-			if (FAILED(hr = m_d3d_device->CreateDepthStencilView(m_dsbuffer, nullptr, &m_depth_stencil_view))) {
+			if (FAILED(hr = m_d3d_device->CreateDepthStencilView(dsbuffer, nullptr, &m_depth_stencil_back))) {
 				throw GameException("ID3D11Device1::CreateDepthStencilView() failed.", hr);
 			}
+			ReleaseObject(dsbuffer);
 		}
 
-		m_d3d_device_context->OMSetRenderTargets(1, &m_render_target_view, m_depth_stencil_view);
+		m_d3d_device_context->OMSetRenderTargets(1, &m_render_target_back, m_depth_stencil_back);
 		m_viewport.TopLeftX = 0.0f;
 		m_viewport.TopLeftY = 0.0f;
 		m_viewport.Width = static_cast<float>(m_screen_width);
