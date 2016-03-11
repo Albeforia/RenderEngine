@@ -12,10 +12,10 @@ namespace Library {
 	class RenderStateHelper;
 	class FullScreenRenderTarget;
 	class Camera;
-	// only for test MRT
 	class FullScreenQuad;
-	class MaterialBasic;
+	class Material;
 	class Effect;
+	class Light;
 }
 
 namespace Rendering {
@@ -45,11 +45,12 @@ namespace Rendering {
 
 		Camera* m_camera;
 
-		// only for test MRT
 		FullScreenQuad* m_quad;
-		MaterialBasic* m_quad_material;
+		Material* m_quad_material;
 		Effect* m_quad_effect;
 		void update_quad_material();
+
+		Light* m_light;
 
 	};
 

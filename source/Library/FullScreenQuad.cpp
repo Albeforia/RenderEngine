@@ -103,8 +103,9 @@ namespace Library {
 		m_pass->apply(0, con);
 		con->DrawIndexed(m_index_count, 0, 0);
 
-		ID3D11ShaderResourceView* null[] = {nullptr};
-		con->PSSetShaderResources(0, 1, null);
+		// reset resource
+		ID3D11ShaderResourceView* null[3] = {};
+		con->PSSetShaderResources(0, ARRAYSIZE(null), null);
 	}
 
 }

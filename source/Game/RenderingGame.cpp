@@ -9,9 +9,10 @@
 #include "EarthDemo.h"
 #include "Utility.h"
 #include "Effect.h"
-#include "MaterialBasic.h"
+#include "MaterialDeferredDiffuse.h"
 #include "FullScreenQuad.h"
 #include "MatrixHelper.h"
+#include "LightDirectional.h"
 
 namespace Rendering {
 
@@ -61,14 +62,18 @@ namespace Rendering {
 		m_camera = new CameraFirstPerson(*this);
 		m_components.push_back(m_camera);
 
-		// other
+		// scene
 		m_components.push_back(new EarthDemo(*this, *m_camera, L"content\\textures\\Earth.dds"));
 
-		// only for test MRT
+		// light
+		m_light = new LightDirectional(*this);
+		m_components.push_back(m_light);
+
+		// quad
 		SetCurrentDirectory(Utility::ExecutableDirectory().c_str());
 		m_quad_effect = new Effect(*this);
-		m_quad_effect->load(L"content\\effects\\basic.cso");
-		m_quad_material = new MaterialBasic();
+		m_quad_effect->load(L"content\\effects\\deferred_light.cso");
+		m_quad_material = new MaterialDeferredDiffuse();
 		m_quad_material->init(m_quad_effect);
 		m_quad = new FullScreenQuad(*this, *m_quad_material);
 		m_quad->init();
@@ -109,16 +114,7 @@ namespace Rendering {
 		m_d3d_device_context->ClearDepthStencilView(m_render_targets[0]->depth_stencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		Game::draw(game_time);
 
-		/*
 		// light pass
-		reset_render_targets();
-		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&BACKGROUND_COLOR));
-		m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		// switch effect
-		Game::draw(game_time);
-		*/
-
-		// only for test MRT
 		reset_render_targets();
 		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&BACKGROUND_COLOR));
 		//m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -132,8 +128,16 @@ namespace Rendering {
 	}
 
 	void RenderingGame::update_quad_material() {
-		m_quad_material->WVP() << XMLoadFloat4x4(&MatrixHelper::Identity);
-		m_quad_material->DiffuseTexture() << m_render_targets[2]->output_texture();
+		MaterialDeferredDiffuse* m = m_quad_material->As<MaterialDeferredDiffuse>();
+		m->WVP() << XMLoadFloat4x4(&MatrixHelper::Identity);
+		m->AmbientColor() << DirectX::operator*(0.5f, ColorHelper::White);
+		LightDirectional* l = m_light->As<LightDirectional>();
+		m->LightColor() << l->color_vector();
+		m->LightDirection() << l->directionv();
+		//
+		m->PositionBuffer() << m_render_targets[0]->output_texture();
+		m->NormalBuffer() << m_render_targets[1]->output_texture();
+		m->AlbedoSpecularBuffer() << m_render_targets[2]->output_texture();
 	}
 
 }
