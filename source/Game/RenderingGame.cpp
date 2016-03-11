@@ -16,7 +16,7 @@
 
 namespace Rendering {
 
-	const XMVECTORF32 RenderingGame::BACKGROUND_COLOR = ColorHelper::CornflowerBlue;
+	const XMVECTORF32 RenderingGame::BACKGROUND_COLOR = ColorHelper::Black;
 
 	RenderingGame::RenderingGame(HINSTANCE instance, const std::wstring& window_class, const std::wstring& window_title, int show_cmd)
 		: Game(instance, window_class, window_title, show_cmd),
@@ -113,11 +113,15 @@ namespace Rendering {
 		m_d3d_device_context->ClearDepthStencilView(m_render_targets[0]->depth_stencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		Game::draw(game_time);
 
+		m_render_state_helper->save_all();	// color pass will enable blend
+
 		// light pass
 		reset_render_targets();
-		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&BACKGROUND_COLOR));
+		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&ColorHelper::Black));
 		//m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		m_quad->draw(game_time);
+
+		m_render_state_helper->restore_all();
 
 		// swap
 		HRESULT hr = m_swap_chain->Present(0, 0);

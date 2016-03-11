@@ -18,6 +18,12 @@ RasterizerState DisableCulling {
 	CullMode = NONE;
 };
 
+BlendState EnableAdditiveBlending {
+	BlendEnable[0] = TRUE;
+	SrcBlend = ONE;
+	DestBlend = ONE;
+};
+
 SamplerState TrilinearSampler {
 	Filter = MIN_MAG_MIP_LINEAR;
 	//AddressU = WRAP;
@@ -72,5 +78,6 @@ technique11 main11 {
 		SetGeometryShader(NULL);
 		SetPixelShader(CompileShader(ps_5_0, pixel_shader()));
 		//SetRasterizerState(DisableCulling);
+		SetBlendState(EnableAdditiveBlending, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
 	}
 }
