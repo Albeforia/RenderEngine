@@ -119,9 +119,6 @@
     <ClInclude Include="..\..\source\Library\ColorHelper.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\MaterialDiffuse.h">
-      <Filter>Header Files\Material</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\Light.h">
       <Filter>Header Files\GameComponent\Light</Filter>
     </ClInclude>
@@ -153,6 +150,9 @@
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\MaterialDeferredGeometry.h">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\MaterialDeferredDiffuse.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
   </ItemGroup>
@@ -229,9 +229,6 @@
     <ClCompile Include="..\..\source\Library\ColorHelper.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Library\MaterialDiffuse.cpp">
-      <Filter>Source Files\Material</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Library\Light.cpp">
       <Filter>Source Files\GameComponent\Light</Filter>
     </ClCompile>
@@ -265,6 +262,9 @@
     <ClCompile Include="..\..\source\Library\MaterialDeferredGeometry.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Library\MaterialDeferredDiffuse.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\content\effects\skybox.fx">
@@ -274,6 +274,9 @@
       <Filter>Effects</Filter>
     </FxCompile>
     <FxCompile Include="..\..\content\effects\deferred_geometry.fx">
+      <Filter>Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\content\effects\deferred_light.fx">
       <Filter>Effects</Filter>
     </FxCompile>
   </ItemGroup>

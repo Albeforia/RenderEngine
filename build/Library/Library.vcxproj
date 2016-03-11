@@ -182,7 +182,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClInclude Include="..\..\source\Library\Material.h" />
     <ClInclude Include="..\..\source\Library\MaterialBasic.h" />
     <ClInclude Include="..\..\source\Library\MaterialDeferredGeometry.h" />
-    <ClInclude Include="..\..\source\Library\MaterialDiffuse.h" />
+    <ClInclude Include="..\..\source\Library\MaterialDeferredDiffuse.h" />
     <ClInclude Include="..\..\source\Library\MaterialSkybox.h" />
     <ClInclude Include="..\..\source\Library\MatrixHelper.h" />
     <ClInclude Include="..\..\source\Library\Mesh.h" />
@@ -221,7 +221,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\Material.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialBasic.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialDeferredGeometry.cpp" />
-    <ClCompile Include="..\..\source\Library\MaterialDiffuse.cpp" />
+    <ClCompile Include="..\..\source\Library\MaterialDeferredDiffuse.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialSkybox.cpp" />
     <ClCompile Include="..\..\source\Library\MatrixHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Mesh.cpp" />
@@ -241,6 +241,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
   <ItemGroup>
     <FxCompile Include="..\..\content\effects\basic.fx" />
     <FxCompile Include="..\..\content\effects\deferred_geometry.fx" />
+    <FxCompile Include="..\..\content\effects\deferred_light.fx" />
     <FxCompile Include="..\..\content\effects\skybox.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
