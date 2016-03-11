@@ -19,17 +19,17 @@ namespace Library {
 		GameComponentDrawable(const GameComponentDrawable&) = delete;
 		GameComponentDrawable& operator=(const GameComponentDrawable&) = delete;
 
-		bool visible() const;
-		void set_visible(bool);
-
-		Camera* get_camera();
-		void set_camera(Camera&);
+		bool& visible();
+		void translate(float x, float y, float z);
+		void scale(float x, float y, float z);
 
 		virtual void draw(const GameTime&);
 
 	protected:
-		bool m_visible;
 		Camera* m_camera;
+
+		bool m_visible;
+		XMFLOAT4X4 m_transform;
 
 	};
 
