@@ -4,7 +4,7 @@
 
 namespace Library {
 
-	FullScreenRenderTarget::FullScreenRenderTarget(Game& game, bool enable_depth_stencil)
+	FullScreenRenderTarget::FullScreenRenderTarget(Game& game, bool enable_depth_stencil, DXGI_FORMAT format)
 		: m_game {&game}, m_render_target {}, m_depth_stencil {}, m_output_texture {},
 		m_depth_stencil_enabled {enable_depth_stencil} {
 		D3D11_TEXTURE2D_DESC desc;
@@ -13,7 +13,7 @@ namespace Library {
 		desc.Height = game.screen_height();
 		desc.MipLevels = 1;
 		desc.ArraySize = 1;
-		desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		desc.Format = format;
 		desc.SampleDesc.Count = 1;
 		desc.SampleDesc.Quality = 0;
 		desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;

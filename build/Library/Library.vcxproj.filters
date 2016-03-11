@@ -152,7 +152,7 @@
     <ClInclude Include="..\..\source\Library\MaterialDeferredGeometry.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\MaterialDeferredDiffuse.h">
+    <ClInclude Include="..\..\source\Library\MaterialDeferredDLight.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
   </ItemGroup>
@@ -262,7 +262,7 @@
     <ClCompile Include="..\..\source\Library\MaterialDeferredGeometry.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Library\MaterialDeferredDiffuse.cpp">
+    <ClCompile Include="..\..\source\Library\MaterialDeferredDLight.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
   </ItemGroup>
@@ -276,7 +276,7 @@
     <FxCompile Include="..\..\content\effects\deferred_geometry.fx">
       <Filter>Effects</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\content\effects\deferred_light.fx">
+    <FxCompile Include="..\..\content\effects\deferred_d_light.fx">
       <Filter>Effects</Filter>
     </FxCompile>
   </ItemGroup>

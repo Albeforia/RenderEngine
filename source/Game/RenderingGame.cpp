@@ -9,7 +9,7 @@
 #include "EarthDemo.h"
 #include "Utility.h"
 #include "Effect.h"
-#include "MaterialDeferredDiffuse.h"
+#include "MaterialDeferredDLight.h"
 #include "FullScreenQuad.h"
 #include "MatrixHelper.h"
 #include "LightDirectional.h"
@@ -43,10 +43,9 @@ namespace Rendering {
 
 		// render
 		m_render_state_helper = new RenderStateHelper(*this);
-
-		auto* position = new FullScreenRenderTarget(*this, true);
-		auto* normal = new FullScreenRenderTarget(*this, false);
-		auto* albedo_specular = new FullScreenRenderTarget(*this, false);
+		auto* position = new FullScreenRenderTarget(*this, true, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		auto* normal = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		auto* albedo_specular = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R8G8B8A8_UNORM);
 		//normal->set_depth_stencil(position->depth_stencil());
 		//albedo_specular->set_depth_stencil(position->depth_stencil());
 		m_render_targets.push_back(position);
@@ -72,8 +71,8 @@ namespace Rendering {
 		// quad
 		SetCurrentDirectory(Utility::ExecutableDirectory().c_str());
 		m_quad_effect = new Effect(*this);
-		m_quad_effect->load(L"content\\effects\\deferred_light.cso");
-		m_quad_material = new MaterialDeferredDiffuse();
+		m_quad_effect->load(L"content\\effects\\deferred_d_light.cso");
+		m_quad_material = new MaterialDeferredDLight();
 		m_quad_material->init(m_quad_effect);
 		m_quad = new FullScreenQuad(*this, *m_quad_material);
 		m_quad->init();
@@ -128,9 +127,11 @@ namespace Rendering {
 	}
 
 	void RenderingGame::update_quad_material() {
-		MaterialDeferredDiffuse* m = m_quad_material->As<MaterialDeferredDiffuse>();
-		m->WVP() << XMLoadFloat4x4(&MatrixHelper::Identity);
+		MaterialDeferredDLight* m = m_quad_material->As<MaterialDeferredDLight>();
+		m->CameraPosition() << XMLoadFloat3(&m_camera->position());
 		m->AmbientColor() << DirectX::operator*(0.5f, ColorHelper::White);
+		m->SpecularColor() << ColorHelper::White;
+		m->SpecularPower() << 25.0f;
 		LightDirectional* l = m_light->As<LightDirectional>();
 		m->LightColor() << l->color_vector();
 		m->LightDirection() << l->directionv();
