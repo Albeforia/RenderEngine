@@ -4,16 +4,16 @@
 
 namespace Library {
 
-	FullScreenRenderTarget::FullScreenRenderTarget(Game& game,
-												   ID3D11DepthStencilView* depth_stencil, DXGI_FORMAT format)
-		: m_game {&game}, m_render_target {}, m_depth_stencil {depth_stencil}, m_output_texture {} {
+	FullScreenRenderTarget::FullScreenRenderTarget(Game& game, bool enable_depth_stencil)
+		: m_game {&game}, m_render_target {}, m_depth_stencil {}, m_output_texture {},
+		m_depth_stencil_enabled {enable_depth_stencil} {
 		D3D11_TEXTURE2D_DESC desc;
 		ZeroMemory(&desc, sizeof(desc));
 		desc.Width = game.screen_width();
 		desc.Height = game.screen_height();
 		desc.MipLevels = 1;
 		desc.ArraySize = 1;
-		desc.Format = format;
+		desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		desc.SampleDesc.Count = 1;
 		desc.SampleDesc.Quality = 0;
 		desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
@@ -35,7 +35,7 @@ namespace Library {
 		}
 		ReleaseObject(tex);
 
-		if (m_depth_stencil == nullptr) {
+		if (enable_depth_stencil) {
 			ZeroMemory(&desc, sizeof(desc));
 			desc.Width = game.screen_width();
 			desc.Height = game.screen_height();
@@ -61,7 +61,9 @@ namespace Library {
 
 	FullScreenRenderTarget::~FullScreenRenderTarget() {
 		ReleaseObject(m_output_texture);
-		ReleaseObject(m_depth_stencil);
+		if (m_depth_stencil_enabled) {
+			ReleaseObject(m_depth_stencil);
+		}
 		ReleaseObject(m_render_target);
 	}
 
@@ -75,6 +77,10 @@ namespace Library {
 
 	ID3D11DepthStencilView* FullScreenRenderTarget::depth_stencil() const {
 		return m_depth_stencil;
+	}
+
+	void FullScreenRenderTarget::set_depth_stencil(ID3D11DepthStencilView* pds) {
+		m_depth_stencil = pds;
 	}
 
 }

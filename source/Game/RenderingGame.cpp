@@ -20,7 +20,7 @@ namespace Rendering {
 	RenderingGame::RenderingGame(HINSTANCE instance, const std::wstring& window_class, const std::wstring& window_title, int show_cmd)
 		: Game(instance, window_class, window_title, show_cmd),
 		m_render_state_helper {}, m_render_targets {} {
-		m_depth_stencil_enabled = true;
+		m_depth_stencil_enabled = false;	// no need for deferred shading
 		m_msaa_enabled = true;
 	}
 
@@ -42,10 +42,12 @@ namespace Rendering {
 
 		// render
 		m_render_state_helper = new RenderStateHelper(*this);
-		// TODO is shared depth buffer possible ?
-		auto* position = new FullScreenRenderTarget(*this);
-		auto* normal = new FullScreenRenderTarget(*this);
-		auto* albedo_specular = new FullScreenRenderTarget(*this);
+
+		auto* position = new FullScreenRenderTarget(*this, true);
+		auto* normal = new FullScreenRenderTarget(*this, false);
+		auto* albedo_specular = new FullScreenRenderTarget(*this, false);
+		normal->set_depth_stencil(position->depth_stencil());
+		albedo_specular->set_depth_stencil(position->depth_stencil());
 		m_render_targets.push_back(position);
 		m_render_targets.push_back(normal);
 		m_render_targets.push_back(albedo_specular);
@@ -73,6 +75,7 @@ namespace Rendering {
 		m_quad->set_active_technique("main11", "p0");
 		m_quad->set_update_material(std::bind(&RenderingGame::update_quad_material, this));
 
+		// init each component
 		Game::init();
 
 		//
@@ -118,7 +121,7 @@ namespace Rendering {
 		// only for test MRT
 		reset_render_targets();
 		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&BACKGROUND_COLOR));
-		m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		//m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		m_quad->draw(game_time);
 
 		// swap
