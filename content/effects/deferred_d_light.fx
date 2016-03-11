@@ -2,10 +2,12 @@ cbuffer CBufferPerFrame {
 	float4 AmbientColor: AMBIENT;
 	float4 LightColor: COLOR;
 	float3 LightDirection: DIRECTION;
+	float3 CameraPosition: CAMERAPOSITION;
 };
 
 cbuffer CBufferPerObject {
-	float4x4 WVP: WORLDVIEWPROJECTION;
+	float4 SpecularColor: SPECULAR;
+	float SpecularPower : SPECULARPOWER;
 };
 
 Texture2D PositionBuffer;
@@ -18,8 +20,8 @@ RasterizerState DisableCulling {
 
 SamplerState TrilinearSampler {
 	Filter = MIN_MAG_MIP_LINEAR;
-	AddressU = WRAP;
-	AddressV = WRAP;
+	//AddressU = WRAP;
+	//AddressV = WRAP;
 };
 
 struct VS_In {
@@ -34,7 +36,7 @@ struct VS_Out {
 
 VS_Out vertex_shader(VS_In input) {
 	VS_Out output = (VS_Out)0;
-	output.h_position = mul(input.o_position, WVP);
+	output.h_position = input.o_position;
 	output.texture_coords = input.texture_coords;
 	return output;
 }
@@ -46,16 +48,20 @@ float4 pixel_shader(VS_Out input) : SV_Target {
 	float4 texel = AlbedoSpecularBuffer.Sample(TrilinearSampler, input.texture_coords);
 	float3 albedo = texel.rgb;
 	float specular = texel.a;
+	specular = 0.8f;	// fix specular for test
 
-	// Lambert
 	float3 light_dir = normalize(-LightDirection);
+	float3 view_dir = normalize(CameraPosition - w_pos);
+	float3 halfv = normalize(light_dir + view_dir);
 	float n_dot_l = dot(normal, light_dir);
-	float3 diffuse = (float3)0;
-	if (n_dot_l > 0) {
-		diffuse = n_dot_l * (LightColor.rgb * LightColor.a) * albedo;
-	}
-	float3 ambient = (AmbientColor.rgb * AmbientColor.a) * albedo;
-	output.rgb = ambient + diffuse;
+	float n_dot_h = dot(normal, halfv);
+	float4 lambert_phong = lit(n_dot_l, n_dot_h, SpecularPower);
+
+	float3 d = lambert_phong.y * (LightColor.rgb * LightColor.a) * albedo;
+	//float3 r = normalize(2 * n_dot_l * normal - light_dir);
+	float3 s = min(lambert_phong.z, specular) * (SpecularColor.rgb * SpecularColor.a);
+	float3 a = (AmbientColor.rgb * AmbientColor.a) * albedo;
+	output.rgb = a + d + s;
 	output.a = 1.0f;
 	return output;
 }
@@ -65,5 +71,6 @@ technique11 main11 {
 		SetVertexShader(CompileShader(vs_5_0, vertex_shader()));
 		SetGeometryShader(NULL);
 		SetPixelShader(CompileShader(ps_5_0, pixel_shader()));
+		//SetRasterizerState(DisableCulling);
 	}
 }
