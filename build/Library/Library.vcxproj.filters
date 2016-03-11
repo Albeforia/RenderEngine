@@ -134,9 +134,6 @@
     <ClInclude Include="..\..\source\Library\CameraFirstPerson.h">
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\Gizmo.h">
-      <Filter>Header Files\GameComponent</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\FullScreenRenderTarget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -144,9 +141,6 @@
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\Mouse.h">
-      <Filter>Header Files\GameComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\FullScreenQuad.h">
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\MaterialDeferredGeometry.h">
@@ -160,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Library\MaterialDeferredPLight.h">
       <Filter>Header Files\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\FullScreenQuad.h">
+      <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -250,9 +247,6 @@
     <ClCompile Include="..\..\source\Library\CameraFirstPerson.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Library\Gizmo.cpp">
-      <Filter>Source Files\GameComponent</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Library\FullScreenRenderTarget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -260,9 +254,6 @@
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Mouse.cpp">
-      <Filter>Source Files\GameComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\FullScreenQuad.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\MaterialDeferredGeometry.cpp">
@@ -276,6 +267,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\MaterialDeferredPLight.cpp">
       <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\FullScreenQuad.cpp">
+      <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,7 +286,7 @@
       <Filter>Effects</Filter>
     </FxCompile>
     <FxCompile Include="..\..\content\effects\deferred_p_light.fx">
-      <Filter>Header Files\GameComponent\Light</Filter>
+      <Filter>Effects</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
