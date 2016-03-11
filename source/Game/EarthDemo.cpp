@@ -66,6 +66,7 @@ namespace Rendering {
 		m_material->WVP() << wvp;
 		m_material->World() << world;
 		m_material->DiffuseTexture() << m_texture;
+		m_material->SpecularPower() << 25.0f;
 		//m_material->SpecularTexture() << ;
 
 		pass->apply(0, con);

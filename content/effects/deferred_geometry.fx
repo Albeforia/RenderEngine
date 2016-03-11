@@ -1,6 +1,7 @@
 cbuffer CBufferPerObject {
 	float4x4 WVP: WORLDVIEWPROJECTION;
-	float4x4 World : WORLD;
+	float4x4 World: WORLD;
+	float SpecularPower : SPECULARPOWER; // material info
 };
 
 Texture2D DiffuseTexture;
@@ -35,15 +36,16 @@ VS_Out vertex_shader(VS_In input) {
 }
 
 struct PS_Out {
-	float3 position: SV_Target0;
-	float3 normal: SV_Target1;
+	float4 position: SV_Target0;
+	float4 normal: SV_Target1;
 	float4 albedo_specular: SV_Target2;
 };
 
 PS_Out pixel_shader(VS_Out input) {
 	PS_Out output = (PS_Out)0;
-	output.position = input.w_position.xyz;
-	output.normal = normalize(input.w_normal);
+	output.position = input.w_position;
+	output.normal.xyz = normalize(input.w_normal);
+	output.normal.w = SpecularPower; // store specular power
 	float4 texel = DiffuseTexture.Sample(TrilinearSampler, input.texture_coords);
 	texel.a = SpecularTexture.Sample(TrilinearSampler, input.texture_coords).r;
 	output.albedo_specular = texel;

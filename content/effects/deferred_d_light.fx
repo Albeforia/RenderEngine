@@ -5,10 +5,10 @@ cbuffer CBufferPerFrame {
 	float3 CameraPosition: CAMERAPOSITION;
 };
 
-cbuffer CBufferPerObject {
-	float4 SpecularColor: SPECULAR;
-	float SpecularPower : SPECULARPOWER;
-};
+//cbuffer CBufferPerObject {
+//	float4 SpecularColor: SPECULAR;
+//	float SpecularPower : SPECULARPOWER;
+//};
 
 Texture2D PositionBuffer;
 Texture2D NormalBuffer;
@@ -50,7 +50,8 @@ VS_Out vertex_shader(VS_In input) {
 float4 pixel_shader(VS_Out input) : SV_Target {
 	float4 output = (float4)0;
 	float3 w_pos = PositionBuffer.Sample(TrilinearSampler, input.texture_coords).xyz;
-	float3 normal = NormalBuffer.Sample(TrilinearSampler, input.texture_coords).xyz;
+	float4 normal = NormalBuffer.Sample(TrilinearSampler, input.texture_coords);
+	float SpecularPower = normal.w; // fetch specular power
 	float4 texel = AlbedoSpecularBuffer.Sample(TrilinearSampler, input.texture_coords);
 	float3 albedo = texel.rgb;
 	float specular = texel.a;
@@ -59,12 +60,14 @@ float4 pixel_shader(VS_Out input) : SV_Target {
 	float3 light_dir = normalize(-LightDirection);
 	float3 view_dir = normalize(CameraPosition - w_pos);
 	float3 halfv = normalize(light_dir + view_dir);
-	float n_dot_l = dot(normal, light_dir);
-	float n_dot_h = dot(normal, halfv);
+	float n_dot_l = dot(normal.xyz, light_dir);
+	float n_dot_h = dot(normal.xyz, halfv);
+
 	float4 lambert_phong = lit(n_dot_l, n_dot_h, SpecularPower);
 
 	float3 d = lambert_phong.y * (LightColor.rgb * LightColor.a) * albedo;
-	//float3 r = normalize(2 * n_dot_l * normal - light_dir);
+	// hard-coded specular color
+	float4 SpecularColor = float4(1.0f, 1.0f, 1.0f, 1.0f);
 	float3 s = min(lambert_phong.z, specular) * (SpecularColor.rgb * SpecularColor.a);
 	float3 a = (AmbientColor.rgb * AmbientColor.a) * albedo;
 	output.rgb = a + d + s;

@@ -7,14 +7,14 @@ namespace Library {
 	RTTI_DEFINITIONS(MaterialDeferredDLight);
 
 	MaterialDeferredDLight::MaterialDeferredDLight()
-		: MATERIAL_VARIABLES_INITIALIZATION(AmbientColor, LightColor, LightDirection, CameraPosition, SpecularColor, SpecularPower, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer)
+		: MATERIAL_VARIABLES_INITIALIZATION(AmbientColor, LightColor, LightDirection, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer)
 		Material("main11") {}
 
-	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredDLight, AmbientColor, LightColor, LightDirection, CameraPosition, SpecularColor, SpecularPower, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
+	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredDLight, AmbientColor, LightColor, LightDirection, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
 
 	void MaterialDeferredDLight::init(Effect* effect) {
 		Material::init(effect);
-		MATERIAL_VARIABLES_RETRIEVE(AmbientColor, LightColor, LightDirection, CameraPosition, SpecularColor, SpecularPower, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
+		MATERIAL_VARIABLES_RETRIEVE(AmbientColor, LightColor, LightDirection, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
 		D3D11_INPUT_ELEMENT_DESC descs[] = {
 			GENERATE_INPUT_ELEMENT_DESC(POSITION, TEXCOORD)
 		};
