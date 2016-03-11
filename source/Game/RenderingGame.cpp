@@ -46,8 +46,8 @@ namespace Rendering {
 		auto* position = new FullScreenRenderTarget(*this, true);
 		auto* normal = new FullScreenRenderTarget(*this, false);
 		auto* albedo_specular = new FullScreenRenderTarget(*this, false);
-		normal->set_depth_stencil(position->depth_stencil());
-		albedo_specular->set_depth_stencil(position->depth_stencil());
+		//normal->set_depth_stencil(position->depth_stencil());
+		//albedo_specular->set_depth_stencil(position->depth_stencil());
 		m_render_targets.push_back(position);
 		m_render_targets.push_back(normal);
 		m_render_targets.push_back(albedo_specular);
@@ -133,7 +133,7 @@ namespace Rendering {
 
 	void RenderingGame::update_quad_material() {
 		m_quad_material->WVP() << XMLoadFloat4x4(&MatrixHelper::Identity);
-		m_quad_material->DiffuseTexture() << m_render_targets[1]->output_texture();
+		m_quad_material->DiffuseTexture() << m_render_targets[2]->output_texture();
 	}
 
 }
