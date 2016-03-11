@@ -179,6 +179,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClInclude Include="..\..\source\Library\Keyboard.h" />
     <ClInclude Include="..\..\source\Library\Light.h" />
     <ClInclude Include="..\..\source\Library\LightDirectional.h" />
+    <ClInclude Include="..\..\source\Library\LightPoint.h" />
     <ClInclude Include="..\..\source\Library\Material.h" />
     <ClInclude Include="..\..\source\Library\MaterialBasic.h" />
     <ClInclude Include="..\..\source\Library\MaterialDeferredGeometry.h" />
@@ -218,6 +219,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\Keyboard.cpp" />
     <ClCompile Include="..\..\source\Library\Light.cpp" />
     <ClCompile Include="..\..\source\Library\LightDirectional.cpp" />
+    <ClCompile Include="..\..\source\Library\LightPoint.cpp" />
     <ClCompile Include="..\..\source\Library\Material.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialBasic.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialDeferredGeometry.cpp" />
@@ -242,6 +244,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <FxCompile Include="..\..\content\effects\basic.fx" />
     <FxCompile Include="..\..\content\effects\deferred_geometry.fx" />
     <FxCompile Include="..\..\content\effects\deferred_d_light.fx" />
+    <FxCompile Include="..\..\content\effects\deferred_p_light.fx" />
     <FxCompile Include="..\..\content\effects\skybox.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
