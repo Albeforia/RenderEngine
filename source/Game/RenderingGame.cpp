@@ -134,10 +134,8 @@ namespace Rendering {
 		MaterialDeferredDLight* m = m_quad_material->As<MaterialDeferredDLight>();
 		m->CameraPosition() << XMLoadFloat3(&m_camera->position());
 		m->AmbientColor() << DirectX::operator*(0.5f, ColorHelper::White);
-		m->SpecularColor() << ColorHelper::White;
-		m->SpecularPower() << 25.0f;
 		LightDirectional* l = m_light->As<LightDirectional>();
-		m->LightColor() << l->color_vector();
+		m->LightColor() << l->colorv();
 		m->LightDirection() << l->directionv();
 		//
 		m->PositionBuffer() << m_render_targets[0]->output_texture();

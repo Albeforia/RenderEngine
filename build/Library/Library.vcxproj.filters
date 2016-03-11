@@ -158,6 +158,9 @@
     <ClInclude Include="..\..\source\Library\LightPoint.h">
       <Filter>Header Files\GameComponent\Light</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\MaterialDeferredPLight.h">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -270,6 +273,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\LightPoint.cpp">
       <Filter>Source Files\GameComponent\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\MaterialDeferredPLight.cpp">
+      <Filter>Source Files\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
