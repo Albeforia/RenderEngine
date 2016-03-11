@@ -14,7 +14,7 @@ namespace Library {
 		return m_color;
 	}
 
-	XMVECTOR Light::color_vector() const {
+	XMVECTOR Light::colorv() const {
 		return XMLoadColor(&m_color);
 	}
 
@@ -29,6 +29,17 @@ namespace Library {
 
 	void Light::set_color(FXMVECTOR color) {
 		XMStoreColor(&m_color, color);
+	}
+
+	FLOAT Light::intensity() const {
+		XMVECTOR v = colorv();
+		return XMVectorGetW(v);
+	}
+
+	void Light::set_intensity(float i) {
+		XMVECTOR v = colorv();
+		XMVectorSetW(v, i);
+		set_color(v);
 	}
 
 }

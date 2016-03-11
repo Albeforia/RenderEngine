@@ -10,14 +10,17 @@ namespace Library {
 		RTTI_DECLARATIONS(Light, GameComponent);
 
 	public:
-		Light(Game& game);
+		Light(Game&);
 		virtual ~Light();
 
 		const XMCOLOR& color() const;
-		XMVECTOR color_vector() const;
-		void set_color(FLOAT r, FLOAT g, FLOAT b, FLOAT a);
-		void set_color(XMCOLOR);
-		void set_color(FXMVECTOR);
+		XMVECTOR colorv() const;
+		FLOAT intensity() const;
+
+		virtual void set_color(FLOAT r, FLOAT g, FLOAT b, FLOAT a);
+		virtual void set_color(XMCOLOR);
+		virtual void set_color(FXMVECTOR);
+		virtual void set_intensity(float);
 
 	protected:
 		XMCOLOR m_color;
