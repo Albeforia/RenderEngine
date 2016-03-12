@@ -1,5 +1,9 @@
+cbuffer CBufferPerFrame {
+	float4x4 VP: VIEWPROJECTION;
+};
+
 cbuffer CBufferPerObject {
-	float4x4 WVP: WORLDVIEWPROJECTION;
+	//float4x4 WVP: WORLDVIEWPROJECTION;
 	float4x4 World: WORLD;
 	float SpecularPower : SPECULARPOWER; // material info
 };
@@ -19,6 +23,13 @@ struct VS_In {
 	float2 texture_coords: TEXCOORD;
 };
 
+struct VS_In_Inst {
+	float4 o_position: POSITION;
+	float3 o_normal: NORMAL;
+	float2 texture_coords: TEXCOORD;
+	row_major float4x4 World: INST_WORLD;
+};
+
 struct VS_Out {
 	float4 h_position: SV_Position;
 	float4 w_position: TEXCOORD1;
@@ -28,9 +39,18 @@ struct VS_Out {
 
 VS_Out vertex_shader(VS_In input) {
 	VS_Out output = (VS_Out)0;
-	output.h_position = mul(input.o_position, WVP);
 	output.w_position = mul(input.o_position, World);
+	output.h_position = mul(output.w_position, VP);
 	output.w_normal = normalize(mul(float4(input.o_normal, 0), World).xyz);
+	output.texture_coords = input.texture_coords;
+	return output;
+}
+
+VS_Out vertex_shader_inst(VS_In_Inst input) {
+	VS_Out output = (VS_Out)0;
+	output.w_position = mul(input.o_position, input.World);
+	output.h_position = mul(output.w_position, VP);
+	output.w_normal = normalize(mul(float4(input.o_normal, 0), input.World).xyz);
 	output.texture_coords = input.texture_coords;
 	return output;
 }
@@ -52,9 +72,17 @@ PS_Out pixel_shader(VS_Out input) {
 	return output;
 }
 
-technique11 main11 {
+technique11 geometry_pass {
 	pass p0 {
 		SetVertexShader(CompileShader(vs_5_0, vertex_shader()));
+		SetGeometryShader(NULL);
+		SetPixelShader(CompileShader(ps_5_0, pixel_shader()));
+	}
+}
+
+technique11 geometry_pass_inst {
+	pass p0 {
+		SetVertexShader(CompileShader(vs_5_0, vertex_shader_inst()));
 		SetGeometryShader(NULL);
 		SetPixelShader(CompileShader(ps_5_0, pixel_shader()));
 	}

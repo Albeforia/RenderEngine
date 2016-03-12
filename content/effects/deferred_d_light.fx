@@ -27,13 +27,8 @@ SamplerState TrilinearSampler {
 	Filter = MIN_MAG_MIP_LINEAR;
 };
 
-struct VS_In {
-	float4 o_position: POSITION;
-	float2 texture_coords: TEXCOORD;
-};
-
-float4 vertex_shader(VS_In input) : SV_Position {
-	return input.o_position;
+float4 vertex_shader(float4 o_position : POSITION) : SV_Position {
+	return o_position;
 }
 
 float4 pixel_shader(float4 p_position : SV_Position) : SV_Target {
