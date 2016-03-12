@@ -60,6 +60,13 @@ namespace Library {
 			ed.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 			ed.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 			ed.InstanceDataStepRate = 0;
+			// instancing check
+			std::string s(ed.SemanticName);
+			if (s.substr(0, 5) == "INST_") {
+				ed.InputSlot = 1;
+				ed.InputSlotClass = D3D11_INPUT_PER_INSTANCE_DATA;
+				ed.InstanceDataStepRate = 1;
+			}
 			// determine DXGI format
 			if (pd.Mask == 1) {
 				if (pd.ComponentType == D3D_REGISTER_COMPONENT_UINT32) ed.Format = DXGI_FORMAT_R32_UINT;
