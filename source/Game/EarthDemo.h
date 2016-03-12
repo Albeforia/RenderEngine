@@ -29,8 +29,11 @@ namespace Rendering {
 		MaterialDeferredGeometry* m_material;
 
 		ID3D11Buffer* m_vertex_buffer;
+		ID3D11Buffer* m_instance_buffer;
+		ID3D11Buffer** m_buffers;
 		ID3D11Buffer* m_index_buffer;
 		UINT m_index_count;
+		UINT m_instance_count;
 
 		std::wstring m_texture_file;
 		ID3D11ShaderResourceView* m_texture;
