@@ -6,19 +6,17 @@ namespace Library {
 	RTTI_DEFINITIONS(MaterialDeferredGeometry);
 
 	MaterialDeferredGeometry::MaterialDeferredGeometry()
-		: MATERIAL_VARIABLES_INITIALIZATION(WVP, World, SpecularPower, DiffuseTexture, SpecularTexture)
-		Material("main11") {}
+		: MATERIAL_VARIABLES_INITIALIZATION(WVP, World, SpecularPower,
+											DiffuseTexture, SpecularTexture)
+		Material() {}
 
-	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredGeometry, WVP, World, SpecularPower, DiffuseTexture, SpecularTexture);
+	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredGeometry, WVP, World, SpecularPower,
+								  DiffuseTexture, SpecularTexture);
 
 	void MaterialDeferredGeometry::init(Effect* effect) {
 		Material::init(effect);
-		MATERIAL_VARIABLES_RETRIEVE(WVP, World, SpecularPower, DiffuseTexture, SpecularTexture);
-		D3D11_INPUT_ELEMENT_DESC descs[] = {
-			GENERATE_INPUT_ELEMENT_DESC(POSITION, NORMAL, TEXCOORD)
-		};
-		descs[0].AlignedByteOffset = 0;
-		create_input_layout("main11", "p0", descs, ARRAYSIZE(descs));
+		MATERIAL_VARIABLES_RETRIEVE(WVP, World, SpecularPower,
+									DiffuseTexture, SpecularTexture);
 	}
 
 	void MaterialDeferredGeometry::create_vertex_buffer(ID3D11Device* device, const Mesh& mesh, ID3D11Buffer** buffer) const {
