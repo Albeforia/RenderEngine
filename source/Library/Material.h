@@ -33,9 +33,10 @@ namespace Library {
 		virtual void create_vertex_buffer(ID3D11Device*, const Model&, std::vector<ID3D11Buffer*>&) const;
 		virtual void create_vertex_buffer(ID3D11Device*, const Mesh&, ID3D11Buffer**) const = 0;
 
-	protected:
-		virtual void create_vertex_buffer(ID3D11Device*, void* vertices, UINT count, ID3D11Buffer**) const;
+		void create_buffer(ID3D11Device*, void* data, UINT count, UINT size,
+						   D3D11_USAGE, ID3D11Buffer**) const;
 
+	protected:
 		const Effect* m_effect;
 		const Technique* m_curr_technique;
 

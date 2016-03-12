@@ -11,7 +11,7 @@ namespace Library {
 
 		RTTI_DECLARATIONS(MaterialDeferredGeometry, Material);
 
-		MATERIAL_VARIABLES_DECLARATION(WVP, World, SpecularPower,
+		MATERIAL_VARIABLES_DECLARATION(VP, World, SpecularPower,
 									   DiffuseTexture, SpecularTexture)
 
 	public:

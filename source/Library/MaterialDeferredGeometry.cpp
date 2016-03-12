@@ -6,16 +6,16 @@ namespace Library {
 	RTTI_DEFINITIONS(MaterialDeferredGeometry);
 
 	MaterialDeferredGeometry::MaterialDeferredGeometry()
-		: MATERIAL_VARIABLES_INITIALIZATION(WVP, World, SpecularPower,
+		: MATERIAL_VARIABLES_INITIALIZATION(VP, World, SpecularPower,
 											DiffuseTexture, SpecularTexture)
 		Material() {}
 
-	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredGeometry, WVP, World, SpecularPower,
+	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredGeometry, VP, World, SpecularPower,
 								  DiffuseTexture, SpecularTexture);
 
 	void MaterialDeferredGeometry::init(Effect* effect) {
 		Material::init(effect);
-		MATERIAL_VARIABLES_RETRIEVE(WVP, World, SpecularPower,
+		MATERIAL_VARIABLES_RETRIEVE(VP, World, SpecularPower,
 									DiffuseTexture, SpecularTexture);
 	}
 
@@ -35,7 +35,9 @@ namespace Library {
 				XMFLOAT4(pos.x, pos.y, pos.z, 1.0f), n, XMFLOAT2(uv.x, uv.y)
 			});
 		}
-		Material::create_vertex_buffer(device, reinterpret_cast<void*>(&vertices[0]), vertices.size(), buffer);
+		Material::create_buffer(device, reinterpret_cast<void*>(&vertices[0]),
+								vertices.size(), vertex_size(),
+								D3D11_USAGE_IMMUTABLE, buffer);
 	}
 
 	UINT MaterialDeferredGeometry::vertex_size() const {

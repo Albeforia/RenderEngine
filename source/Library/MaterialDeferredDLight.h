@@ -10,7 +10,9 @@ namespace Library {
 
 		RTTI_DECLARATIONS(MaterialDeferredDLight, Material);
 
-		MATERIAL_VARIABLES_DECLARATION(AmbientColor, LightColor, LightDirection, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
+		MATERIAL_VARIABLES_DECLARATION(AmbientColor, LightColor, LightDirection,
+									   CameraPosition, ScreenResolution,
+									   PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
 
 	public:
 		MaterialDeferredDLight();

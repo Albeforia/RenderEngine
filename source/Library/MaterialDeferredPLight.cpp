@@ -8,18 +8,13 @@ namespace Library {
 
 	MaterialDeferredPLight::MaterialDeferredPLight()
 		: MATERIAL_VARIABLES_INITIALIZATION(AmbientColor, LightColor, LightPosition, LightAttenuation, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer)
-		Material("main11") {}
+		Material() {}
 
 	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredPLight, AmbientColor, LightColor, LightPosition, LightAttenuation, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
 
 	void MaterialDeferredPLight::init(Effect* effect) {
 		Material::init(effect);
 		MATERIAL_VARIABLES_RETRIEVE(AmbientColor, LightColor, LightPosition, LightAttenuation, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
-		D3D11_INPUT_ELEMENT_DESC descs[] = {
-			GENERATE_INPUT_ELEMENT_DESC(POSITION, TEXCOORD)
-		};
-		descs[0].AlignedByteOffset = 0;
-		create_input_layout("main11", "p0", descs, ARRAYSIZE(descs));
 	}
 
 	void MaterialDeferredPLight::create_vertex_buffer(ID3D11Device* device, const Mesh& mesh, ID3D11Buffer** buffer) const {
@@ -35,7 +30,9 @@ namespace Library {
 				XMFLOAT4(pos.x, pos.y, pos.z, 1.0f), XMFLOAT2(uv.x, uv.y),
 			});
 		}
-		Material::create_vertex_buffer(device, reinterpret_cast<void*>(&vertices[0]), vertices.size(), buffer);
+		Material::create_buffer(device, reinterpret_cast<void*>(&vertices[0]),
+								vertices.size(), vertex_size(),
+								D3D11_USAGE_IMMUTABLE, buffer);
 	}
 
 	UINT MaterialDeferredPLight::vertex_size() const {

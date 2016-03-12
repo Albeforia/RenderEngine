@@ -7,19 +7,20 @@ namespace Library {
 	RTTI_DEFINITIONS(MaterialDeferredDLight);
 
 	MaterialDeferredDLight::MaterialDeferredDLight()
-		: MATERIAL_VARIABLES_INITIALIZATION(AmbientColor, LightColor, LightDirection, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer)
-		Material("main11") {}
+		: MATERIAL_VARIABLES_INITIALIZATION(AmbientColor, LightColor, LightDirection,
+											CameraPosition, ScreenResolution,
+											PositionBuffer, NormalBuffer, AlbedoSpecularBuffer)
+		Material() {}
 
-	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredDLight, AmbientColor, LightColor, LightDirection, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
+	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredDLight, AmbientColor, LightColor, LightDirection,
+								  CameraPosition, ScreenResolution,
+								  PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
 
 	void MaterialDeferredDLight::init(Effect* effect) {
 		Material::init(effect);
-		MATERIAL_VARIABLES_RETRIEVE(AmbientColor, LightColor, LightDirection, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
-		D3D11_INPUT_ELEMENT_DESC descs[] = {
-			GENERATE_INPUT_ELEMENT_DESC(POSITION, TEXCOORD)
-		};
-		descs[0].AlignedByteOffset = 0;
-		create_input_layout("main11", "p0", descs, ARRAYSIZE(descs));
+		MATERIAL_VARIABLES_RETRIEVE(AmbientColor, LightColor, LightDirection,
+									CameraPosition, ScreenResolution,
+									PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
 	}
 
 	void MaterialDeferredDLight::create_vertex_buffer(ID3D11Device* device, const Mesh& mesh, ID3D11Buffer** buffer) const {
@@ -35,7 +36,9 @@ namespace Library {
 				XMFLOAT4(pos.x, pos.y, pos.z, 1.0f), XMFLOAT2(uv.x, uv.y),
 			});
 		}
-		Material::create_vertex_buffer(device, reinterpret_cast<void*>(&vertices[0]), vertices.size(), buffer);
+		Material::create_buffer(device, reinterpret_cast<void*>(&vertices[0]),
+								vertices.size(), vertex_size(),
+								D3D11_USAGE_IMMUTABLE, buffer);
 	}
 
 	UINT MaterialDeferredDLight::vertex_size() const {
