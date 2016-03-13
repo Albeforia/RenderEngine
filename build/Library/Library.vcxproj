@@ -185,6 +185,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClInclude Include="..\..\source\Library\MaterialDeferredGeometry.h" />
     <ClInclude Include="..\..\source\Library\MaterialDeferredDLight.h" />
     <ClInclude Include="..\..\source\Library\MaterialDeferredPLight.h" />
+    <ClInclude Include="..\..\source\Library\MaterialDeferredStencil.h" />
     <ClInclude Include="..\..\source\Library\MatrixHelper.h" />
     <ClInclude Include="..\..\source\Library\Mesh.h" />
     <ClInclude Include="..\..\source\Library\Model.h" />
@@ -224,6 +225,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\MaterialDeferredGeometry.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialDeferredDLight.cpp" />
     <ClCompile Include="..\..\source\Library\MaterialDeferredPLight.cpp" />
+    <ClCompile Include="..\..\source\Library\MaterialDeferredStencil.cpp" />
     <ClCompile Include="..\..\source\Library\MatrixHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Mesh.cpp" />
     <ClCompile Include="..\..\source\Library\Model.cpp" />

@@ -173,6 +173,9 @@
     <ClInclude Include="..\..\source\Library\FullScreenQuad.h">
       <Filter>Header Files\GameComponent\Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\MaterialDeferredStencil.h">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -282,6 +285,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\FullScreenQuad.cpp">
       <Filter>Source Files\GameComponent\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\MaterialDeferredStencil.cpp">
+      <Filter>Source Files\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

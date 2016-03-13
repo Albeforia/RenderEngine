@@ -36,6 +36,10 @@ namespace Library {
 		m_curr_technique->pass(0)->apply(0, context);
 	}
 
+	UINT Material::vertex_size() const {
+		return sizeof(XMFLOAT4);
+	}
+
 	void Material::create_vertex_buffer(ID3D11Device* device, const Model& model, std::vector<ID3D11Buffer*>& buffers) const {
 		buffers.reserve(model.meshes().size());
 		for (auto* mesh : model.meshes()) {
@@ -44,6 +48,8 @@ namespace Library {
 			buffers.push_back(buffer);
 		}
 	}
+
+	void Material::create_vertex_buffer(ID3D11Device*, const Mesh&, ID3D11Buffer**) const {}
 
 	void Material::create_buffer(ID3D11Device* device, void* data, UINT count, UINT size,
 								 D3D11_USAGE usage, ID3D11Buffer** buffer) const {
