@@ -6,8 +6,8 @@
 namespace Library {
 
 	Pass::Pass(Game& game, Technique& technique, ID3DX11EffectPass* pass)
-		: m_technique {technique}, m_pass {pass},
-		m_pass_desc {}, m_name {} {
+		: m_technique {technique}, m_pass {pass}, m_pass_desc {},
+		m_input_layout {}, m_layout_descs {}, m_name {} {
 		m_pass->GetDesc(&m_pass_desc);
 		m_name = m_pass_desc.Name;
 		if (FAILED(create_input_layout(game))) {
@@ -48,7 +48,7 @@ namespace Library {
 		shader_ref->GetDesc(&sd);
 
 		// read input layout description
-		std::vector<D3D11_INPUT_ELEMENT_DESC> descs;
+		m_layout_descs.reserve(sd.InputParameters);
 		for (UINT i = 0; i < sd.InputParameters; i++) {
 			D3D11_SIGNATURE_PARAMETER_DESC pd;
 			shader_ref->GetInputParameterDesc(i, &pd);
@@ -57,7 +57,7 @@ namespace Library {
 			ed.SemanticName = pd.SemanticName;
 			ed.SemanticIndex = pd.SemanticIndex;
 			ed.InputSlot = 0;
-			ed.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+			ed.AlignedByteOffset = i == 0 ? 0 : D3D11_APPEND_ALIGNED_ELEMENT;
 			ed.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 			ed.InstanceDataStepRate = 0;
 			// instancing check
@@ -88,10 +88,10 @@ namespace Library {
 				else if (pd.ComponentType == D3D_REGISTER_COMPONENT_SINT32) ed.Format = DXGI_FORMAT_R32G32B32A32_SINT;
 				else if (pd.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32) ed.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 			}
-			descs.push_back(ed);
+			m_layout_descs.push_back(ed);
 		}
 
-		HRESULT hr = game.d3d_device()->CreateInputLayout(&descs[0], descs.size(),
+		HRESULT hr = game.d3d_device()->CreateInputLayout(&m_layout_descs[0], m_layout_descs.size(),
 														  m_pass_desc.pIAInputSignature,
 														  m_pass_desc.IAInputSignatureSize,
 														  &m_input_layout);

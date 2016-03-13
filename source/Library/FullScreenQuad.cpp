@@ -32,11 +32,11 @@ namespace Library {
 	}
 
 	void FullScreenQuad::set_active_technique(const std::string& tname, const std::string& pname) {
-		Technique* technique = m_material->effect()->techniques_by_name().at(tname);
+		const Technique* technique = m_material->effect()->technique(tname);
 		assert(technique != nullptr);
-		m_pass = technique->passes_by_name().at(pname);
+		m_pass = technique->pass(pname);
 		assert(m_pass != nullptr);
-		m_input_layout = m_material->input_layouts().at(m_pass);
+		m_input_layout = m_pass->input_layout();
 	}
 
 	void FullScreenQuad::set_update_material(std::function<void()> callback) {
@@ -44,16 +44,13 @@ namespace Library {
 	}
 
 	void FullScreenQuad::init() {
-		VertexQuad vertices[] =
-		{
-			VertexQuad { XMFLOAT4(-1.0f, -1.0f, 0.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-			VertexQuad { XMFLOAT4(-1.0f, 1.0f, 0.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
-			VertexQuad { XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
-			VertexQuad { XMFLOAT4(1.0f, -1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
+		XMFLOAT4 vertices[] = {
+			XMFLOAT4(-1.0f, -1.0f, 0.0f, 1.0f) ,
+			XMFLOAT4(-1.0f, 1.0f, 0.0f, 1.0f) ,
+			XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) ,
+			XMFLOAT4(1.0f, -1.0f, 0.0f, 1.0f) ,
 		};
-
-		UINT indices[] =
-		{
+		UINT indices[] = {
 			0, 1, 2,
 			0, 2, 3
 		};
@@ -63,7 +60,7 @@ namespace Library {
 		D3D11_SUBRESOURCE_DATA data;
 
 		ZeroMemory(&desc, sizeof(desc));
-		desc.ByteWidth = sizeof(VertexQuad) * ARRAYSIZE(vertices);
+		desc.ByteWidth = sizeof(XMFLOAT4) * ARRAYSIZE(vertices);
 		desc.Usage = D3D11_USAGE_IMMUTABLE;
 		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		ZeroMemory(&data, sizeof(data));
@@ -91,7 +88,7 @@ namespace Library {
 		con->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		con->IASetInputLayout(m_input_layout);
 
-		UINT stride = sizeof(VertexQuad);
+		UINT stride = sizeof(XMFLOAT4);
 		UINT offset = 0;
 		con->IASetVertexBuffers(0, 1, &m_vertex_buffer, &stride, &offset);
 		con->IASetIndexBuffer(m_index_buffer, DXGI_FORMAT_R32_UINT, 0);

@@ -13,6 +13,7 @@ namespace Library {
 	class FullScreenRenderTarget;
 	class Camera;
 	class FullScreenQuad;
+	class Sphere;
 	class Material;
 	class Effect;
 	class Light;
@@ -45,12 +46,18 @@ namespace Rendering {
 
 		Camera* m_camera;
 
+		Sphere* m_sphere;
+		Material* m_sphere_material;
+		Effect* m_sphere_effect;
+		void update_sphere_material(const Sphere&);
+
 		FullScreenQuad* m_quad;
 		Material* m_quad_material;
 		Effect* m_quad_effect;
 		void update_quad_material();
 
-		Light* m_light;
+		Light* m_sun;
+		Light* m_point_light;
 
 	};
 

@@ -10,8 +10,6 @@ namespace Library {
 	class Effect;
 	class Pass;
 
-	VERTEX_STRUCT_DECLARATION(Quad, POSITION, TEXCOORD)
-
 	class FullScreenQuad : public GameComponentDrawable {
 
 		RTTI_DECLARATIONS(FullScreenQuad, GameComponentDrawable)
@@ -31,7 +29,7 @@ namespace Library {
 
 	private:
 		Material* m_material;
-		Pass* m_pass;
+		const Pass* m_pass;
 		ID3D11InputLayout* m_input_layout;
 
 		ID3D11Buffer* m_vertex_buffer;

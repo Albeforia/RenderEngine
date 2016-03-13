@@ -3,6 +3,7 @@
 #include "Utility.h"
 #include "Model.h"
 #include "Mesh.h"
+#include "Game.h"
 #include "GameException.h"
 #include "Camera.h"
 #include <DDSTextureLoader.h>
@@ -56,8 +57,8 @@ namespace Library {
 		ID3D11DeviceContext* con = m_game->d3d_device_context();
 		con->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		Pass* pass = m_material->curr_technique()->passes().at(0);
-		ID3D11InputLayout* inputLayout = m_material->input_layouts().at(pass);
+		const Pass* pass = m_material->curr_technique()->pass(0);
+		ID3D11InputLayout* inputLayout = pass->input_layout();
 		con->IASetInputLayout(inputLayout);
 
 		UINT stride = m_material->vertex_size();

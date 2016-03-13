@@ -30,6 +30,7 @@ namespace Library {
 		ID3DX11EffectPass* m_pass;
 		D3DX11_PASS_DESC m_pass_desc;
 		ID3D11InputLayout* m_input_layout;
+		std::vector<D3D11_INPUT_ELEMENT_DESC> m_layout_descs;
 
 		std::string m_name;
 

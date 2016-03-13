@@ -10,9 +10,12 @@
 #include "Utility.h"
 #include "Effect.h"
 #include "MaterialDeferredDLight.h"
+#include "MaterialDeferredPLight.h"
 #include "FullScreenQuad.h"
 #include "MatrixHelper.h"
 #include "LightDirectional.h"
+#include "LightPoint.h"
+#include "Sphere.h"
 
 namespace Rendering {
 
@@ -21,7 +24,7 @@ namespace Rendering {
 	RenderingGame::RenderingGame(HINSTANCE instance, const std::wstring& window_class, const std::wstring& window_title, int show_cmd)
 		: Game(instance, window_class, window_title, show_cmd),
 		m_render_state_helper {}, m_render_targets {} {
-		m_depth_stencil_enabled = false;	// no need for deferred shading
+		m_depth_stencil_enabled = true;
 		m_msaa_enabled = true;
 	}
 
@@ -65,8 +68,21 @@ namespace Rendering {
 		m_components.push_back(new EarthDemo(*this, *m_camera, L"content\\textures\\Earth.dds"));
 
 		// light
-		m_light = new LightDirectional(*this);
-		m_components.push_back(m_light);
+		m_sun = new LightDirectional(*this);
+		m_components.push_back(m_sun);
+		m_point_light = new LightPoint(*this);
+		m_components.push_back(m_point_light);
+		m_point_light->set_color(1.0f, 0, 0, 1.0f);
+		m_point_light->As<LightPoint>()->set_attenuation(1.0f, 1.7f, 0.8f);
+		m_point_light->As<LightPoint>()->set_position(0, 5.0f, 0);
+
+		// point light volume
+		SetCurrentDirectory(Utility::ExecutableDirectory().c_str());
+		m_sphere_effect = new Effect(*this);
+		m_sphere_effect->load(L"content\\effects\\deferred_p_light.cso");
+		m_sphere_material = new MaterialDeferredPLight();
+		m_sphere_material->init(m_sphere_effect);
+		m_sphere = new Sphere(*this, *m_sphere_material);
 
 		// quad
 		SetCurrentDirectory(Utility::ExecutableDirectory().c_str());
@@ -76,7 +92,7 @@ namespace Rendering {
 		m_quad_material->init(m_quad_effect);
 		m_quad = new FullScreenQuad(*this, *m_quad_material);
 		m_quad->init();
-		m_quad->set_active_technique("main11", "p0");
+		m_quad->set_active_technique("directional_light_pass", "p0");
 		m_quad->set_update_material(std::bind(&RenderingGame::update_quad_material, this));
 
 		// init each component
@@ -93,6 +109,9 @@ namespace Rendering {
 		DeleteObject(m_render_targets_raw);
 		DeleteObject(m_render_state_helper);
 		ReleaseObject(m_input);
+		DeleteObject(m_sphere_effect);
+		DeleteObject(m_sphere_material);
+		DeleteObject(m_sphere);
 		DeleteObject(m_quad_effect);
 		DeleteObject(m_quad_material);
 		DeleteObject(m_quad);
@@ -118,7 +137,12 @@ namespace Rendering {
 		// light pass
 		reset_render_targets();
 		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&ColorHelper::Black));
-		//m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		// point lights
+		// for each point light
+		update_sphere_material(*m_sphere);
+		m_sphere->draw(game_time);
+		// directional light and ambient
 		m_quad->draw(game_time);
 
 		m_render_state_helper->restore_all();
@@ -130,11 +154,30 @@ namespace Rendering {
 		}
 	}
 
+	void RenderingGame::update_sphere_material(const Sphere& sphere) {
+		MaterialDeferredPLight* m = m_sphere_material->As<MaterialDeferredPLight>();
+		m->ScreenResolution() << XMLoadFloat2(&XMFLOAT2(m_screen_width, m_screen_height));
+		m->VP() << m_camera->view_projection();
+		m->CameraPosition() << XMLoadFloat3(&m_camera->position());
+		LightPoint* l = m_point_light->As<LightPoint>();
+		XMVECTOR pos = l->positionv();
+		float r = l->radius();
+		m->World() << XMMatrixScaling(r, r, r) * XMMatrixTranslationFromVector(pos);
+		m->LightColor() << l->colorv();
+		m->LightPosition() << pos;
+		m->LightAttenuation() << l->attenuation();
+		//
+		m->PositionBuffer() << m_render_targets[0]->output_texture();
+		m->NormalBuffer() << m_render_targets[1]->output_texture();
+		m->AlbedoSpecularBuffer() << m_render_targets[2]->output_texture();
+	}
+
 	void RenderingGame::update_quad_material() {
 		MaterialDeferredDLight* m = m_quad_material->As<MaterialDeferredDLight>();
+		m->ScreenResolution() << XMLoadFloat2(&XMFLOAT2(m_screen_width, m_screen_height));
 		m->CameraPosition() << XMLoadFloat3(&m_camera->position());
-		m->AmbientColor() << DirectX::operator*(0.5f, ColorHelper::White);
-		LightDirectional* l = m_light->As<LightDirectional>();
+		m->AmbientColor() << DirectX::operator*(0.2f, ColorHelper::White);
+		LightDirectional* l = m_sun->As<LightDirectional>();
 		m->LightColor() << l->colorv();
 		m->LightDirection() << l->directionv();
 		//

@@ -4,8 +4,6 @@
 
 namespace Library {
 
-	VERTEX_STRUCT_DECLARATION(MaterialDeferredDLight, POSITION, TEXCOORD)
-
 	class MaterialDeferredDLight : public Material {
 
 		RTTI_DECLARATIONS(MaterialDeferredDLight, Material);

@@ -35,6 +35,11 @@ namespace Library {
 		m_position = position;
 	}
 
+	XMVECTOR LightPoint::attenuation() const {
+		XMFLOAT3 a(m_constant, m_linear, m_quadratic);
+		return XMLoadFloat3(&a);
+	}
+
 	void LightPoint::set_attenuation(float constant, float linear, float quadratic) {
 		m_constant = constant;
 		m_linear = linear;
@@ -67,7 +72,7 @@ namespace Library {
 		float max = std::fmaxf(std::fmaxf(r, g), b);
 		m_radius = (-m_linear +
 					std::sqrtf(m_linear * m_linear -
-							   4 * m_quadratic * (m_constant - 256.0 * intensity() * max)))
+							   4 * m_quadratic * (m_constant - 256.0f * intensity() * max)))
 			/ (2 * m_quadratic);
 	}
 

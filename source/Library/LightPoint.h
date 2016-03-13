@@ -20,6 +20,8 @@ namespace Library {
 		virtual void set_position(float x, float y, float z);
 		virtual void set_position(FXMVECTOR);
 		virtual void set_position(const XMFLOAT3&);
+
+		XMVECTOR attenuation() const;
 		virtual void set_attenuation(float constant, float linear, float quadratic);
 
 		virtual void set_color(FLOAT r, FLOAT g, FLOAT b, FLOAT a) override;

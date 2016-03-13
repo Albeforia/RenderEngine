@@ -36,6 +36,12 @@
     <Filter Include="Header Files\GameComponent\Light">
       <UniqueIdentifier>{200ab768-fe17-42b6-8c93-8c7df6f1554d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Effect">
+      <UniqueIdentifier>{4fc90334-a1f1-45ff-897d-3768f3464efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Effect">
+      <UniqueIdentifier>{d92d2202-fd67-4a3d-ab18-47f34bd6131a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Library\GameClock.h">
@@ -59,18 +65,6 @@
     <ClInclude Include="..\..\source\Library\Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\Pass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\Technique.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\Effect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\Variable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -89,9 +83,6 @@
     <ClInclude Include="..\..\source\Library\MaterialBasic.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\MaterialSkybox.h">
-      <Filter>Header Files\Material</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\GameComponent.h">
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
@@ -99,9 +90,6 @@
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\InfoPanel.h">
-      <Filter>Header Files\GameComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\Skybox.h">
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\MatrixHelper.h">
@@ -158,6 +146,21 @@
     <ClInclude Include="..\..\source\Library\FullScreenQuad.h">
       <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\Effect.h">
+      <Filter>Header Files\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Technique.h">
+      <Filter>Header Files\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Variable.h">
+      <Filter>Header Files\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Pass.h">
+      <Filter>Header Files\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Sphere.h">
+      <Filter>Header Files\GameComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -173,18 +176,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Utility.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Effect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Technique.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Pass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Variable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\Model.cpp">
@@ -205,9 +196,6 @@
     <ClCompile Include="..\..\source\Library\MaterialBasic.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Library\MaterialSkybox.cpp">
-      <Filter>Source Files\Material</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Library\GameComponent.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
@@ -215,9 +203,6 @@
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\InfoPanel.cpp">
-      <Filter>Source Files\GameComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Skybox.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\MatrixHelper.cpp">
@@ -269,6 +254,21 @@
       <Filter>Source Files\Material</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\FullScreenQuad.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Effect.cpp">
+      <Filter>Source Files\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Pass.cpp">
+      <Filter>Source Files\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Technique.cpp">
+      <Filter>Source Files\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Variable.cpp">
+      <Filter>Source Files\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Sphere.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>

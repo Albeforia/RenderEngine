@@ -96,7 +96,6 @@ namespace Library {
 		ReleaseObject(m_render_target_back);
 		ReleaseObject(m_depth_stencil_back);
 		ReleaseObject(m_swap_chain);
-		/*ReleaseObject(m_dsbuffer);*/
 		if (m_d3d_device_context != nullptr) {
 			m_d3d_device_context->ClearState();
 		}

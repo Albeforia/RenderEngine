@@ -35,30 +35,31 @@ namespace Rendering {
 	void EarthDemo::init() {
 		SetCurrentDirectory(Utility::ExecutableDirectory().c_str());
 
-		std::unique_ptr<Model> model(new Model(*m_game, "content\\models\\Sphere.obj", true));
 		m_effect = new Effect(*m_game);
 		m_effect->load(L"content\\effects\\deferred_geometry.cso");
 		m_material = new MaterialDeferredGeometry();
 		m_material->init(m_effect);
 		m_material->set_curr_technique(1);
 
+		std::unique_ptr<Model> model(new Model(*m_game, "content\\models\\Sphere.obj", true));
 		Mesh* mesh = model->meshes().at(0);
 		m_material->create_vertex_buffer(m_game->d3d_device(), *mesh, &m_vertex_buffer);
 		mesh->create_index_buffer(&m_index_buffer);
 		m_index_count = mesh->indices().size();
 
 		// create instance buffer
+		float scale = 5.0f;
 		std::vector<XMFLOAT4X4> inst_data;
 		UINT axis_count = 5;
-		float offset = 10.0f;
+		float offset = 20.0f;
 		for (UINT x = 0; x < axis_count; x++) {
 			float x_pox = x * offset;
 			for (UINT z = 0; z < axis_count; z++) {
 				float z_pos = z * offset;
 				XMFLOAT4X4 m;
-				XMStoreFloat4x4(&m, XMMatrixTranslation(-x_pox, 0, -z_pos));
+				XMStoreFloat4x4(&m, XMMatrixScaling(scale, scale, scale) * XMMatrixTranslation(-x_pox, 0, -z_pos));
 				inst_data.push_back(m);
-				XMStoreFloat4x4(&m, XMMatrixTranslation(x_pox, 0, -z_pos));
+				XMStoreFloat4x4(&m, XMMatrixScaling(scale, scale, scale) * XMMatrixTranslation(+x_pox, 0, -z_pos));
 				inst_data.push_back(m);
 			}
 		}
