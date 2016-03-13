@@ -82,7 +82,9 @@ namespace Rendering {
 		m_sphere_effect->load(L"content\\effects\\deferred_p_light.cso");
 		m_sphere_material = new MaterialDeferredPLight();
 		m_sphere_material->init(m_sphere_effect);
-		m_sphere = new Sphere(*this, *m_sphere_material);
+		m_sphere = new Sphere(*this, *m_camera, *m_sphere_material);
+		m_sphere->init();
+		m_sphere->set_update_material(std::bind(&RenderingGame::update_sphere_material, this));
 
 		// quad
 		SetCurrentDirectory(Utility::ExecutableDirectory().c_str());
@@ -140,7 +142,6 @@ namespace Rendering {
 		m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		// point lights
 		// for each point light
-		update_sphere_material(*m_sphere);
 		m_sphere->draw(game_time);
 		// directional light and ambient
 		m_quad->draw(game_time);
@@ -154,11 +155,9 @@ namespace Rendering {
 		}
 	}
 
-	void RenderingGame::update_sphere_material(const Sphere& sphere) {
+	void RenderingGame::update_sphere_material() {
 		MaterialDeferredPLight* m = m_sphere_material->As<MaterialDeferredPLight>();
 		m->ScreenResolution() << XMLoadFloat2(&XMFLOAT2(m_screen_width, m_screen_height));
-		m->VP() << m_camera->view_projection();
-		m->CameraPosition() << XMLoadFloat3(&m_camera->position());
 		LightPoint* l = m_point_light->As<LightPoint>();
 		XMVECTOR pos = l->positionv();
 		float r = l->radius();

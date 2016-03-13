@@ -49,7 +49,7 @@ namespace Rendering {
 		Sphere* m_sphere;
 		Material* m_sphere_material;
 		Effect* m_sphere_effect;
-		void update_sphere_material(const Sphere&);
+		void update_sphere_material();
 
 		FullScreenQuad* m_quad;
 		Material* m_quad_material;
