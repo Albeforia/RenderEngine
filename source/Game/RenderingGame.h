@@ -12,11 +12,11 @@ namespace Library {
 	class RenderStateHelper;
 	class FullScreenRenderTarget;
 	class Camera;
-	class FullScreenQuad;
-	class Sphere;
+	class Geometry;
 	class Material;
 	class Effect;
 	class Light;
+	class Model;
 }
 
 namespace Rendering {
@@ -40,18 +40,19 @@ namespace Rendering {
 		Mouse* m_mouse;
 
 		RenderStateHelper* m_render_state_helper;
-		// MRT for deferred shading
+		// G-Buffers
 		std::vector<FullScreenRenderTarget*> m_render_targets;
 		ID3D11RenderTargetView** m_render_targets_raw;
 
 		Camera* m_camera;
 
-		Sphere* m_sphere;
+		Model* m_model;
+		Geometry* m_sphere;
 		Material* m_sphere_material;
 		Effect* m_sphere_effect;
 		void update_sphere_material();
 
-		FullScreenQuad* m_quad;
+		Geometry* m_quad;
 		Material* m_quad_material;
 		Effect* m_quad_effect;
 		void update_quad_material();

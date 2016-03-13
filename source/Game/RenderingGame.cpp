@@ -11,11 +11,12 @@
 #include "Effect.h"
 #include "MaterialDeferredDLight.h"
 #include "MaterialDeferredPLight.h"
-#include "FullScreenQuad.h"
-#include "MatrixHelper.h"
 #include "LightDirectional.h"
 #include "LightPoint.h"
-#include "Sphere.h"
+#include "Geometry.h"
+#include "FullScreenQuad.h"
+#include "Model.h"
+#include "Mesh.h"
 
 namespace Rendering {
 
@@ -25,7 +26,9 @@ namespace Rendering {
 		: Game(instance, window_class, window_title, show_cmd),
 		m_render_state_helper {}, m_render_targets {} {
 		m_depth_stencil_enabled = true;
-		m_msaa_enabled = true;
+		// we have to disable MSAA because G-Buffers' MSAA count and
+		// MSAA quality must equal to depth-stencil buffer's
+		m_msaa_enabled = false;
 	}
 
 	RenderingGame::~RenderingGame() {}
@@ -46,11 +49,9 @@ namespace Rendering {
 
 		// render
 		m_render_state_helper = new RenderStateHelper(*this);
-		auto* position = new FullScreenRenderTarget(*this, true, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		auto* position = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
 		auto* normal = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
 		auto* albedo_specular = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R8G8B8A8_UNORM);
-		//normal->set_depth_stencil(position->depth_stencil());
-		//albedo_specular->set_depth_stencil(position->depth_stencil());
 		m_render_targets.push_back(position);
 		m_render_targets.push_back(normal);
 		m_render_targets.push_back(albedo_specular);
@@ -82,9 +83,11 @@ namespace Rendering {
 		m_sphere_effect->load(L"content\\effects\\deferred_p_light.cso");
 		m_sphere_material = new MaterialDeferredPLight();
 		m_sphere_material->init(m_sphere_effect);
-		m_sphere = new Sphere(*this, *m_camera, *m_sphere_material);
-		m_sphere->init();
-		m_sphere->set_update_material(std::bind(&RenderingGame::update_sphere_material, this));
+
+		m_model = new Model(*this, "content\\models\\Sphere.obj", true);
+		Mesh* mesh = m_model->meshes().at(0);
+		m_sphere = new Geometry(*this, *mesh);
+		m_components.push_back(m_sphere);
 
 		// quad
 		SetCurrentDirectory(Utility::ExecutableDirectory().c_str());
@@ -92,10 +95,9 @@ namespace Rendering {
 		m_quad_effect->load(L"content\\effects\\deferred_d_light.cso");
 		m_quad_material = new MaterialDeferredDLight();
 		m_quad_material->init(m_quad_effect);
-		m_quad = new FullScreenQuad(*this, *m_quad_material);
-		m_quad->init();
-		m_quad->set_active_technique("directional_light_pass", "p0");
-		m_quad->set_update_material(std::bind(&RenderingGame::update_quad_material, this));
+
+		m_quad = new FullScreenQuad(*this);
+		m_components.push_back(m_quad);
 
 		// init each component
 		Game::init();
@@ -113,10 +115,9 @@ namespace Rendering {
 		ReleaseObject(m_input);
 		DeleteObject(m_sphere_effect);
 		DeleteObject(m_sphere_material);
-		DeleteObject(m_sphere);
 		DeleteObject(m_quad_effect);
 		DeleteObject(m_quad_material);
-		DeleteObject(m_quad);
+		DeleteObject(m_model);
 		// keyboard, mouse and camera will be deleted with components
 		Game::shutdown();
 	}
@@ -127,24 +128,47 @@ namespace Rendering {
 
 	void RenderingGame::draw(const GameTime& game_time) {
 		// geometry pass
-		m_d3d_device_context->OMSetRenderTargets(3, m_render_targets_raw, m_render_targets[0]->depth_stencil());
+		m_d3d_device_context->OMSetRenderTargets(3, m_render_targets_raw, m_depth_stencil_back);
 		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[0], reinterpret_cast<const float*>(&BACKGROUND_COLOR));
 		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[1], reinterpret_cast<const float*>(&BACKGROUND_COLOR));
 		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[2], reinterpret_cast<const float*>(&BACKGROUND_COLOR));
-		m_d3d_device_context->ClearDepthStencilView(m_render_targets[0]->depth_stencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		Game::draw(game_time);
 
-		m_render_state_helper->save_all();	// color pass will enable blend
+		m_d3d_device_context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		// light pass
-		reset_render_targets();
-		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&ColorHelper::Black));
-		m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		// point lights
+		/*
+		m_render_state_helper->save_all();
+
+		// stencil pass
+		m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_STENCIL, 1.0f, 0);
 		// for each point light
 		m_sphere->draw(game_time);
+
+		m_render_state_helper->restore_all();
+		*/
+
+		m_render_state_helper->save_all();
+
+		// light pass
+		m_d3d_device_context->OMSetRenderTargets(1, &m_render_target_back, m_depth_stencil_back);
+		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&ColorHelper::Black));
+		// point lights
+		m_sphere->apply();
+		// for each point light
+		update_sphere_material();
+		m_sphere_material->apply(m_d3d_device_context);
+		m_d3d_device_context->DrawIndexed(m_sphere->index_count(), 0, 0);
+
 		// directional light and ambient
-		m_quad->draw(game_time);
+		m_quad->apply();
+		update_quad_material();
+		m_quad_material->apply(m_d3d_device_context);
+		m_d3d_device_context->DrawIndexed(m_quad->index_count(), 0, 0);
+
+		// reset resource
+		ID3D11ShaderResourceView* null[3] = {};
+		m_d3d_device_context->PSSetShaderResources(0, ARRAYSIZE(null), null);
 
 		m_render_state_helper->restore_all();
 
@@ -157,6 +181,8 @@ namespace Rendering {
 
 	void RenderingGame::update_sphere_material() {
 		MaterialDeferredPLight* m = m_sphere_material->As<MaterialDeferredPLight>();
+		m->VP() << m_camera->view_projection();
+		m->CameraPosition() << XMLoadFloat3(&m_camera->position());
 		m->ScreenResolution() << XMLoadFloat2(&XMFLOAT2(m_screen_width, m_screen_height));
 		LightPoint* l = m_point_light->As<LightPoint>();
 		XMVECTOR pos = l->positionv();
