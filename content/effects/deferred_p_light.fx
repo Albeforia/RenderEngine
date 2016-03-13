@@ -18,14 +18,25 @@ Texture2D PositionBuffer;
 Texture2D NormalBuffer;
 Texture2D AlbedoSpecularBuffer;
 
-RasterizerState DisableCulling {
-	CullMode = NONE;
+RasterizerState FrontCulling {
+	// keep lighting when camera is inside volume
+	CullMode = FRONT;
 };
 
 BlendState EnableAdditiveBlending {
 	BlendEnable[0] = TRUE;
 	SrcBlend = ONE;
 	DestBlend = ONE;
+};
+
+DepthStencilState LightVolumeCulling {
+	// disable depth test
+	DepthEnable = FALSE;
+
+	StencilEnable = TRUE;
+	// pass when != 0
+	FrontFaceStencilFunc = NOT_EQUAL;
+	BackFaceStencilFunc = NOT_EQUAL;
 };
 
 SamplerState TrilinearSampler {
@@ -75,7 +86,8 @@ technique11 point_light_pass {
 		SetVertexShader(CompileShader(vs_5_0, vertex_shader()));
 		SetGeometryShader(NULL);
 		SetPixelShader(CompileShader(ps_5_0, pixel_shader()));
-		//SetRasterizerState(DisableCulling);
+		SetRasterizerState(FrontCulling);
+		SetDepthStencilState(LightVolumeCulling, 0);
 		SetBlendState(EnableAdditiveBlending, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
 	}
 }

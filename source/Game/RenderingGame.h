@@ -48,11 +48,16 @@ namespace Rendering {
 
 		Model* m_model;
 		Geometry* m_sphere;
-		Material* m_sphere_material;
-		Effect* m_sphere_effect;
-		void update_sphere_material();
-
 		Geometry* m_quad;
+
+		Material* m_stencil_material;
+		Effect* m_stencil_effect;
+		void update_stencil_material();
+
+		Material* m_light_material;
+		Effect* m_light_effect;
+		void update_light_material();
+
 		Material* m_quad_material;
 		Effect* m_quad_effect;
 		void update_quad_material();

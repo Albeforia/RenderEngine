@@ -23,6 +23,10 @@ BlendState EnableAdditiveBlending {
 	DestBlend = ONE;
 };
 
+DepthStencilState DisableDepth {
+	DepthEnable = FALSE;
+};
+
 SamplerState TrilinearSampler {
 	Filter = MIN_MAG_MIP_LINEAR;
 };
@@ -43,7 +47,7 @@ float4 pixel_shader(float4 p_position : SV_Position) : SV_Target {
 	float4 texel = AlbedoSpecularBuffer.Sample(TrilinearSampler, uv);
 	float3 albedo = texel.rgb;
 	float specular = texel.a;
-	specular = 0.8f;	// fix specular for test
+	specular = 0.0f;	// fix specular for test
 
 	float3 light_dir = normalize(-LightDirection);
 	float3 view_dir = normalize(CameraPosition - w_pos);
@@ -68,7 +72,8 @@ technique11 directional_light_pass {
 		SetVertexShader(CompileShader(vs_5_0, vertex_shader()));
 		SetGeometryShader(NULL);
 		SetPixelShader(CompileShader(ps_5_0, pixel_shader()));
-		//SetRasterizerState(DisableCulling);
+		SetRasterizerState(DisableCulling);
+		SetDepthStencilState(DisableDepth, 0xFFFFFFFF);
 		SetBlendState(EnableAdditiveBlending, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
 	}
 }
