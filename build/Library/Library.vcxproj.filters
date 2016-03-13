@@ -42,6 +42,18 @@
     <Filter Include="Source Files\Effect">
       <UniqueIdentifier>{d92d2202-fd67-4a3d-ab18-47f34bd6131a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameComponent\Abstract">
+      <UniqueIdentifier>{9931dd3f-1683-4455-8a58-da67a5ba68b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameComponent\Abstract">
+      <UniqueIdentifier>{81d6d0fb-6524-44ef-9d5a-808a4e07d691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameComponent\Geometry">
+      <UniqueIdentifier>{a8ef3474-c160-484e-b595-9f803144cff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameComponent\Geometry">
+      <UniqueIdentifier>{11daddfc-6949-48c1-ab08-356728ecc19a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Library\GameClock.h">
@@ -82,12 +94,6 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Library\MaterialBasic.h">
       <Filter>Header Files\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\GameComponent.h">
-      <Filter>Header Files\GameComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\GameComponentDrawable.h">
-      <Filter>Header Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Library\InfoPanel.h">
       <Filter>Header Files\GameComponent</Filter>
@@ -143,9 +149,6 @@
     <ClInclude Include="..\..\source\Library\MaterialDeferredPLight.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\FullScreenQuad.h">
-      <Filter>Header Files\GameComponent</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\Effect.h">
       <Filter>Header Files\Effect</Filter>
     </ClInclude>
@@ -158,8 +161,17 @@
     <ClInclude Include="..\..\source\Library\Pass.h">
       <Filter>Header Files\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\Sphere.h">
-      <Filter>Header Files\GameComponent</Filter>
+    <ClInclude Include="..\..\source\Library\GameComponent.h">
+      <Filter>Header Files\GameComponent\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\GameComponentDrawable.h">
+      <Filter>Header Files\GameComponent\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Geometry.h">
+      <Filter>Header Files\GameComponent\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\FullScreenQuad.h">
+      <Filter>Header Files\GameComponent\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -195,12 +207,6 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\MaterialBasic.cpp">
       <Filter>Source Files\Material</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\GameComponent.cpp">
-      <Filter>Source Files\GameComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\GameComponentDrawable.cpp">
-      <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\InfoPanel.cpp">
       <Filter>Source Files\GameComponent</Filter>
@@ -253,9 +259,6 @@
     <ClCompile Include="..\..\source\Library\MaterialDeferredPLight.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Library\FullScreenQuad.cpp">
-      <Filter>Source Files\GameComponent</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Library\Effect.cpp">
       <Filter>Source Files\Effect</Filter>
     </ClCompile>
@@ -268,8 +271,17 @@
     <ClCompile Include="..\..\source\Library\Variable.cpp">
       <Filter>Source Files\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Library\Sphere.cpp">
-      <Filter>Source Files\GameComponent</Filter>
+    <ClCompile Include="..\..\source\Library\GameComponent.cpp">
+      <Filter>Source Files\GameComponent\Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\GameComponentDrawable.cpp">
+      <Filter>Source Files\GameComponent\Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Geometry.cpp">
+      <Filter>Source Files\GameComponent\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\FullScreenQuad.cpp">
+      <Filter>Source Files\GameComponent\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +298,9 @@
       <Filter>Effects</Filter>
     </FxCompile>
     <FxCompile Include="..\..\content\effects\deferred_p_light.fx">
+      <Filter>Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\content\effects\deferred_stencil.fx">
       <Filter>Effects</Filter>
     </FxCompile>
   </ItemGroup>
