@@ -9,9 +9,7 @@ namespace Library {
 		: m_game {}, m_enabled {true} {}
 
 	GameComponent::GameComponent(Game& game)
-		: GameComponent() {
-		m_game = &game;
-	}
+		: m_game {&game}, m_enabled {true} {}
 
 	GameComponent::~GameComponent() {}
 
@@ -23,12 +21,8 @@ namespace Library {
 		m_game = &game;
 	}
 
-	bool GameComponent::enabled() const {
+	bool& GameComponent::enabled() {
 		return m_enabled;
-	}
-
-	void GameComponent::set_enabled(bool e) {
-		m_enabled = e;
 	}
 
 	void GameComponent::init() {}

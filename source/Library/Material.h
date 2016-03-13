@@ -28,6 +28,8 @@ namespace Library {
 		 */
 		void set_curr_technique(const std::string&);
 
+		void apply(ID3D11DeviceContext*) const;
+
 		virtual void init(Effect*);
 		virtual UINT vertex_size() const = 0;
 		virtual void create_vertex_buffer(ID3D11Device*, const Model&, std::vector<ID3D11Buffer*>&) const;

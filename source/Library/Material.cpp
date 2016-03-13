@@ -31,6 +31,11 @@ namespace Library {
 		set_curr_technique(0);
 	}
 
+	void Material::apply(ID3D11DeviceContext* context) const {
+		context->IASetInputLayout(m_curr_technique->pass(0)->input_layout());
+		m_curr_technique->pass(0)->apply(0, context);
+	}
+
 	void Material::create_vertex_buffer(ID3D11Device* device, const Model& model, std::vector<ID3D11Buffer*>& buffers) const {
 		buffers.reserve(model.meshes().size());
 		for (auto* mesh : model.meshes()) {

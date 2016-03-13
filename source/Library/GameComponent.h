@@ -21,8 +21,7 @@ namespace Library {
 
 		Game* get_game() const;
 		void set_game(Game&);
-		bool enabled() const;
-		void set_enabled(bool);
+		bool& enabled();
 
 		virtual void init();
 		virtual void update(const GameTime&);

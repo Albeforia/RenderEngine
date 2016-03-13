@@ -16,9 +16,6 @@ namespace Library {
 		GameComponentDrawable(Game&, Camera&);
 		virtual ~GameComponentDrawable();
 
-		GameComponentDrawable(const GameComponentDrawable&) = delete;
-		GameComponentDrawable& operator=(const GameComponentDrawable&) = delete;
-
 		bool& visible();
 		void translate(float x, float y, float z);
 		void scale(float x, float y, float z);
