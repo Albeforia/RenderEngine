@@ -7,14 +7,21 @@ namespace Library {
 	RTTI_DEFINITIONS(MaterialDeferredPLight);
 
 	MaterialDeferredPLight::MaterialDeferredPLight()
-		: MATERIAL_VARIABLES_INITIALIZATION(AmbientColor, LightColor, LightPosition, LightAttenuation, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer)
+		: MATERIAL_VARIABLES_INITIALIZATION(ScreenResolution, VP, CameraPosition, World,
+											LightColor, LightPosition, LightAttenuation,
+											PositionBuffer, NormalBuffer, AlbedoSpecularBuffer)
 		Material() {}
 
-	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredPLight, AmbientColor, LightColor, LightPosition, LightAttenuation, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
+	MATERIAL_VARIABLES_DEFINITION(MaterialDeferredPLight,
+								  ScreenResolution, VP, CameraPosition, World,
+								  LightColor, LightPosition, LightAttenuation,
+								  PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
 
 	void MaterialDeferredPLight::init(Effect* effect) {
 		Material::init(effect);
-		MATERIAL_VARIABLES_RETRIEVE(AmbientColor, LightColor, LightPosition, LightAttenuation, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
+		MATERIAL_VARIABLES_RETRIEVE(ScreenResolution, VP, CameraPosition, World,
+									LightColor, LightPosition, LightAttenuation,
+									PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
 	}
 
 	void MaterialDeferredPLight::create_vertex_buffer(ID3D11Device* device, const Mesh& mesh, ID3D11Buffer** buffer) const {
@@ -27,7 +34,7 @@ namespace Library {
 			XMFLOAT3 pos = src_vertices.at(i);
 			XMFLOAT3 uv = tex_coords->at(i);
 			vertices.push_back(VertexMaterialDeferredPLight {
-				XMFLOAT4(pos.x, pos.y, pos.z, 1.0f), XMFLOAT2(uv.x, uv.y),
+				XMFLOAT4(pos.x, pos.y, pos.z, 1.0f)
 			});
 		}
 		Material::create_buffer(device, reinterpret_cast<void*>(&vertices[0]),

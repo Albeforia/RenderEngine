@@ -4,13 +4,15 @@
 
 namespace Library {
 
-	VERTEX_STRUCT_DECLARATION(MaterialDeferredPLight, POSITION, TEXCOORD)
+	VERTEX_STRUCT_DECLARATION(MaterialDeferredPLight, POSITION)
 
 	class MaterialDeferredPLight : public Material {
 
 		RTTI_DECLARATIONS(MaterialDeferredPLight, Material);
 
-		MATERIAL_VARIABLES_DECLARATION(AmbientColor, LightColor, LightPosition, LightAttenuation, CameraPosition, PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
+		MATERIAL_VARIABLES_DECLARATION(ScreenResolution, VP, CameraPosition, World,
+									   LightColor, LightPosition, LightAttenuation,
+									   PositionBuffer, NormalBuffer, AlbedoSpecularBuffer);
 
 	public:
 		MaterialDeferredPLight();
