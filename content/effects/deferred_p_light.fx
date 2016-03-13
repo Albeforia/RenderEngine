@@ -1,14 +1,18 @@
+cbuffer CBufferPerRender {
+	float2 ScreenResolution;
+};
+
 cbuffer CBufferPerFrame {
-	float4 LightColor: COLOR;
-	float3 LightPosition: POSITION;
-	float3 LightAttenuation;
+	float4x4 VP: VIEWPROJECTION;
 	float3 CameraPosition: CAMERAPOSITION;
 };
 
-//cbuffer CBufferPerObject {
-//	float4 SpecularColor: SPECULAR;
-//	float SpecularPower : SPECULARPOWER;
-//};
+cbuffer CBufferPerLight {
+	float4x4 World: WORLD;
+	float4 LightColor: COLOR;
+	float3 LightPosition: POSITION;
+	float3 LightAttenuation;
+};
 
 Texture2D PositionBuffer;
 Texture2D NormalBuffer;
@@ -26,33 +30,22 @@ BlendState EnableAdditiveBlending {
 
 SamplerState TrilinearSampler {
 	Filter = MIN_MAG_MIP_LINEAR;
-	//AddressU = WRAP;
-	//AddressV = WRAP;
 };
 
-struct VS_In {
-	float4 o_position: POSITION;
-	float2 texture_coords: TEXCOORD;
-};
-
-struct VS_Out {
-	float4 h_position: SV_Position;
-	float2 texture_coords: TEXCOORD;
-};
-
-VS_Out vertex_shader(VS_In input) {
-	VS_Out output = (VS_Out)0;
-	output.h_position = input.o_position;
-	output.texture_coords = input.texture_coords;
-	return output;
+float4 vertex_shader(float4 o_position : POSITION) : SV_Position {
+	return mul(mul(o_position, World), VP);
 }
 
-float4 pixel_shader(VS_Out input) : SV_Target {
+float4 pixel_shader(float4 p_position : SV_Position) : SV_Target {
+	// convert from pixel position to texel position
+	// http://www.asawicki.info/news_1516_half-pixel_offset_in_directx_11.html
+	float2 uv = p_position / ScreenResolution;
+
 	float4 output = (float4)0;
-	float3 w_pos = PositionBuffer.Sample(TrilinearSampler, input.texture_coords).xyz;
-	float4 normal = NormalBuffer.Sample(TrilinearSampler, input.texture_coords);
+	float3 w_pos = PositionBuffer.Sample(TrilinearSampler, uv).xyz;
+	float4 normal = NormalBuffer.Sample(TrilinearSampler, uv);
 	float SpecularPower = normal.w; // fetch specular power
-	float4 texel = AlbedoSpecularBuffer.Sample(TrilinearSampler, input.texture_coords);
+	float4 texel = AlbedoSpecularBuffer.Sample(TrilinearSampler, uv);
 	float3 albedo = texel.rgb;
 	float specular = texel.a;
 	specular = 0.8f;	// fix specular for test
