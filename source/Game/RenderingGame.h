@@ -65,6 +65,9 @@ namespace Rendering {
 		Light* m_sun;
 		Light* m_point_light;
 
+		Material* m_test_material;
+		Effect* m_test_effect;
+
 	};
 
 }

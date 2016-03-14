@@ -7,9 +7,12 @@ namespace Library {
 		: m_effect {effect}, m_variable {variable}, m_variable_desc {}, m_name {} {
 		m_variable->GetDesc(&m_variable_desc);
 		m_name = m_variable_desc.Name;
+		m_variable_type = m_variable->GetType();
+		m_variable_type->GetDesc(&m_variable_type_desc);
 	}
 
 	Variable::~Variable() {
+		ReleaseObject(m_variable_type);
 		ReleaseObject(m_variable);
 	}
 

@@ -12,6 +12,7 @@
 #include "MaterialDeferredStencil.h"
 #include "MaterialDeferredDLight.h"
 #include "MaterialDeferredPLight.h"
+#include "MaterialBasic.h"
 #include "LightDirectional.h"
 #include "LightPoint.h"
 #include "Geometry.h"
@@ -105,6 +106,13 @@ namespace Rendering {
 		m_quad = new FullScreenQuad(*this);
 		m_components.push_back(m_quad);
 
+		// test
+		m_test_effect = new Effect(*this);
+		m_test_effect->load(L"content\\effects\\basic.cso");
+		m_test_material = new MaterialBasic();
+		m_test_material->init(m_test_effect);
+		m_test_material->set_curr_technique(1);
+
 		// init each component
 		Game::init();
 
@@ -125,6 +133,8 @@ namespace Rendering {
 		DeleteObject(m_light_material);
 		DeleteObject(m_quad_effect);
 		DeleteObject(m_quad_material);
+		DeleteObject(m_test_effect);
+		DeleteObject(m_test_material);
 		DeleteObject(m_model);
 		// keyboard, mouse and camera will be deleted with components
 		Game::shutdown();
@@ -194,6 +204,18 @@ namespace Rendering {
 		// reset resource
 		ID3D11ShaderResourceView* null[3] = {};
 		m_d3d_device_context->PSSetShaderResources(0, ARRAYSIZE(null), null);
+
+		// test
+		m_render_state_helper->save_all();
+		m_sphere->apply();
+		MaterialBasic* m = m_test_material->As<MaterialBasic>();
+		LightPoint* l = m_point_light->As<LightPoint>();
+		float r = l->radius();
+		XMMATRIX world = XMMatrixScaling(r, r, r) * XMMatrixTranslationFromVector(l->positionv());
+		m->WVP() << world * m_camera->view_projection();
+		m_test_material->apply(m_d3d_device_context);
+		m_d3d_device_context->DrawIndexed(m_sphere->index_count(), 0, 0);
+		m_render_state_helper->restore_all();
 
 		// swap
 		HRESULT hr = m_swap_chain->Present(0, 0);

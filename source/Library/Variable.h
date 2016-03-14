@@ -27,6 +27,8 @@ namespace Library {
 
 		ID3DX11EffectVariable* m_variable;
 		D3DX11_EFFECT_VARIABLE_DESC m_variable_desc;
+		ID3DX11EffectType* m_variable_type;
+		D3DX11_EFFECT_TYPE_DESC m_variable_type_desc;
 
 		std::string m_name;
 
