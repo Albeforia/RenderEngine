@@ -47,7 +47,7 @@ float4 pixel_shader(float4 p_position : SV_Position) : SV_Target {
 	float4 texel = AlbedoSpecularBuffer.Sample(TrilinearSampler, uv);
 	float3 albedo = texel.rgb;
 	float specular = texel.a;
-	specular = 0.0f;	// fix specular for test
+	specular = 0.8f;	// fix specular for test
 
 	float3 light_dir = normalize(-LightDirection);
 	float3 view_dir = normalize(CameraPosition - w_pos);
