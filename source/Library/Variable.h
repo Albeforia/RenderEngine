@@ -16,11 +16,14 @@ namespace Library {
 		~Variable();
 
 		const std::string& name() const;
+		const D3DX11_EFFECT_TYPE_DESC& type_desc() const;
 
 		Variable& operator<<(CXMMATRIX);
 		Variable& operator<<(ID3D11ShaderResourceView*);
 		Variable& operator<<(FXMVECTOR);
 		Variable& operator<<(float);
+		Variable& operator<<(const std::vector<float>&);
+		Variable& operator<<(const std::vector<XMFLOAT2>&);
 
 	private:
 		Effect& m_effect;

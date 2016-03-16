@@ -176,6 +176,9 @@
     <ClInclude Include="..\..\source\Library\MaterialDeferredStencil.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\MaterialGaussianBlur.h">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -289,6 +292,9 @@
     <ClCompile Include="..\..\source\Library\MaterialDeferredStencil.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Library\MaterialGaussianBlur.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\content\effects\skybox.fx">
@@ -307,6 +313,9 @@
       <Filter>Effects</Filter>
     </FxCompile>
     <FxCompile Include="..\..\content\effects\deferred_stencil.fx">
+      <Filter>Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\content\effects\gaussian_blur.fx">
       <Filter>Effects</Filter>
     </FxCompile>
   </ItemGroup>

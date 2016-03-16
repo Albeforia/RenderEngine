@@ -40,6 +40,8 @@ namespace Library {
 		*/
 		Variable* variable(const std::string&) const;
 
+		const Game& game() const;
+
 	private:
 		void init();
 

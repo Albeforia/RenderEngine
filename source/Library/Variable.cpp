@@ -20,6 +20,10 @@ namespace Library {
 		return m_name;
 	}
 
+	const D3DX11_EFFECT_TYPE_DESC& Variable::type_desc() const {
+		return m_variable_type_desc;
+	}
+
 	Variable& Variable::operator<<(CXMMATRIX value) {
 		auto* v = m_variable->AsMatrix();
 		if (!v->IsValid()) {
@@ -53,6 +57,28 @@ namespace Library {
 			throw GameException("Invalid effect variable cast.");
 		}
 		v->SetFloat(value);
+		return *this;
+	}
+
+	Variable& Variable::operator<<(const std::vector<float>& values) {
+		ID3DX11EffectScalarVariable* variable = m_variable->AsScalar();
+		if (variable->IsValid() == false) {
+			throw GameException("Invalid effect variable cast.");
+		}
+
+		variable->SetFloatArray(&values[0], 0, values.size());
+
+		return *this;
+	}
+
+	Variable& Variable::operator<<(const std::vector<XMFLOAT2>& values) {
+		ID3DX11EffectVectorVariable* variable = m_variable->AsVector();
+		if (variable->IsValid() == false) {
+			throw GameException("Invalid effect variable cast.");
+		}
+
+		variable->SetFloatVectorArray(reinterpret_cast<const float*>(&values[0]), 0, values.size());
+
 		return *this;
 	}
 

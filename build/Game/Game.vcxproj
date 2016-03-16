@@ -140,7 +140,7 @@ IF EXIST "$(SolutionDir)..\content\game" xcopy /E /Y "$(SolutionDir)..\content\g
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;DirectXTK.lib;d3dcompiler.lib;Effects11.lib;dinput8.lib;dxguid.lib;shlwapi.lib;assimp-vc140-mt.lib;Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\external\assimp\lib\Debug;$(SolutionDir)..\lib;$(SolutionDir)..\external\DirectXTK\Bin\Desktop_2015\Win32\Debug;$(SolutionDir)..\external\Effects11\Bin\Desktop_2015\Win32\Debug;$(WindowsSDK_IncludePath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\external\assimp\lib\Debug;$(SolutionDir)..\lib;$(SolutionDir)..\external\DirectXTK\Bin\Desktop_2015\Win32\Release;$(SolutionDir)..\external\Effects11\Bin\Desktop_2015\Win32\Release;$(WindowsSDK_IncludePath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>IF NOT EXIST "$(OutDir)content\" mkdir "$(OutDir)content\"

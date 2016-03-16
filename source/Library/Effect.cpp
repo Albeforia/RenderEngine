@@ -95,4 +95,8 @@ namespace Library {
 		return m_variables_by_name.at(name);
 	}
 
+	const Game& Effect::game() const {
+		return m_game;
+	}
+
 }
