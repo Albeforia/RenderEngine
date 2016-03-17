@@ -28,7 +28,7 @@ namespace Rendering {
 	RenderingGame::RenderingGame(HINSTANCE instance, const std::wstring& window_class, const std::wstring& window_title, int show_cmd)
 		: Game(instance, window_class, window_title, show_cmd),
 		m_render_state_helper {}, m_render_targets {} {
-		m_depth_stencil_enabled = true;
+		m_depth_stencil_enabled = false;
 		// we have to disable MSAA because G-Buffers' MSAA count and
 		// MSAA quality must equal to depth-stencil buffer's
 		m_msaa_enabled = false;
@@ -52,7 +52,7 @@ namespace Rendering {
 
 		// render
 		m_render_state_helper = new RenderStateHelper(*this);
-		auto* position = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		auto* position = new FullScreenRenderTarget(*this, true, DXGI_FORMAT_R32G32B32A32_FLOAT);
 		auto* normal = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
 		auto* albedo_specular = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R8G8B8A8_UNORM);
 		auto* color = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R8G8B8A8_UNORM);
@@ -167,11 +167,11 @@ namespace Rendering {
 	void RenderingGame::draw(const GameTime& game_time) {
 		//---------------------------------------------------
 		// BEGIN: geometry pass
-		m_d3d_device_context->OMSetRenderTargets(3, m_render_targets_raw, m_depth_stencil_back);
+		m_d3d_device_context->OMSetRenderTargets(3, m_render_targets_raw, m_render_targets[0]->depth_stencil());
 		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[0], reinterpret_cast<const float*>(&BACKGROUND_COLOR));
 		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[1], reinterpret_cast<const float*>(&BACKGROUND_COLOR));
 		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[2], reinterpret_cast<const float*>(&BACKGROUND_COLOR));
-		m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		m_d3d_device_context->ClearDepthStencilView(m_render_targets[0]->depth_stencil(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		Game::draw(game_time);
 		// END: geometry pass
 		//---------------------------------------------------
@@ -183,7 +183,7 @@ namespace Rendering {
 		// BEGIN: stencil pass
 		m_render_state_helper->save_all();
 
-		m_d3d_device_context->ClearDepthStencilView(m_depth_stencil_back, D3D11_CLEAR_STENCIL, 1.0f, 0);
+		m_d3d_device_context->ClearDepthStencilView(m_render_targets[0]->depth_stencil(), D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 		update_stencil_material();
 		m_stencil_material->apply(m_d3d_device_context);
@@ -197,7 +197,7 @@ namespace Rendering {
 		// BEGIN: point light pass
 		m_render_state_helper->save_all();
 
-		m_d3d_device_context->OMSetRenderTargets(1, &m_render_targets_raw[3], m_depth_stencil_back);
+		m_d3d_device_context->OMSetRenderTargets(1, &m_render_targets_raw[3], m_render_targets[0]->depth_stencil());
 		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[3], reinterpret_cast<const float*>(&ColorHelper::Black));
 
 		update_light_material();
