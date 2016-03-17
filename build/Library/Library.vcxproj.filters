@@ -182,6 +182,9 @@
     <ClInclude Include="..\..\source\Library\MaterialDownSampling.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\MaterialDoF.h">
+      <Filter>Header Files\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -301,6 +304,9 @@
     <ClCompile Include="..\..\source\Library\MaterialDownSampling.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Library\MaterialDoF.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\content\effects\skybox.fx">
@@ -325,6 +331,9 @@
       <Filter>Effects</Filter>
     </FxCompile>
     <FxCompile Include="..\..\content\effects\down_sampling.fx">
+      <Filter>Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\content\effects\depth_of_field.fx">
       <Filter>Effects</Filter>
     </FxCompile>
   </ItemGroup>

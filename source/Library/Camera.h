@@ -27,6 +27,8 @@ namespace Library {
 		float fov() const;
 		float nearp() const;
 		float farp() const;
+		float focus_distance() const;
+		float focus_range() const;
 
 		XMMATRIX view() const;
 		XMMATRIX projection() const;
@@ -49,12 +51,16 @@ namespace Library {
 		static const float DEFAULT_RATIO;
 		static const float DEFAULT_NEARP;
 		static const float DEFAULT_FARP;
+		static const float DEFAULT_FOCUS_DISTANCE;
+		static const float DEFAULT_FOCUS_RANGE;
 
 	protected:
 		float m_fov;
 		float m_ratio;
 		float m_nearp;
 		float m_farp;
+		float m_focus_distance;
+		float m_focus_range;
 
 		XMFLOAT3 m_position;
 		XMFLOAT3 m_direction;

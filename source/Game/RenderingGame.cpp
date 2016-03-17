@@ -15,6 +15,7 @@
 #include "MaterialBasic.h"
 #include "MaterialDownSampling.h"
 #include "MaterialGaussianBlur.h"
+#include "MaterialDoF.h"
 #include "LightDirectional.h"
 #include "LightPoint.h"
 #include "Geometry.h"
@@ -58,13 +59,15 @@ namespace Rendering {
 		auto* albedo_specular = new FullScreenRenderTarget(*this, false);
 		auto* color = new FullScreenRenderTarget(*this, false);
 		auto* color_down = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT, 4);
-		auto* blur = new FullScreenRenderTarget(*this, false);
+		auto* gaussian_blur_h = new FullScreenRenderTarget(*this, false);
+		auto* gaussian_blur_v = new FullScreenRenderTarget(*this, false);
 		m_render_targets.push_back(position);
 		m_render_targets.push_back(normal);
 		m_render_targets.push_back(albedo_specular);
 		m_render_targets.push_back(color);
 		m_render_targets.push_back(color_down);
-		m_render_targets.push_back(blur);
+		m_render_targets.push_back(gaussian_blur_h);
+		m_render_targets.push_back(gaussian_blur_v);
 		m_render_targets_raw = new ID3D11RenderTargetView*[m_render_targets.size()];
 		for (UINT i = 0; i < m_render_targets.size(); i++) {
 			m_render_targets_raw[i] = m_render_targets[i]->render_target();
@@ -124,24 +127,29 @@ namespace Rendering {
 		m_test_material->init(m_test_effect);
 		m_test_material->set_curr_technique(1);
 
-		//
+		// down-sampling
 		m_down_sampling_effect = new Effect(*this);
 		m_down_sampling_effect->load(L"content\\effects\\down_sampling.cso");
 		m_down_sampling_material = new MaterialDownSampling(4);
 		m_down_sampling_material->init(m_down_sampling_effect);
 
-		// post-processing
 		// gaussian blur
 		m_blur_effect = new Effect(*this);
 		m_blur_effect->load(L"content\\effects\\gaussian_blur.cso");
 		m_blur_material = new MaterialGaussianBlur(1.5f);
 		m_blur_material->init(m_blur_effect);
 
+		// dof
+		m_dof_effect = new Effect(*this);
+		m_dof_effect->load(L"content\\effects\\depth_of_field.cso");
+		m_dof_material = new MaterialDoF(m_camera);
+		m_dof_material->init(m_dof_effect);
+
 		// init each component
 		Game::init();
 
 		//
-		m_camera->set_position(0, 0, 25.0f);
+		m_camera->set_position(0, 0, 20.0f);
 	}
 
 	void RenderingGame::shutdown() {
@@ -163,6 +171,8 @@ namespace Rendering {
 		DeleteObject(m_down_sampling_material);
 		DeleteObject(m_blur_effect);
 		DeleteObject(m_blur_material);
+		DeleteObject(m_dof_effect);
+		DeleteObject(m_dof_material);
 		DeleteObject(m_model);
 		// keyboard, mouse and camera will be deleted with components
 		Game::shutdown();
@@ -247,7 +257,7 @@ namespace Rendering {
 		//---------------------------------------------------
 		// BEGIN: post-processing
 
-		// horizontal blur
+		// horizontal gaussian blur
 		m_d3d_device_context->OMSetRenderTargets(1, &m_render_targets_raw[5], nullptr);
 		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[5], reinterpret_cast<const float*>(&ColorHelper::Black));
 		m_blur_material->set_curr_technique(0);
@@ -255,12 +265,21 @@ namespace Rendering {
 		m_blur_material->apply(m_d3d_device_context);
 		m_d3d_device_context->DrawIndexed(m_quad->index_count(), 0, 0);
 
-		// vertical blur
-		m_d3d_device_context->OMSetRenderTargets(1, &m_render_target_back, nullptr);
-		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&ColorHelper::Black));
+		// vertical gaussian blur
+		m_d3d_device_context->OMSetRenderTargets(1, &m_render_targets_raw[6], nullptr);
+		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[6], reinterpret_cast<const float*>(&ColorHelper::Black));
 		m_blur_material->set_curr_technique(1);
 		m_blur_material->As<MaterialGaussianBlur>()->ColorBuffer() << m_render_targets[5]->output_texture();
 		m_blur_material->apply(m_d3d_device_context);
+		m_d3d_device_context->DrawIndexed(m_quad->index_count(), 0, 0);
+
+		// dof
+		m_d3d_device_context->OMSetRenderTargets(1, &m_render_target_back, nullptr);
+		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&ColorHelper::Black));
+		m_dof_material->As<MaterialDoF>()->ColorBuffer() << m_render_targets[3]->output_texture();
+		m_dof_material->As<MaterialDoF>()->BlurBuffer() << m_render_targets[6]->output_texture();
+		m_dof_material->As<MaterialDoF>()->DepthBuffer() << m_render_targets[0]->output_depth_texture();
+		m_dof_material->apply(m_d3d_device_context);
 		m_d3d_device_context->DrawIndexed(m_quad->index_count(), 0, 0);
 
 		// END: post-processing

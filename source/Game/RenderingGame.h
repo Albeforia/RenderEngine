@@ -74,6 +74,9 @@ namespace Rendering {
 		Material* m_blur_material;
 		Effect* m_blur_effect;
 
+		Material* m_dof_material;
+		Effect* m_dof_effect;
+
 	};
 
 }

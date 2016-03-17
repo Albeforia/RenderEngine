@@ -11,10 +11,13 @@ namespace Library {
 	const float Camera::DEFAULT_FOV = XM_PIDIV4;
 	const float Camera::DEFAULT_NEARP = 0.01f;
 	const float Camera::DEFAULT_FARP = 1000.0f;
+	const float Camera::DEFAULT_FOCUS_DISTANCE = 20.0f;
+	const float Camera::DEFAULT_FOCUS_RANGE = 30.0f;
 
 	Camera::Camera(Game& game)
 		: GameComponent(game),
 		m_fov {DEFAULT_FOV}, m_ratio {game.aspect_ratio()}, m_nearp {DEFAULT_NEARP}, m_farp {DEFAULT_FARP},
+		m_focus_distance {DEFAULT_FOCUS_DISTANCE}, m_focus_range {DEFAULT_FOCUS_RANGE},
 		m_position {}, m_direction {}, m_up {}, m_right {}, m_view {}, m_projection {} {}
 
 	Camera::Camera(Game& game, float fov, float ratio, float nearp, float farp)
@@ -26,6 +29,22 @@ namespace Library {
 	}
 
 	Camera::~Camera() {}
+
+	float Camera::focus_distance() const {
+		return m_focus_distance;
+	}
+
+	float Camera::focus_range() const {
+		return m_focus_range;
+	}
+
+	float Camera::nearp() const {
+		return m_nearp;
+	}
+
+	float Camera::farp() const {
+		return m_farp;
+	}
 
 	const XMFLOAT3& Camera::position() const { return m_position; }
 	const XMFLOAT3& Camera::direction() const { return m_direction; }
