@@ -13,6 +13,7 @@
 #include "MaterialDeferredDLight.h"
 #include "MaterialDeferredPLight.h"
 #include "MaterialBasic.h"
+#include "MaterialDownSampling.h"
 #include "MaterialGaussianBlur.h"
 #include "LightDirectional.h"
 #include "LightPoint.h"
@@ -54,21 +55,20 @@ namespace Rendering {
 		m_render_state_helper = new RenderStateHelper(*this);
 		auto* position = new FullScreenRenderTarget(*this, true, DXGI_FORMAT_R32G32B32A32_FLOAT);
 		auto* normal = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
-		auto* albedo_specular = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R8G8B8A8_UNORM);
-		auto* color = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R8G8B8A8_UNORM);
-		auto* blur = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R8G8B8A8_UNORM);
+		auto* albedo_specular = new FullScreenRenderTarget(*this, false);
+		auto* color = new FullScreenRenderTarget(*this, false);
+		auto* color_down = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT, 4);
+		auto* blur = new FullScreenRenderTarget(*this, false);
 		m_render_targets.push_back(position);
 		m_render_targets.push_back(normal);
 		m_render_targets.push_back(albedo_specular);
 		m_render_targets.push_back(color);
+		m_render_targets.push_back(color_down);
 		m_render_targets.push_back(blur);
-		m_render_targets_raw = new ID3D11RenderTargetView*[5] {
-			position->render_target(),
-				normal->render_target(),
-				albedo_specular->render_target(),
-				color->render_target(),
-				blur->render_target()
-		};
+		m_render_targets_raw = new ID3D11RenderTargetView*[m_render_targets.size()];
+		for (UINT i = 0; i < m_render_targets.size(); i++) {
+			m_render_targets_raw[i] = m_render_targets[i]->render_target();
+		}
 
 		// camera
 		m_camera = new CameraFirstPerson(*this);
@@ -124,6 +124,12 @@ namespace Rendering {
 		m_test_material->init(m_test_effect);
 		m_test_material->set_curr_technique(1);
 
+		//
+		m_down_sampling_effect = new Effect(*this);
+		m_down_sampling_effect->load(L"content\\effects\\down_sampling.cso");
+		m_down_sampling_material = new MaterialDownSampling(4);
+		m_down_sampling_material->init(m_down_sampling_effect);
+
 		// post-processing
 		// gaussian blur
 		m_blur_effect = new Effect(*this);
@@ -153,6 +159,8 @@ namespace Rendering {
 		DeleteObject(m_quad_material);
 		DeleteObject(m_test_effect);
 		DeleteObject(m_test_material);
+		DeleteObject(m_down_sampling_effect);
+		DeleteObject(m_down_sampling_material);
 		DeleteObject(m_blur_effect);
 		DeleteObject(m_blur_material);
 		DeleteObject(m_model);
@@ -177,6 +185,7 @@ namespace Rendering {
 		//---------------------------------------------------
 
 		m_d3d_device_context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		// use sphere mesh for next two passes
 		m_sphere->apply();
 
 		//---------------------------------------------------
@@ -208,27 +217,41 @@ namespace Rendering {
 		// END: point light pass
 		//---------------------------------------------------
 
+		// use quad mesh from now on
+		m_quad->apply();
+
 		//---------------------------------------------------
-		// BEGIN: final pass
+		// BEGIN: directional light pass
 		m_render_state_helper->save_all();
 
-		m_quad->apply();
 		update_quad_material();
 		m_quad_material->apply(m_d3d_device_context);
 		m_d3d_device_context->DrawIndexed(m_quad->index_count(), 0, 0);
 
 		m_render_state_helper->restore_all();
-		// END: final pass
+		// END: directional light pass
+		//---------------------------------------------------
+
+		//---------------------------------------------------
+		// BEGIN: down-sampling (4x)
+
+		m_d3d_device_context->OMSetRenderTargets(1, &m_render_targets_raw[4], nullptr);
+		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[4], reinterpret_cast<const float*>(&ColorHelper::Black));
+		m_down_sampling_material->As<MaterialDownSampling>()->ColorBuffer() << m_render_targets[3]->output_texture();
+		m_down_sampling_material->apply(m_d3d_device_context);
+		m_d3d_device_context->DrawIndexed(m_quad->index_count(), 0, 0);
+
+		// END: down-sampling (4x)
 		//---------------------------------------------------
 
 		//---------------------------------------------------
 		// BEGIN: post-processing
 
 		// horizontal blur
-		m_d3d_device_context->OMSetRenderTargets(1, &m_render_targets_raw[4], nullptr);
-		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[4], reinterpret_cast<const float*>(&ColorHelper::Black));
+		m_d3d_device_context->OMSetRenderTargets(1, &m_render_targets_raw[5], nullptr);
+		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[5], reinterpret_cast<const float*>(&ColorHelper::Black));
 		m_blur_material->set_curr_technique(0);
-		m_blur_material->As<MaterialGaussianBlur>()->ColorBuffer() << m_render_targets[3]->output_texture();
+		m_blur_material->As<MaterialGaussianBlur>()->ColorBuffer() << m_render_targets[4]->output_texture();
 		m_blur_material->apply(m_d3d_device_context);
 		m_d3d_device_context->DrawIndexed(m_quad->index_count(), 0, 0);
 
@@ -236,7 +259,7 @@ namespace Rendering {
 		m_d3d_device_context->OMSetRenderTargets(1, &m_render_target_back, nullptr);
 		m_d3d_device_context->ClearRenderTargetView(m_render_target_back, reinterpret_cast<const float*>(&ColorHelper::Black));
 		m_blur_material->set_curr_technique(1);
-		m_blur_material->As<MaterialGaussianBlur>()->ColorBuffer() << m_render_targets[4]->output_texture();
+		m_blur_material->As<MaterialGaussianBlur>()->ColorBuffer() << m_render_targets[5]->output_texture();
 		m_blur_material->apply(m_d3d_device_context);
 		m_d3d_device_context->DrawIndexed(m_quad->index_count(), 0, 0);
 

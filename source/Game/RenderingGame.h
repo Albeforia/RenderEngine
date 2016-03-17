@@ -68,6 +68,9 @@ namespace Rendering {
 		Material* m_test_material;
 		Effect* m_test_effect;
 
+		Material* m_down_sampling_material;
+		Effect* m_down_sampling_effect;
+
 		Material* m_blur_material;
 		Effect* m_blur_effect;
 

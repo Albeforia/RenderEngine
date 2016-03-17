@@ -8,9 +8,7 @@ cbuffer CBufferPerRender {
 
 Texture2D ColorBuffer;
 
-SamplerState TrilinearSampler {
-	Filter = MIN_MAG_MIP_LINEAR;
-};
+SamplerState TrilinearSampler;
 
 float4 vertex_shader(float4 o_position : POSITION) : SV_Position {
 	return o_position;

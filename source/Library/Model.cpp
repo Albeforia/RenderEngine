@@ -12,7 +12,11 @@ namespace Library {
 	Model::Model(Game& game, const std::string& file, bool flip_uv)
 		: m_game {game}, m_meshes {}, m_materials {} {
 		Assimp::Importer importer;
-		UINT flags = aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_SortByPType | aiProcess_FlipWindingOrder;
+		// flip the order of triangle vertices
+		// because we are using a right-handed coordinate system
+		// https://msdn.microsoft.com/en-us/library/windows/desktop/bb204853(v=vs.85).aspx
+		UINT flags = aiProcess_Triangulate | aiProcess_JoinIdenticalVertices
+			| aiProcess_SortByPType | aiProcess_FlipWindingOrder;
 		if (flip_uv) {
 			flags |= aiProcess_FlipUVs;
 		}

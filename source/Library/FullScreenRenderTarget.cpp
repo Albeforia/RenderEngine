@@ -4,13 +4,14 @@
 
 namespace Library {
 
-	FullScreenRenderTarget::FullScreenRenderTarget(Game& game, bool enable_depth_stencil, DXGI_FORMAT format)
+	FullScreenRenderTarget::FullScreenRenderTarget(Game& game, bool enable_depth_stencil,
+												   DXGI_FORMAT format, UINT down_sampling_ratio)
 		: m_game {&game}, m_render_target {}, m_depth_stencil {}, m_depth_stencil_enabled {enable_depth_stencil},
 		m_texture {}, m_depth_texture {} {
 		D3D11_TEXTURE2D_DESC desc;
 		ZeroMemory(&desc, sizeof(desc));
-		desc.Width = game.screen_width();
-		desc.Height = game.screen_height();
+		desc.Width = game.screen_width() / down_sampling_ratio;
+		desc.Height = game.screen_height() / down_sampling_ratio;
 		desc.MipLevels = 1;
 		desc.ArraySize = 1;
 		desc.Format = format;
@@ -37,8 +38,8 @@ namespace Library {
 
 		if (enable_depth_stencil) {
 			ZeroMemory(&desc, sizeof(desc));
-			desc.Width = game.screen_width();
-			desc.Height = game.screen_height();
+			desc.Width = game.screen_width() / down_sampling_ratio;
+			desc.Height = game.screen_height() / down_sampling_ratio;
 			desc.MipLevels = 1;
 			desc.ArraySize = 1;
 			desc.Format = DXGI_FORMAT_R24G8_TYPELESS;
