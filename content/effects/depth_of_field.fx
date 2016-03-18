@@ -36,7 +36,7 @@ float4 pixel_shader(float4 p_position : SV_Position) : SV_Target {
 
 	// compute blur factor
 	// note c_depth < 0
-	float blur_factor = saturate((abs(c_depth) - DoFParams.x) / DoFParams.y);
+	float blur_factor = saturate(abs(c_depth + DoFParams.x) / DoFParams.y);
 
 	// interpolate
 	float4 color = float4(0, 0, 0, 0);
