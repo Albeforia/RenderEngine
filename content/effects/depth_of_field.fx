@@ -11,6 +11,7 @@ Texture2D ColorBuffer;
 Texture2D BlurBuffer;
 Texture2D DepthBuffer;
 
+SamplerState LinearSampler;
 SamplerState PointSampler {
 	Filter = MIN_MAG_MIP_POINT;
 };
@@ -22,17 +23,20 @@ float4 vertex_shader(float4 o_position : POSITION) : SV_Position {
 float4 pixel_shader(float4 p_position : SV_Position) : SV_Target {
 	float2 uv = p_position.xy / ScreenResolution;
 
-	float4 color_texel = ColorBuffer.Sample(PointSampler, uv);
-	float4 blur_texel = BlurBuffer.Sample(PointSampler, uv);
-	// DXGI_FORMAT_R24_UNORM_X8_TYPELESS
-	float depth = DepthBuffer.Sample(PointSampler, uv).r;
+	float4 color_texel = ColorBuffer.Sample(LinearSampler, uv);
+	float4 blur_texel = BlurBuffer.Sample(LinearSampler, uv);
+
+	// NOTE we are in right-handed coordinate system
+	// the value sampled has been normalized into [0, 1]
+	// but the actual depth should be negtive
+	float depth = -DepthBuffer.Sample(PointSampler, uv).r;
 
 	// reverse depth into camera space
-	// note we are in right-handed coordinate system
 	float c_depth = (DoFParams.w * DoFParams.z) / (depth - DoFParams.w);
 
 	// compute blur factor
-	float blur_factor = saturate(abs(c_depth - DoFParams.x) / DoFParams.y);
+	// note c_depth < 0
+	float blur_factor = saturate((abs(c_depth) - DoFParams.x) / DoFParams.y);
 
 	// interpolate
 	float4 color = float4(0, 0, 0, 0);
