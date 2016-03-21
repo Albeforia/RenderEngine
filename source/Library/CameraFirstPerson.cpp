@@ -14,13 +14,16 @@ namespace Library {
 	const float CameraFirstPerson::DEFAULT_MOVEMENT_RATE = 10.0f;
 
 	CameraFirstPerson::CameraFirstPerson(Game& game)
-		: Camera(game), m_keyboard {}, m_mouse {},
+		: CameraPerspective(game), m_keyboard {}, m_mouse {},
 		m_mouse_sensitivity {DEFAULT_MOUSE_SENSITIVITY},
 		m_rotation_rate {DEFAULT_ROTATION_RATE},
 		m_movement_rate {DEFAULT_MOVEMENT_RATE} {}
 
-	CameraFirstPerson::CameraFirstPerson(Game& game, float fov, float ratio, float nearp, float farp)
-		: Camera(game, fov, ratio, nearp, farp), m_keyboard {}, m_mouse {},
+	CameraFirstPerson::CameraFirstPerson(Game& game, float fov, float ratio,
+										 float nearp, float farp,
+										 float focus_distance, float focus_range)
+		: CameraPerspective(game, fov, ratio, nearp, farp, focus_distance, focus_range),
+		m_keyboard {}, m_mouse {},
 		m_mouse_sensitivity {DEFAULT_MOUSE_SENSITIVITY},
 		m_rotation_rate {DEFAULT_ROTATION_RATE},
 		m_movement_rate {DEFAULT_MOVEMENT_RATE} {}
@@ -46,10 +49,9 @@ namespace Library {
 		m_mouse = &mouse;
 	}
 
-	float&CameraFirstPerson::mouse_sensitivity() {
+	float& CameraFirstPerson::mouse_sensitivity() {
 		return m_mouse_sensitivity;
 	}
-
 
 	float& CameraFirstPerson::rotation_rate() {
 		return m_rotation_rate;
@@ -62,7 +64,7 @@ namespace Library {
 	void CameraFirstPerson::init() {
 		m_keyboard = (Keyboard*)m_game->services().get_service(Keyboard::TypeIdClass());
 		m_mouse = (Mouse*)m_game->services().get_service(Mouse::TypeIdClass());
-		Camera::init();
+		CameraPerspective::init();
 	}
 
 	void CameraFirstPerson::update(const GameTime& game_time) {
@@ -112,6 +114,7 @@ namespace Library {
 
 		XMStoreFloat3(&m_position, position);
 
-		Camera::update(game_time);
+		CameraPerspective::update(game_time);
 	}
+
 }

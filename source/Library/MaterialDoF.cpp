@@ -1,5 +1,5 @@
 #include "MaterialDoF.h"
-#include "Camera.h"
+#include "CameraPerspective.h"
 #include "Effect.h"
 #include "Game.h"
 
@@ -7,7 +7,7 @@ namespace Library {
 
 	RTTI_DEFINITIONS(MaterialDoF);
 
-	MaterialDoF::MaterialDoF(Camera* camera)
+	MaterialDoF::MaterialDoF(CameraPerspective* camera)
 		: m_camera {*camera},
 		MATERIAL_VARIABLES_INITIALIZATION(DoFParams, ScreenResolution, ColorBuffer, BlurBuffer, DepthBuffer)
 		Material() {}

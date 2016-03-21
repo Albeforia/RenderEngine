@@ -1,20 +1,21 @@
 #pragma once
 
-#include "Camera.h"
+#include "CameraPerspective.h"
 
 namespace Library {
 
 	class Keyboard;
 	class Mouse;
 
-	class CameraFirstPerson : public Camera {
+	class CameraFirstPerson : public CameraPerspective {
 
-		RTTI_DECLARATIONS(CameraFirstPerson, Camera);
+		RTTI_DECLARATIONS(CameraFirstPerson, CameraPerspective);
 
 	public:
 		CameraFirstPerson(Game&);
-		CameraFirstPerson(Game&, float fov, float ratio, float nearp, float farp);
-
+		CameraFirstPerson(Game&, float fov, float ratio,
+						  float nearp, float farp,
+						  float focus_distance, float focus_range);
 		virtual ~CameraFirstPerson();
 
 		const Keyboard& keyboard() const;

@@ -89,6 +89,10 @@ namespace Rendering {
 		m_point_light->As<LightPoint>()->set_attenuation(1.0f, 0.04f, 0.002f);
 		m_point_light->As<LightPoint>()->set_position(0, 10.0f, -40.0f);
 
+		// projectors
+		/*m_projector = new Camera(*this);
+		m_components.push_back(m_projector);*/
+
 		// stencil
 		SetCurrentDirectory(Utility::ExecutableDirectory().c_str());
 		m_stencil_effect = new Effect(*this);
@@ -142,14 +146,16 @@ namespace Rendering {
 		// dof
 		m_dof_effect = new Effect(*this);
 		m_dof_effect->load(L"content\\effects\\depth_of_field.cso");
-		m_dof_material = new MaterialDoF(m_camera);
+		m_dof_material = new MaterialDoF(m_camera->As<CameraFirstPerson>());
 		m_dof_material->init(m_dof_effect);
 
 		// init each component
 		Game::init();
 
-		//
+		// after init
 		m_camera->set_position(0, 0, 20.0f);
+		//m_projector->set_position(m_point_light->As<LightPoint>()->positionv());
+
 	}
 
 	void RenderingGame::shutdown() {

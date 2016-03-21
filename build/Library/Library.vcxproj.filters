@@ -182,9 +182,6 @@
     <ClInclude Include="..\..\source\Library\MaterialDoF.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\Camera.h">
-      <Filter>Header Files\GameComponent\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\CameraFirstPerson.h">
       <Filter>Header Files\GameComponent\Camera</Filter>
     </ClInclude>
@@ -196,6 +193,12 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Library\RenderTarget.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\CameraPerspective.h">
+      <Filter>Header Files\GameComponent\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Camera.h">
+      <Filter>Header Files\GameComponent\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +321,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\RenderTarget.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\CameraPerspective.cpp">
+      <Filter>Source Files\GameComponent\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

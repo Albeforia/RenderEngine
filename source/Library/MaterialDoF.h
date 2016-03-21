@@ -4,7 +4,7 @@
 
 namespace Library {
 
-	class Camera;
+	class CameraPerspective;
 
 	class MaterialDoF : public Material {
 
@@ -13,12 +13,12 @@ namespace Library {
 		MATERIAL_VARIABLES_DECLARATION(DoFParams, ScreenResolution, ColorBuffer, BlurBuffer, DepthBuffer);
 
 	public:
-		MaterialDoF(Camera*);
+		MaterialDoF(CameraPerspective*);
 
 		virtual void init(Effect*) override;
 
 	private:
-		const Camera& m_camera;
+		const CameraPerspective& m_camera;
 
 	};
 
