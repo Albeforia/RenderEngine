@@ -6,12 +6,12 @@ namespace Library {
 
 	class Game;
 
-	class FullScreenRenderTarget {
+	class RenderTarget {
 	public:
-		FullScreenRenderTarget(Game&, bool enable_depth_stencil,
-							   DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM,
-							   UINT down_sampling_ratio = 1);
-		~FullScreenRenderTarget();
+		RenderTarget(Game&, bool enable_depth_stencil,
+					 DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM,
+					 UINT down_sampling_ratio = 1);
+		~RenderTarget();
 
 		ID3D11RenderTargetView* render_target() const;
 		ID3D11DepthStencilView* depth_stencil() const;

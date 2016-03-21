@@ -1,11 +1,11 @@
-#include "FullScreenRenderTarget.h"
+#include "RenderTarget.h"
 #include "Game.h"
 #include "GameException.h"
 
 namespace Library {
 
-	FullScreenRenderTarget::FullScreenRenderTarget(Game& game, bool enable_depth_stencil,
-												   DXGI_FORMAT format, UINT down_sampling_ratio)
+	RenderTarget::RenderTarget(Game& game, bool enable_depth_stencil,
+							   DXGI_FORMAT format, UINT down_sampling_ratio)
 		: m_game {&game}, m_render_target {}, m_depth_stencil {}, m_depth_stencil_enabled {enable_depth_stencil},
 		m_texture {}, m_depth_texture {} {
 		D3D11_TEXTURE2D_DESC desc;
@@ -75,7 +75,7 @@ namespace Library {
 		}
 	}
 
-	FullScreenRenderTarget::~FullScreenRenderTarget() {
+	RenderTarget::~RenderTarget() {
 		ReleaseObject(m_texture);
 		ReleaseObject(m_render_target);
 		if (m_depth_stencil_enabled) {
@@ -84,23 +84,23 @@ namespace Library {
 		}
 	}
 
-	ID3D11ShaderResourceView* FullScreenRenderTarget::output_texture() const {
+	ID3D11ShaderResourceView* RenderTarget::output_texture() const {
 		return m_texture;
 	}
 
-	ID3D11ShaderResourceView* FullScreenRenderTarget::output_depth_texture() const {
+	ID3D11ShaderResourceView* RenderTarget::output_depth_texture() const {
 		return m_depth_texture;
 	}
 
-	ID3D11RenderTargetView* FullScreenRenderTarget::render_target() const {
+	ID3D11RenderTargetView* RenderTarget::render_target() const {
 		return m_render_target;
 	}
 
-	ID3D11DepthStencilView* FullScreenRenderTarget::depth_stencil() const {
+	ID3D11DepthStencilView* RenderTarget::depth_stencil() const {
 		return m_depth_stencil;
 	}
 
-	void FullScreenRenderTarget::set_depth_stencil(ID3D11DepthStencilView* pds) {
+	void RenderTarget::set_depth_stencil(ID3D11DepthStencilView* pds) {
 		m_depth_stencil = pds;
 	}
 

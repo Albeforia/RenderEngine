@@ -12,7 +12,7 @@ namespace Library {
 	const float Camera::DEFAULT_NEARP = 0.01f;
 	const float Camera::DEFAULT_FARP = 1000.0f;
 	const float Camera::DEFAULT_FOCUS_DISTANCE = 20.0f;
-	const float Camera::DEFAULT_FOCUS_RANGE = 30.0f;
+	const float Camera::DEFAULT_FOCUS_RANGE = 15.0f;
 
 	Camera::Camera(Game& game)
 		: GameComponent(game),
