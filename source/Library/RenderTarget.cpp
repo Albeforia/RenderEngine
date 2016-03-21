@@ -4,9 +4,10 @@
 
 namespace Library {
 
-	RenderTarget::RenderTarget(Game& game, bool enable_depth_stencil,
+	RenderTarget::RenderTarget(Game& game, bool enable_color_buffer, bool enable_depth_stencil,
 							   DXGI_FORMAT format, UINT down_sampling_ratio)
-		: m_game {&game}, m_render_target {}, m_depth_stencil {}, m_depth_stencil_enabled {enable_depth_stencil},
+		: m_game {&game}, m_render_target {}, m_depth_stencil {},
+		m_color_buffer_enabled {enable_color_buffer}, m_depth_stencil_enabled {enable_depth_stencil},
 		m_texture {}, m_depth_texture {} {
 		D3D11_TEXTURE2D_DESC desc;
 		ZeroMemory(&desc, sizeof(desc));
@@ -21,22 +22,25 @@ namespace Library {
 		desc.Usage = D3D11_USAGE_DEFAULT;
 
 		HRESULT hr;
-		ID3D11Texture2D* buffer1 = nullptr;
 		ID3D11Device* dev = game.d3d_device();
-		if (FAILED(hr = dev->CreateTexture2D(&desc, nullptr, &buffer1))) {
-			throw GameException("IDXGIDevice::CreateTexture2D() failed.", hr);
-		}
-		if (FAILED(hr = dev->CreateShaderResourceView(buffer1, nullptr, &m_texture))) {
-			ReleaseObject(buffer1);
-			throw GameException("IDXGIDevice::CreateShaderResourceView() failed.", hr);
-		}
-		if (FAILED(hr = dev->CreateRenderTargetView(buffer1, nullptr, &m_render_target))) {
-			ReleaseObject(buffer1);
-			throw GameException("IDXGIDevice::CreateRenderTargetView() failed.", hr);
-		}
-		ReleaseObject(buffer1);
 
-		if (enable_depth_stencil) {
+		if (m_color_buffer_enabled) {
+			ID3D11Texture2D* buffer1 = nullptr;
+			if (FAILED(hr = dev->CreateTexture2D(&desc, nullptr, &buffer1))) {
+				throw GameException("IDXGIDevice::CreateTexture2D() failed.", hr);
+			}
+			if (FAILED(hr = dev->CreateShaderResourceView(buffer1, nullptr, &m_texture))) {
+				ReleaseObject(buffer1);
+				throw GameException("IDXGIDevice::CreateShaderResourceView() failed.", hr);
+			}
+			if (FAILED(hr = dev->CreateRenderTargetView(buffer1, nullptr, &m_render_target))) {
+				ReleaseObject(buffer1);
+				throw GameException("IDXGIDevice::CreateRenderTargetView() failed.", hr);
+			}
+			ReleaseObject(buffer1);
+		}
+
+		if (m_depth_stencil_enabled) {
 			ZeroMemory(&desc, sizeof(desc));
 			desc.Width = game.screen_width() / down_sampling_ratio;
 			desc.Height = game.screen_height() / down_sampling_ratio;
@@ -76,8 +80,10 @@ namespace Library {
 	}
 
 	RenderTarget::~RenderTarget() {
-		ReleaseObject(m_texture);
-		ReleaseObject(m_render_target);
+		if (m_color_buffer_enabled) {
+			ReleaseObject(m_texture);
+			ReleaseObject(m_render_target);
+		}
 		if (m_depth_stencil_enabled) {
 			ReleaseObject(m_depth_texture);
 			ReleaseObject(m_depth_stencil);

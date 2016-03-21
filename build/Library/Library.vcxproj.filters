@@ -54,6 +54,18 @@
     <Filter Include="Source Files\GameComponent\Geometry">
       <UniqueIdentifier>{11daddfc-6949-48c1-ab08-356728ecc19a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameComponent\Camera">
+      <UniqueIdentifier>{ac842f22-24d3-4531-9f44-580f6eca4d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameComponent\Input">
+      <UniqueIdentifier>{172c8ddb-c33a-4d45-82d4-3eaf773db74f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameComponent\Camera">
+      <UniqueIdentifier>{d6a2bb7b-f868-4b9a-b389-4ca78f45332d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameComponent\Input">
+      <UniqueIdentifier>{17bae0eb-a92c-477f-8354-b499d44cf4b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Library\GameClock.h">
@@ -122,21 +134,6 @@
     <ClInclude Include="..\..\source\Library\RasterizerStates.h">
       <Filter>Header Files\Helper</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Library\Camera.h">
-      <Filter>Header Files\GameComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\CameraFirstPerson.h">
-      <Filter>Header Files\GameComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\FullScreenRenderTarget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\Keyboard.h">
-      <Filter>Header Files\GameComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Library\Mouse.h">
-      <Filter>Header Files\GameComponent</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Library\MaterialDeferredGeometry.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
@@ -184,6 +181,21 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Library\MaterialDoF.h">
       <Filter>Header Files\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Camera.h">
+      <Filter>Header Files\GameComponent\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\CameraFirstPerson.h">
+      <Filter>Header Files\GameComponent\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Keyboard.h">
+      <Filter>Header Files\GameComponent\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\Mouse.h">
+      <Filter>Header Files\GameComponent\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Library\RenderTarget.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,21 +256,6 @@
     <ClCompile Include="..\..\source\Library\RasterizerStates.cpp">
       <Filter>Source Files\Helper</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Library\Camera.cpp">
-      <Filter>Source Files\GameComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\CameraFirstPerson.cpp">
-      <Filter>Source Files\GameComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\FullScreenRenderTarget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Keyboard.cpp">
-      <Filter>Source Files\GameComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Library\Mouse.cpp">
-      <Filter>Source Files\GameComponent</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Library\MaterialDeferredGeometry.cpp">
       <Filter>Source Files\Material</Filter>
     </ClCompile>
@@ -306,6 +303,21 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Library\MaterialDoF.cpp">
       <Filter>Source Files\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Camera.cpp">
+      <Filter>Source Files\GameComponent\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\CameraFirstPerson.cpp">
+      <Filter>Source Files\GameComponent\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Keyboard.cpp">
+      <Filter>Source Files\GameComponent\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\Mouse.cpp">
+      <Filter>Source Files\GameComponent\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\RenderTarget.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

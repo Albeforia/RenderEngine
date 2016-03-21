@@ -167,7 +167,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClInclude Include="..\..\source\Library\Effect.h" />
     <ClInclude Include="..\..\source\Library\EffectHelper.h" />
     <ClInclude Include="..\..\source\Library\FullScreenQuad.h" />
-    <ClInclude Include="..\..\source\Library\FullScreenRenderTarget.h" />
+    <ClInclude Include="..\..\source\Library\RenderTarget.h" />
     <ClInclude Include="..\..\source\Library\Game.h" />
     <ClInclude Include="..\..\source\Library\GameClock.h" />
     <ClInclude Include="..\..\source\Library\GameComponent.h" />
@@ -210,7 +210,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
     <ClCompile Include="..\..\source\Library\ColorHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Effect.cpp" />
     <ClCompile Include="..\..\source\Library\FullScreenQuad.cpp" />
-    <ClCompile Include="..\..\source\Library\FullScreenRenderTarget.cpp" />
+    <ClCompile Include="..\..\source\Library\RenderTarget.cpp" />
     <ClCompile Include="..\..\source\Library\Game.cpp" />
     <ClCompile Include="..\..\source\Library\GameClock.cpp" />
     <ClCompile Include="..\..\source\Library\GameComponent.cpp" />

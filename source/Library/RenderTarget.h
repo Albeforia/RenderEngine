@@ -8,7 +8,8 @@ namespace Library {
 
 	class RenderTarget {
 	public:
-		RenderTarget(Game&, bool enable_depth_stencil,
+		RenderTarget(Game&, bool enable_color_buffer = true,
+					 bool enable_depth_stencil = true,
 					 DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM,
 					 UINT down_sampling_ratio = 1);
 		~RenderTarget();
@@ -25,6 +26,7 @@ namespace Library {
 		ID3D11DepthStencilView* m_depth_stencil;
 		ID3D11ShaderResourceView* m_texture;
 		ID3D11ShaderResourceView* m_depth_texture;
+		bool m_color_buffer_enabled;
 		bool m_depth_stencil_enabled;
 	};
 

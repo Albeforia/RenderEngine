@@ -54,13 +54,13 @@ namespace Rendering {
 
 		// render
 		m_render_state_helper = new RenderStateHelper(*this);
-		auto* position = new RenderTarget(*this, true, DXGI_FORMAT_R32G32B32A32_FLOAT);
-		auto* normal = new RenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
-		auto* albedo_specular = new RenderTarget(*this, false);
-		auto* color = new RenderTarget(*this, false);
-		auto* color_down = new RenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT, 4);
-		auto* gaussian_blur_h = new RenderTarget(*this, false);
-		auto* gaussian_blur_v = new RenderTarget(*this, false);
+		auto* position = new RenderTarget(*this, true, true, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		auto* normal = new RenderTarget(*this, true, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		auto* albedo_specular = new RenderTarget(*this, true, false);
+		auto* color = new RenderTarget(*this, true, false);
+		auto* color_down = new RenderTarget(*this, true, false, DXGI_FORMAT_R8G8B8A8_UNORM, 4);
+		auto* gaussian_blur_h = new RenderTarget(*this, true, false);
+		auto* gaussian_blur_v = new RenderTarget(*this, true, false);
 		m_render_targets.push_back(position);
 		m_render_targets.push_back(normal);
 		m_render_targets.push_back(albedo_specular);
@@ -245,11 +245,20 @@ namespace Rendering {
 		//---------------------------------------------------
 		// BEGIN: down-sampling (4x)
 
+		// seems there's no need to change viewport...
+		m_viewport.Width = static_cast<float>(m_screen_width) / 4.0f;
+		m_viewport.Height = static_cast<float>(m_screen_height) / 4.0f;
+		m_d3d_device_context->RSSetViewports(1, &m_viewport);
+
 		m_d3d_device_context->OMSetRenderTargets(1, &m_render_targets_raw[4], nullptr);
 		m_d3d_device_context->ClearRenderTargetView(m_render_targets_raw[4], reinterpret_cast<const float*>(&ColorHelper::Black));
 		m_down_sampling_material->As<MaterialDownSampling>()->ColorBuffer() << m_render_targets[3]->output_texture();
 		m_down_sampling_material->apply(m_d3d_device_context);
 		m_d3d_device_context->DrawIndexed(m_quad->index_count(), 0, 0);
+
+		m_viewport.Width = static_cast<float>(m_screen_width);
+		m_viewport.Height = static_cast<float>(m_screen_height);
+		m_d3d_device_context->RSSetViewports(1, &m_viewport);
 
 		// END: down-sampling (4x)
 		//---------------------------------------------------
