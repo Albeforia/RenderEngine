@@ -3,7 +3,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "RenderStateHelper.h"
-#include "FullScreenRenderTarget.h"
+#include "RenderTarget.h"
 #include "CameraFirstPerson.h"
 #include "ColorHelper.h"
 #include "EarthDemo.h"
@@ -54,13 +54,13 @@ namespace Rendering {
 
 		// render
 		m_render_state_helper = new RenderStateHelper(*this);
-		auto* position = new FullScreenRenderTarget(*this, true, DXGI_FORMAT_R32G32B32A32_FLOAT);
-		auto* normal = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
-		auto* albedo_specular = new FullScreenRenderTarget(*this, false);
-		auto* color = new FullScreenRenderTarget(*this, false);
-		auto* color_down = new FullScreenRenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT, 4);
-		auto* gaussian_blur_h = new FullScreenRenderTarget(*this, false);
-		auto* gaussian_blur_v = new FullScreenRenderTarget(*this, false);
+		auto* position = new RenderTarget(*this, true, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		auto* normal = new RenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT);
+		auto* albedo_specular = new RenderTarget(*this, false);
+		auto* color = new RenderTarget(*this, false);
+		auto* color_down = new RenderTarget(*this, false, DXGI_FORMAT_R32G32B32A32_FLOAT, 4);
+		auto* gaussian_blur_h = new RenderTarget(*this, false);
+		auto* gaussian_blur_v = new RenderTarget(*this, false);
 		m_render_targets.push_back(position);
 		m_render_targets.push_back(normal);
 		m_render_targets.push_back(albedo_specular);

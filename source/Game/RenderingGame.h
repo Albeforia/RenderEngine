@@ -10,7 +10,7 @@ namespace Library {
 	class Keyboard;
 	class Mouse;
 	class RenderStateHelper;
-	class FullScreenRenderTarget;
+	class RenderTarget;
 	class Camera;
 	class Geometry;
 	class Material;
@@ -41,7 +41,7 @@ namespace Rendering {
 
 		RenderStateHelper* m_render_state_helper;
 		// G-Buffers
-		std::vector<FullScreenRenderTarget*> m_render_targets;
+		std::vector<RenderTarget*> m_render_targets;
 		ID3D11RenderTargetView** m_render_targets_raw;
 
 		Camera* m_camera;
