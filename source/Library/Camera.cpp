@@ -48,6 +48,15 @@ namespace Library {
 		m_position = position;
 	}
 
+	void Camera::set_direction(FLOAT x, FLOAT y, FLOAT z) {
+		XMVECTOR d = XMVectorSet(x, y, z, 1.0f);
+		set_direction(d);
+	}
+
+	void Camera::set_direction(FXMVECTOR direction) {
+		XMStoreFloat3(&m_direction, direction);
+	}
+
 	void Camera::reset() {
 		m_position = Vector3Helper::Zero;
 		m_direction = Vector3Helper::Forward;

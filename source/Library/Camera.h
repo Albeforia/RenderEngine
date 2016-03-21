@@ -29,6 +29,9 @@ namespace Library {
 		virtual void set_position(FXMVECTOR);
 		virtual void set_position(const XMFLOAT3&);
 
+		virtual void set_direction(FLOAT x, FLOAT y, FLOAT z);
+		virtual void set_direction(FXMVECTOR);
+
 		virtual void reset();
 		virtual void init() override;
 		virtual void update(const GameTime&) override;

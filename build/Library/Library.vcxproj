@@ -161,6 +161,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Library\Camera.h" />
+    <ClInclude Include="..\..\source\Library\CameraOrthographic.h" />
     <ClInclude Include="..\..\source\Library\CameraPerspective.h" />
     <ClInclude Include="..\..\source\Library\CameraFirstPerson.h" />
     <ClInclude Include="..\..\source\Library\ColorHelper.h" />
@@ -208,6 +209,7 @@ copy "$(SolutionDir)..\external\assimp\bin\Debug\assimp-vc140-mt.dll" "$(OutDir)
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\Camera.cpp" />
     <ClCompile Include="..\..\source\Library\CameraFirstPerson.cpp" />
+    <ClCompile Include="..\..\source\Library\CameraOrthographic.cpp" />
     <ClCompile Include="..\..\source\Library\CameraPerspective.cpp" />
     <ClCompile Include="..\..\source\Library\ColorHelper.cpp" />
     <ClCompile Include="..\..\source\Library\Effect.cpp" />

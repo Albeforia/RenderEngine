@@ -200,6 +200,9 @@
     <ClInclude Include="..\..\source\Library\Camera.h">
       <Filter>Header Files\GameComponent\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Library\CameraOrthographic.h">
+      <Filter>Header Files\GameComponent\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Library\GameClock.cpp">
@@ -323,6 +326,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Library\CameraPerspective.cpp">
+      <Filter>Source Files\GameComponent\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Library\CameraOrthographic.cpp">
       <Filter>Source Files\GameComponent\Camera</Filter>
     </ClCompile>
   </ItemGroup>
